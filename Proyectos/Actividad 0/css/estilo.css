@@ -1,17 +1,16 @@
 /* tengoe l estilo tranquilo aniquilo */
 .titulo{
     display: flex;
-    background-color:burlywood;
-    border-radius: 10%;
+    
    align-items: center;
    justify-content: center;
 }
 
-.card-boton{
+.pagina{
     display: flex;
     justify-content: center;
     margin-top: 5em;
-    border: 30vw inset burlywood;
+    border:50vw inset burlywood;
 
 }
 
@@ -19,4 +18,10 @@
     display: flex;
     justify-items: end;
     background-color: azure;
+}
+
+.sub{
+    display: flex;
+   align-items: center;
+   justify-content: center;
 }
