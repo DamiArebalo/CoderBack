@@ -1,13 +1,13 @@
 * linkeo en html con etiqueta 
 <script  src= "./ruta/del/archivo.js"> </script>
 
-* Tambien le tenemos que agregar atributos que no9 bloqueen el resto del codigo
+* Tambien le tenemos que agregar atributos que nobloqueen el resto del codigo
 para identificar la funcionalidad basica del script:
 
 "async" --> para que se ejecute independientemente al html
 "defer" --> para que se ejecute luego de la carga completa del html
 
-<script "async"//"defer" src= "./ruta/del/archivo.js"> </script>
+<script async//defer src= "./ruta/del/archivo.js"> </script>
 
 -- muestreo en consola --
 
@@ -34,6 +34,19 @@ alert("mensaje a mostrar")
 
 //funcion confirm -- true o false (booleano)
 let (variable_de_guardado) confirm("pregunta de aceptar/cancelar")
+
+--- CONCATENACION--
+para mostrar datos por consola y/o alerts podemos concatenar 
+texto entre " ", nombre de variables,etc  separando con --> +
+
+--- OPERACIONES --
+
+Suma--> +
+Resta --> -
+Multiplicacion --> *
+Division --> /
+
+
 
 
 
