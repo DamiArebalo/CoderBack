@@ -1,0 +1,22 @@
+/* tengoe l estilo tranquilo aniquilo */
+.titulo{
+    display: flex;
+    background-color:burlywood;
+    border-radius: 10%;
+   align-items: center;
+   justify-content: center;
+}
+
+.card-boton{
+    display: flex;
+    justify-content: center;
+    margin-top: 5em;
+    border: 30vw inset burlywood;
+
+}
+
+.boton{
+    display: flex;
+    justify-items: end;
+    background-color: azure;
+}
