@@ -2,7 +2,9 @@
 en la carpeta del proyecto marcar en terminal -->  "git init"
 para agregar los archivos al repositorio de github --> "git add . "
 Cada vez que se cambia algo debemos codear --> git commit -m "Agrego descripcion del cambio "
+                            -> git push -u origin main
 
+                            
 Para linkear repositorio local con online
 …or push an existing repository from the command line
 git remote add origin https://github.com/DamiArebalo/BackupCoderhouse1.git

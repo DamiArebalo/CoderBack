@@ -46,6 +46,12 @@ Resta --> -
 Multiplicacion --> *
 Division --> /
 
+--- TIPO DE DATOS --
+STRING - "texto"
+NUMBER - Numeros
+Boolean - True // false
+
+
 
 
 
