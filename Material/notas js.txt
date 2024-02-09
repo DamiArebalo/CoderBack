@@ -26,7 +26,7 @@ console.error("MENSAJE DE ERROR")
 
 --- FUNCIONES NATIVAS --
 
-//funcion prompt -- se usa pra pedir texto(valor string)
+//funcion prompt -- se usa para pedir texto(valor string)
 let (variable_de_guardado) = prompt(´ingrese un texto/string´)
 
 //funcion alert --  mensaje 
@@ -34,6 +34,11 @@ alert("mensaje a mostrar")
 
 //funcion confirm -- true o false (booleano)
 let (variable_de_guardado) confirm("pregunta de aceptar/cancelar")
+
+//funcion Parse .. "Cambiar a" (de texto a numero )
+parseInt(variable) -- cambio a entero
+parseFloat(variable) -- cambio a decimal (flotante)
+
 
 --- CONCATENACION--
 para mostrar datos por consola y/o alerts podemos concatenar 
@@ -50,6 +55,9 @@ Division --> /
 STRING - "texto"
 NUMBER - Numeros
 Boolean - True // false
+Float - decimales
+Char - un solo caracter
+
 
 
 
