@@ -58,7 +58,46 @@ Boolean - True // false
 Float - decimales
 Char - un solo caracter
 
+----CONDICIONALES ----
+Estructuras sintacticas para evaluar una CONDICIONALES
+dando como resultado booleano TRUE o FALSE 
 
+**Sintaxis**
+
+if(CONDICION){ --> Si no igualamos a false siempre toma true
+    //CODIGO DE ACCION
+
+}else{ --> "Y SI NO"
+
+    //CONDIGO DE ACCION
+}
+
+--OPERADORES DE COMPARACION ---
+
+X == Y --> ES EXACTAMENTE IGUAL
+
+X < Y --> MENOR QUE
+
+X <= Y -- > MENOR IGUAL
+
+X > Y --> MAYOR QUE
+
+X >= Y --> MAYOR O IGUAL
+
+X =! Y ---> DISTINTO A 
+
+
+---OPERADORES LOGICOS --
+
+&& ---> AND 
+|| ---> OR 
+! -->
+
+---CICLO FOR ---
+
+for (desde;hasta;i++){
+    
+}
 
 
 

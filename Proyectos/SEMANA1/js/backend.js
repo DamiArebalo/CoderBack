@@ -1,4 +1,4 @@
-/* VAR NO SE USA!!  
+/* VAR NO SE USA!!  *
 
 let nombre = prompt("¿Como te llamas?");
 console.log(nombre)
