@@ -15,7 +15,7 @@ let lados =  parseInt(prompt('INGRESE CANTIDAD DE LADOS'));
 for (let index = 0; index < lados; index++) {
 if (index > 3) {
 }
-alert("lado");
+alert("lado "+(index+1));
 }
 
 /* 
@@ -23,11 +23,11 @@ alert("lado");
 ¿Por qué no cumple con su función?
 ¿Qué propuesta podrías hacer para que tenga sentido su uso?
 
-Este codigo tendria que mostrar la cantidad de lados
-en un figura que proporcione el usuario
+Este codigo tendria que el numero de cada lado que proporcione el usuario
 
 no cumple su funcion porque la variable lados esta contenida 
-por un string y no un entero para que tenga funcionalidad el for
+por un string y no un entero para que tenga funcionalidad el for 
+y porque en el alert no se anida la variable de incremento
 
 agregando un parseint en la variable de entrada, se solucionaria el error
 
