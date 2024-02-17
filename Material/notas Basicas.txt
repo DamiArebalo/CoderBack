@@ -162,11 +162,71 @@ El valor de la variable tiene que coincidir exactamente con el del case
 
 ----------ALGORITMOS-----------
      Simples y condicionales
+conjunto de sentencias ordenadas para un FUNCIONES
 
-     
+------------FUNCIONES------------------
+Algoritmos autocontenidos dentro de un bloque de codigo
+Podemos llamarlas cuando queramos en el momento que necesitemos
+
+Podemos llamar una funcion como parametro, valor, argumento,etc.
+
+*Declarar una funcion*
+    --Funciones Declaradas 
+        function nombreFuncion( ){
+            //bloque de instrucciones
+        }
+
+        *Llamado de funcion*
+
+        nombreFuncion(); --> escribo el nombre + ()
+
+        **nombrar a las funciones explicitamente con su uso
+
+        ejemplo console.log(sumar());
+
+        ** Variables y funciones
+        Lo que se guarda en una variable es el return de la funcion
+
+        **Parametros de funciones
+
+        datos que necesita una funcion para ejecutarse correctamente.
+        Se expresan dentro de los parentesis
+
+        function saludar(nombre,edad){
+            console.log("soy "+nombre+" y tengo "+edad)
+        }
+
+        saludar("dami",21)
 
 
+    --Funciones Expresadas --> no necesitan nombre ( se guardan en variables)
 
+        crear const nombreConst= function(){
+            //instrucciones
+        }
+
+        nombreConst();
+
+        ¡No puden ejecutarse antes de su declaracion!
+
+
+---PRINCIPIOS FUNDAMENTALES ---
+
+    ---D.R.Y ---
+    (Dont Repeat Yourself) -- No repitas
+
+    todas tareas que se repitan guardalas en funciones
+
+    --K.I.S.S--
+    (Kepp It Simple Stupid!) -- Mantenlo Simple
+
+    No hagas funciones complicadas.
+    Desarma los problemas y resuelve con funciones resumidas
+
+    --Y.A.G.N.I---
+    (You Aren´t Gonna Need It) - No lo necesitas
+
+    Si no lo necesitas - borralo
 
 
 
