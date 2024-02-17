@@ -65,3 +65,18 @@ Podemos llamar una funcion como parametro, valor, argumento,etc.
     (You Aren´t Gonna Need It) - No lo necesitas
 
     Si no lo necesitas - borralo
+
+
+---- Parametros  y argumentos----
+
+Valores que vamos a necesitar para que una funciones autocontenidos
+
+RECOMENDACION -- 1 funcion == 1 Tarea 
+
+se remplazan al momento del llamado con los datos a usar
+pueden ser variables, otras funciones, o cualquier tipo de datos
+
+Se Respeta el orden y el tipo marcado en la declaracion 
+
+Al momento de la llamda EL TOOLTIP dice que tipo de datos necesita.
+
