@@ -80,3 +80,29 @@ Se Respeta el orden y el tipo marcado en la declaracion
 
 Al momento de la llamda EL TOOLTIP dice que tipo de datos necesita.
 
+----FUNCIONES ANONIMAS---
+
+Asegura el codigo ordenado y no se ejecute la funcion antes de declararla
+
+const mutiplicarx2 = function(num){
+    //tarea
+}
+
+**llamo a la funcion con la variable
+
+---FUNCIONES FLECHA ----
+
+Forma mas corta de codear func. anonimas
+
+const multiplicarXdos=(parametro) =>{
+    //tarea
+}
+
+**si hay un solo parametro no hace falta parentisis**
+
+const multiplicarXdos = numero =>numero*2;
+
+** siempre retornan algo (tiene el return implicito)**
+
+
+

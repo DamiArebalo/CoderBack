@@ -1,0 +1,27 @@
+Scope= contexto actual de Ejecucion
+        espacio del programa (respeta los rangos)
+
+lugar donde las variables son visibles y referenciadas
+
+scope global: acceso desde cualquier lugar del programa
+    -----
+    variable aisladas (Por fuera de cualquier bloque)
+
+
+scope local: Limitado-Acceso por una parte del programa
+    ------
+    Scope De Funcion = variables dentro de funciones
+    **Toda variable declarada con var dentro de una funcion**
+       va a tener Scope de Funcion sin importar en que parte este
+    
+    Scope de bloque = variables dentro de un algoritmo {}
+
+
+***Siempre es mejor un Scope reducido***
+ 
+--Para dificultar la generacion de bugs
+    y simplificar la solucion
+
+
+--Jerarquia de Scope -- 
+desde si mismo al exterior

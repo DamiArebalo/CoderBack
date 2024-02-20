@@ -1,5 +1,6 @@
 let pares = 0;
 let impares = 0;
+let entrada = 0;
 
 function pruebaPar(numEntrada){
    let prueba = (numEntrada % 2) ;
@@ -7,13 +8,13 @@ function pruebaPar(numEntrada){
 }
 
 function pedirNumero(){
-    let entrada = parseInt(prompt("Ingrese un numero entero"));
+    entrada = parseInt(prompt("Ingrese un numero entero"));
     return(entrada)
     
 }
 
 function muestra(numEntrada){
-    let entrada = pruebaPar(numEntrada) 
+    entrada = pruebaPar(numEntrada) 
     if(entrada==0){
         alert("el numero "+numEntrada+" es PAR");
     }else{
@@ -21,19 +22,27 @@ function muestra(numEntrada){
     }
 }
 
+function contadorPar(numEntrada){
+    let prueba = pruebaPar(numEntrada);
+    if(prueba==0){pares++};
+    
+}
+
+function contadorImpar(numEntrada){
+    let prueba = pruebaPar(numEntrada);
+    if(prueba==0){impares++;}
+    
+
+}
 let ciclo =confirm("Evaluamos un numero?");
 while(ciclo){
-   let entrada = pedirNumero();
+    let entrada = pedirNumero();
     muestra(entrada);
-    let prueba = pruebaPar(entrada) 
-    if(prueba==0){
-
-        pares++;
-    }else{
-        impares++;
-    }
-    ciclo = confirm("¿Evaluamos otro numero?");
+    pares = contadorPar(entrada); 
+    impares = contadorImpar(entrada);
     console.log(pares+" "+impares)
+    ciclo = confirm("¿Evaluamos otro numero?");
+    
 
 }
 
