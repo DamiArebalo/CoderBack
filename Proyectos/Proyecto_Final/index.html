@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   /*TITULO DE PESTAÑA*/
+   <!-- /*TITULO DE PESTAÑA*/ -->
     <title>RityJust - Cleaning Supplies</title>
-    /*LINKEO DE CSS*/
+    <!-- /*LINKEO DE CSS*/ -->
     <link rel="stylesheet" type="text/css" href="./css/styles.css">
-    /*LINKEO DE JS*/
+    <!-- /* LINKEO DE JS  -->
     <script defer  src="script.js"></script>
 </head>
 <body>
-
-    /*ENCABEZADO*/
+<!-- ENCABEZADO*/ -->
     <header>
-        /*PARTE IZQUIERDA*/
+        <!-- /*PARTE IZQUIERDA*/ -->
         <div class="left-header">
             <div class="search">
                 <span>🔍</span>
@@ -22,19 +21,29 @@
             </div>
             
         </div>
-        /*PARTE CENTRAL*/
-        <div class="logo">🛍️ RityJust</div>
+        <!-- /*PARTE CENTRAL*/ -->
+        <div class="logo">
+            <img src="./Img/Logos/rityJust.jpg">    
+        </div>
         
-        /*PARTE DERECHA*/
+        <!-- /*PARTE DERECHA*/ -->
         <div class="right-header">
-            <span>🔑 Login</span>
-            <span>🛒 Cart</span>
+            <div class="opcion">
+                <span>🔑</span>
+                <h3>Login</h3>
+            </div>
+            <div class="opcion">
+                <span>🛒</span>
+                <h3>Carrito</h3>
+            </div>
+
+            
         </div>
     </header>
 
-    /*contenido principal*/
+    <!-- /*contenido principal*/ -->
     <main>
-        /*menu de navegacion*/
+        <!-- /*menu de navegacion*/ -->
         <nav class="nav-links">
             <ul>
                 <li><a href="#home">Home</a></li>
@@ -45,26 +54,102 @@
             </ul>
         </nav>
 
-        /*Seccion de productos*/
+        <!-- /*Seccion de productos*/ -->
         <section id="products">
-            <h2>Our Products</h2>
-            <!-- Add product cards here -->
+            <h2>Nuestros Productos</h2>
+            <div class="product-carousel">
+                <button class="add-products">Add Products</button>
+                <div class="carousel-container">
+                    <div class="carousel-track">
+                        <div class="product-card">
+                            <img src="./Img/Productos/Oleo31.jpg" alt="Oleo 31">
+                            <h3 class="product-name">Oleo 31</h3>
+                            <p class="product-description">Multifunctional oil</p>
+                            <hr class="divider">
+                            <p class="product-price">$1,000</p>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+
+                        <div class="product-card">
+                            <img src="./Img/Productos/Oleo31.jpg" alt="Oleo 31">
+                            <h3 class="product-name">Oleo 31</h3>
+                            <p class="product-description">Multifunctional oil</p>
+                            <hr class="divider">
+                            <p class="product-price">$1,000</p>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                    <button class="carousel-prev">←</button>
+                    <button class="carousel-next">→</button>
+                </div>
+            </div>    
+
         </section>
 
-        /*Seccion de ofertas*/
+        <!-- Seccion de ofertas*/ -->
         <section id="offers">
-            <h2>Special Offers</h2>
-            <!-- Add offer cards here -->
+            <h2>OFERTAS</h2>
+            <div class="product-carousel">
+                <button class="add-products">Add Products</button>
+                <div class="carousel-container">
+                    <div class="carousel-track">
+                        <div class="product-card">
+                            <img src="./Img/Productos/Oleo31.jpg" alt="Oleo 31">
+                            <h3 class="product-name">Oleo 31</h3>
+                            <p class="product-description">Multifunctional oil</p>
+                            <hr class="divider">
+                            <p class="product-price">$1,000</p>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+
+                        <div class="product-card">
+                            <img src="./Img/Productos/Oleo31.jpg" alt="Oleo 31">
+                            <h3 class="product-name">Oleo 31</h3>
+                            <p class="product-description">Multifunctional oil</p>
+                            <hr class="divider">
+                            <p class="product-price">$1,000</p>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+
+                        <div class="product-card">
+                            <img src="./Img/Productos/Oleo31.jpg" alt="Oleo 31">
+                            <h3 class="product-name">Oleo 31</h3>
+                            <p class="product-description">Multifunctional oil</p>
+                            <hr class="divider">
+                            <p class="product-price">$1,000</p>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                        <div class="product-card">
+                            <img src="./Img/Productos/Oleo31.jpg" alt="Oleo 31">
+                            <h3 class="product-name">Oleo 31</h3>
+                            <p class="product-description">Multifunctional oil</p>
+                            <hr class="divider">
+                            <p class="product-price">$1,000</p>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                        <div class="product-card">
+                            <img src="./Img/Productos/Oleo31.jpg" alt="Oleo 31">
+                            <h3 class="product-name">Oleo 31</h3>
+                            <p class="product-description">Multifunctional oil</p>
+                            <hr class="divider">
+                            <p class="product-price">$1,000</p>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                    <button class="carousel-prev">←</button>
+                    <button class="carousel-next">→</button>
+                </div>
+            </div>
         </section>
 
-        /*Seccion de preguntas*/
+        <!--  /*Seccion de preguntas*/ -->
         <section id="questions">Questions Content</section>
         
-        /*Seccion de contacto*/
+        <!-- /*Seccion de contacto*/ -->
         <section id="contact">Contact Content</section>
     </main>
 
-    /*PIE DE PAGINA*/
+    <!-- /* PIE DE PAGINA */ -->
     <footer>
         <p>© 2024 RityJust. All rights reserved.</p>
     </footer>

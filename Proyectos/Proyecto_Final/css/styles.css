@@ -1,152 +1,240 @@
-/* body {
-    font-family: Arial, sans-serif;
+
+/*configuracion principal */
+
+* {
     margin: 0;
     padding: 0;
-    background-color: #D8F6E8;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    box-sizing: border-box;
 }
-.header {
-    background-color: #40E0D0;
-    color: white;
-    padding: 10px 0 10px 0;
-    text-align: center;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 2px 8px 2px;
-}
-.header .logo, .header .options {
-    display: flex;
-    align-items: center;
-}
-.sidebar {
-    background-color: #8CEBDC;
-    position: sticky;
-    top: 50px;  Adjusted to avoid overlap with header 
-    width: 100%;
-    height: 30px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    border-bottom: 2px solid white;
-    
-
-}
-.sidebar ul {
-    display: flex;
-    justify-content: space-around ; 
-    width: 40%;
-    padding: 0;
-    list-style-type: none;
-}
-.sidebar ul li {
-    text-align: center;
-    border-right: 2px solid white;
-}
-.sidebar ul li:last-child {
-    border-right: none;
-}
-.content {
-    margin: 80px 20px 90px; /* Adjusted to avoid overlap with header and sidebar
-    background-color: #66E6D6;
-    padding-top: 30px; /* Added to avoid overlap with sidebar 
-}
-.content .product-card, .content .offer-card {
-    border: 1px solid #40E0D0;
-    padding: 10px;
-    margin-bottom: 10px;
-}
-.footer {
-    background-color: #40E0D0;
-    color: white;
-
-    text-align: center;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    height: 70px;
-}
-
-#home{
-    width: 100vw;
-    height: 100vw;
-}
-@media (max-width: 600px) {
-    .header, .footer {
-        padding: 10px;
-    }
-}
- */
-
 
  body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #D8F6E8;
+    background-color: #e0fef2;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
+
+/* Encabezado */
 header {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: #40E0D0;
+    background-color: #e0fef2;
     color: white;
     padding:10px 0;
     position: sticky;
     top: 0;
     z-index: 1;
 }
-.left-header, .right-header {
+.left-header, .right-header, .opcion {
     display: flex;
     align-items: center;
     gap: 7px;
     margin: 0 10px;
+
+}
+
+.right-header{
+    color: #21203f;
+}
+
+.opcion:hover{
+   background-color: #c8fde8;
+   padding: 10px;
+   border-radius: 15px;
 }
 .nav-links {
     list-style: none;
     display: flex;
     justify-content: center;
-    background-color: #8CEBDC;
+    background-color: #b1e4dc;
     position: sticky;
     top: 40px; /* Adjusted to avoid overlap with header */
     height: 3em;
     align-items: center;
-    width: 100%;
+    
 }
 .nav-links ul {
     display: flex;
     gap: 3px;
     padding: 0;
-    border-right: 1px solid #fff;
-    border-left: 1px solid #fff;
+    border-right: 1px solid #21203f;
+    border-left: 1px solid #21203f;
 
     list-style-type: none;
 }
 .nav-links a {
-    color: white;
+    color: #21203f;
     text-decoration: none;
     padding: 0 10px;
 }
-main {
-    margin: 20px;
-    background-color: #66E6D6;
-    flex-grow: 1;
+
+.logo{
+    display: flex;
+    justify-content: center;
 }
+
+.logo img{
+    width:17%;
+    object-position: center;
+    
+}
+
+
+   
+
+/* Fin de encabezado */
+
+    /* contenido principal */
+    main {
+        margin: 20px;
+        background-color: #e0fef2;
+        flex-grow: 1;
+    }
+
+    /* Carrousel */
+
+
+    /* Product carousel styles */
+    .product-carousel {
+        position: relative;
+        text-align: right;
+        padding: 10px;
+        background-color: #b1e4dc;
+        box-shadow: inset;
+    }
+
+    .add-products {
+        background-color: #333;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .add-products:hover {
+        background-color: #c3c3c3;
+    }
+
+    .carousel-container {
+        position: relative;
+        overflow: hidden;
+        margin-top: 2px;
+    }
+
+    .carousel-track {
+        display: flex;
+        gap: 10px;
+        transition: transform 0.3s;
+    }
+
+    .carousel-prev,
+    .carousel-next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .carousel-prev {
+        left: 10px;
+    }
+
+    .carousel-next {
+        right: 10px;
+    }
+
+    /* Card de productos */
+    .product-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #f9f9f9;
+        box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        border-radius: 8px;
+        width: 12%;
+        margin: 0 auto;
+    }
+
+    /* imagen de pructo */
+    .product-card img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+    .product-card:hover{
+        background-color: #20ffe9;
+    }
+
+    /* Titulo de Productos */
+    .product-name {
+        font-size: 22px;
+        color: #008080; /* Another color from the palette */
+        margin-top: 10px;
+    }
+
+    /* Descripcion*/
+    .product-description {
+        font-size: 12px;
+        color: #555;
+    }
+
+    /* Linea divisoria*/
+    .divider {
+        border: 1px solid #ccc;
+        margin: 10px 0;
+    }
+
+    /*Precio*/
+    .product-price {
+        font-size: 20px;
+        color: rgb(53, 18, 181);
+        
+    }
+
+    /* Boton de compra */
+
+    .add-to-cart {
+        background-color: #40E0D0;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        margin-top: 5px;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 50%; /* Occupies 50% of the card width */
+        transition: background-color 0.3s;
+    }
+
+    .add-to-cart:hover {
+        background-color: #008080;
+    }
+
+
+
+
+
+
+
+/* Pie de pagina */
 footer {
     background-color: #40E0D0;
     color: white;
     text-align: center;
     padding: 10px 0;
 }
+
+/* Responsive */
 @media (max-width: 600px) {
     header {
         flex-direction: column;

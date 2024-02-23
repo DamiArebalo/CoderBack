@@ -30,7 +30,7 @@ function contadorPar(numEntrada){
 
 function contadorImpar(numEntrada){
     let prueba = pruebaPar(numEntrada);
-    if(prueba==0){impares++;}
+    if(prueba!=0){impares++;}
     
 
 }
@@ -38,8 +38,8 @@ let ciclo =confirm("Evaluamos un numero?");
 while(ciclo){
     let entrada = pedirNumero();
     muestra(entrada);
-    pares = contadorPar(entrada); 
-    impares = contadorImpar(entrada);
+    pares = pares + contadorPar(entrada); 
+    impares = impares + contadorImpar(entrada);
     console.log(pares+" "+impares)
     ciclo = confirm("¿Evaluamos otro numero?");
     
