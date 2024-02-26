@@ -7,17 +7,19 @@
     <title>RityJust - Cleaning Supplies</title>
     <!-- /*LINKEO DE CSS*/ -->
     <link rel="stylesheet" type="text/css" href="./css/styles.css">
+    <link rel="stylesheet" type="text/css" href="./css/Carrousel.css">
+    <link rel="stylesheet" type="text/css" href="./css/popUp.css">
     <!-- /* LINKEO DE JS  -->
-    <script defer  src="script.js"></script>
+    <script defer  src="./js/backend.js"></script>
 </head>
 <body>
-<!-- ENCABEZADO*/ -->
+    <!-- ENCABEZADO*/ -->
     <header>
         <!-- /*PARTE IZQUIERDA*/ -->
         <div class="left-header">
             <div class="search">
                 <span>🔍</span>
-                <input type="text" placeholder="Search">
+                <input type="text" placeholder="Busca tu Producto">
             </div>
             
         </div>
@@ -28,17 +30,20 @@
         
         <!-- /*PARTE DERECHA*/ -->
         <div class="right-header">
-            <div class="opcion">
-                <span>🔑</span>
-                <h3>Login</h3>
-            </div>
-            <div class="opcion">
-                <span>🛒</span>
-                <h3>Carrito</h3>
-            </div>
+            <div class="opcion" onclick="openPopup()">🔑 Login</div>
+            <div class="opcion">🛒 Carrito</div>
+        </div>
+
+        <!-- Pop Up para el formulario de inicio de sesión -->
+        <div class="popup" id="loginPopup">
+            <input type="text" placeholder="Correo electrónico">
+            <input type="password" placeholder="Contraseña">
+            <label><input type="checkbox"> ¿Perfil de Administrador?</label>
+            <button onclick="validateAndClose()">Enviar</button>
+        </div>
 
             
-        </div>
+        
     </header>
 
     <!-- /*contenido principal*/ -->
