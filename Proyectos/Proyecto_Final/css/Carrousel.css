@@ -76,7 +76,7 @@
     }
 
     .product-card:hover{
-        background-color: #20ffe9;
+        background-color: rgba(81, 174, 168, 0.706)
     }
 
     /* Titulo de Productos */
@@ -120,5 +120,5 @@
     }
 
     .add-to-cart:hover {
-        background-color: #008080;
+        background-color: #21203f;
     }

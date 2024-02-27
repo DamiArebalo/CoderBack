@@ -30,18 +30,24 @@
         
         <!-- /*PARTE DERECHA*/ -->
         <div class="right-header">
-            <div class="opcion" onclick="openPopup()">🔑 Login</div>
+            <a class="opcion" href="#" onclick="openPopup()">🔑 Login</a>
             <div class="opcion">🛒 Carrito</div>
         </div>
+    
 
-        <!-- Pop Up para el formulario de inicio de sesión -->
+    <!-- Pop-up para el formulario de inicio de sesión -->
+    <div class="background" id="modalBackground">
         <div class="popup" id="loginPopup">
-            <input type="text" placeholder="Correo electrónico">
-            <input type="password" placeholder="Contraseña">
+            <span class="close-button" onclick="closePopup()">×</span>
+            <h2>Welcome to Our Website</h2>
+            <input type="text" id="email" placeholder="Correo electrónico">
+            <p id="emailError"></p>
+            <input type="password" id="password" placeholder="Contraseña">
+            <p id="passwordError"></p>
             <label><input type="checkbox"> ¿Perfil de Administrador?</label>
-            <button onclick="validateAndClose()">Enviar</button>
+            <button onclick="validateAndClose()">Login</button>
         </div>
-
+    </div>
             
         
     </header>
@@ -63,7 +69,26 @@
         <section id="products">
             <h2>Nuestros Productos</h2>
             <div class="product-carousel">
-                <button class="add-products">Add Products</button>
+                <button class="add-products" onclick="openPopupProducts()">Add Products</button>
+                <div class="background" id="modalBackgroundProducts">
+                    <div class="popup" id="productPopup">
+                        <span class="close-button" onclick="closePopupProduct()">×</span>
+                        <div class="product-form">
+                            <div class="left-column">
+                                <input type="file" id="productImage" accept="image/*">
+                                <input type="text" id="productName" placeholder="Nombre del producto">
+                            </div>
+                            <div class="right-column">
+                                <input type="text" id="productShortDescription" placeholder="Descripción breve">
+                                <input type="text" id="productLongDescription" placeholder="Descripción extensa">
+                                <input type="number" id="productPrice" placeholder="Precio del producto">
+                                <input type="number" id="productDiscount" placeholder="Descuento (opcional)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
                 <div class="carousel-container">
                     <div class="carousel-track">
                         <div class="product-card">
@@ -75,14 +100,6 @@
                             <button class="add-to-cart">Add to Cart</button>
                         </div>
 
-                        <div class="product-card">
-                            <img src="./Img/Productos/Oleo31.jpg" alt="Oleo 31">
-                            <h3 class="product-name">Oleo 31</h3>
-                            <p class="product-description">Multifunctional oil</p>
-                            <hr class="divider">
-                            <p class="product-price">$1,000</p>
-                            <button class="add-to-cart">Add to Cart</button>
-                        </div>
                     </div>
                     <button class="carousel-prev">←</button>
                     <button class="carousel-next">→</button>
@@ -161,4 +178,5 @@
     
 </body>
 </html>
+
 

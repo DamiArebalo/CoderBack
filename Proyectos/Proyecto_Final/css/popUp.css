@@ -1,20 +1,64 @@
-/* Estilos para el Pop Up */
+/* Estilos para el overlay de fondo */
+.background {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+}
+
+/*Estilos para el pop-up
+ .popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 4em; /* Doble de grande 
+    background-color: #21203f; /* Color de fondo verdoso 
+    color: #b1e4dc; /* Color de texto verdoso 
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    width: 80%;
+    max-width: 400px;
+    z-index: 2;
+} */
+
+/* Estilos para el pop-up de productos */
 .popup {
     display: none;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 20px;
-    background-color: #e0fef2; /* Color de fondo */
+    padding: 80px; /* Doble de grande */
+    background-color: rgba(33, 32, 63, 0.6); /* Color de fondo verdoso con transparencia */
+    color: #b1e4dc; /* Color de texto verdoso */
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    width: 60%; /* Tamaño más grande */
-    height: 70%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     text-align: center;
+    width: 80%;
+    max-width: 600px;
+    z-index: 2;
+    display: flex; /* Añadido */
+    justify-content: space-between; /* Añadido */
 }
 
-/* Estilos adicionales para el formulario */
+/* Estilos para el botón de cerrar */
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+
+ /* Estilos adicionales para el formulario */
 .popup input[type="text"],
 .popup input[type="password"] {
     width: 100%;
@@ -32,15 +76,34 @@
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+} 
+
+
+
+
+/* Línea divisoria vertical en el centro */
+.product-form {
+    display: flex;
+    align-items: center; /* Añadido */
+    border-right: 3px solid #b1e4dc;
+    padding-right: 20px;
+    flex: 1; /* Añadido */
 }
 
-/* Fondo difuminado */
-.background {
-    position: fixed;
-    top: 0;
-    left: 0;
+/* Estilos para las filas de entrada de texto */
+.product-form input {
     width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.2); /* Difuminado */
-    z-index: -1;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.4); /* Fondo transparente */
+    color: #b1e4dc; /* Color de texto verdoso */
+    transition: background-color 0.3s ease; /* Transición suave */
 }
+
+/* Cambio de estilo al enfocar el input */
+.product-form input:focus {
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo más claro al enfocar */
+}
+
