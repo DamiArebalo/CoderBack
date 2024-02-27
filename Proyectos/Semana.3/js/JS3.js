@@ -16,7 +16,8 @@ const iva = 21;
 
 
 //sacar la diferencia de aumento 
-function aumentoAprox(factura,lista,aumento,descuento){
+
+const aumentoAprox=(factura,lista,aumento,descuento) =>{
     let nuevoPrecio = lista + (lista*aumento/100);
     let resultadoFinal= nuevoPrecio - (nuevoPrecio*descuento/100);
 
@@ -24,8 +25,9 @@ function aumentoAprox(factura,lista,aumento,descuento){
 }
 
 
+
 //sacar el monto sin IVA para realizar ajuste
-function ajuste(factura){
+const ajuste =(factura)=>{
     let precioNuevo = parseInt(prompt("Cuanto le tiene que quedar"));
     let parcial = factura - precioNuevo;
     let resultado = parcial -(parcial*iva/100);
@@ -33,6 +35,8 @@ function ajuste(factura){
     return(resultado)
 
 }
+
+
 
 let accion = confirm("Nueva gestion?") 
 do{
