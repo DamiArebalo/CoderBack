@@ -37,7 +37,7 @@
     transform: translate(-50%, -50%);
     padding: 80px; /* Doble de grande */
     background-color: rgba(33, 32, 63, 0.6); /* Color de fondo verdoso con transparencia */
-    color: #b1e4dc; /* Color de texto verdoso */
+    
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     text-align: center;
@@ -84,10 +84,11 @@
 /* Línea divisoria vertical en el centro */
 .product-form {
     display: flex;
-    align-items: center; /* Añadido */
-    border-right: 3px solid #b1e4dc;
-    padding-right: 20px;
-    flex: 1; /* Añadido */
+    align-items:stretch;
+    padding: 20px 0px 20 0px;
+    margin: 20px 0px 20 0px ;
+    flex: 1;
+    color: #fff;
 }
 
 /* Estilos para las filas de entrada de texto */
@@ -98,7 +99,7 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.4); /* Fondo transparente */
-    color: #b1e4dc; /* Color de texto verdoso */
+    
     transition: background-color 0.3s ease; /* Transición suave */
 }
 
@@ -107,3 +108,41 @@
     background-color: rgba(255, 255, 255, 0.8); /* Fondo más claro al enfocar */
 }
 
+.right-column {
+    border-left: 5px solid #b1e4dc; /* Color del borde izquierdo */
+    padding-left: 20px; /* Espacio entre el borde y el contenido */
+}
+
+.left-column{
+    padding-right: 30px;
+}
+
+/* Estilos para el input de imágenes */
+.contendor-img{
+    height: 75%; /* Triple de su tamaño original */
+    color: white; /* Letras blancas */
+    width: 110%;
+    
+}
+
+#productImage{
+    height: 90%;
+}
+
+/* Estilos para el botón de carga de archivos de imagen */
+#productImage::file-selector-button {
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+    border: none;
+    background: #084cdf; /* Color de fondo del botón */
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
+    margin: 7em 0 1em 0; /* Añadido */
+   ; /* Añadido */
+}
+
+#productImage::file-selector-button:hover {
+    background: #0d45a5; /* Color de fondo al pasar el cursor sobre el botón */
+}

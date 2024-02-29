@@ -1,18 +1,18 @@
-function openPopup() {
+function abrirPopup() {
     document.getElementById("modalBackground").style.display = "block";
     document.getElementById("loginPopup").style.display = "block";
 }
 
-function closePopup() {
+function cerrarPopup() {
     document.getElementById("modalBackground").style.display = "none";
     document.getElementById("loginPopup").style.display = "none";
 }
 
-function validateAndClose() {
-    const emailInput = document.getElementById("email");
-    const passwordInput = document.getElementById("password");
-    const emailError = document.getElementById("emailError");
-    const passwordError = document.getElementById("passwordError");
+function validarYCerrar() {
+    let emailInput = document.getElementById("email");
+    let passwordInput = document.getElementById("password");
+    let emailError = document.getElementById("emailError");
+    let passwordError = document.getElementById("passwordError");
 
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d!@#$%^&*()_+]{8,}$/;
@@ -35,16 +35,16 @@ function validateAndClose() {
 
 
     if (emailRegex.test(emailInput.value) && passwordRegex.test(passwordInput.value)) {
-        closePopup();
+        cerrarPopup();
     }
 }
 
-function openPopupProducts() {
+function abrirPopupProductos() {
     document.getElementById("modalBackgroundProducts").style.display = "block";
     document.getElementById("productPopup").style.display = "block";
 }
 
-function closePopupProduct() {
+function cerrarPopupProductos() {
     document.getElementById("modalBackgroundProducts").style.display = "none";
     document.getElementById("productPopup").style.display = "none";
 }

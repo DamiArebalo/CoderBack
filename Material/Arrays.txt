@@ -1,0 +1,44 @@
+--------ARRAYS / VECTORES -------
+
+Es una estructura de datos que sirve para almacenar
+una lista de valores dentro de una misma variable
+
+const <nombre en plural> = [cant]
+
+Indice de arrays SIEMPRE ARRANCA EN 0
+
+console.table(array)
+
+TODOS LOS ELEMENTO DEBERIAN SER DEL MISMO TIPO
+
+------Propiedades del array------
+
+Tienen distinto tipos de Propiedades (buscar mas propiedades)
+
+.length  --> indica la cantidad de elemento/posiciones que tiene LONGITUD
+
+.push(elementoNuevo) --> Agregar un elemento al final de la lista
+
+.unshift(elemntoNuevo)  --> Agregar un elemento al Inicio de la lista
+
+.shift() -- Elimina el Primer elemento (no necesita parametros)
+
+.pop() -- elimina el ultimo elemento).
+
+.join() -- genera un string con todos los elemento del array, 
+            separandolos con un valor que elijamos por parametro
+
+.indexof()-- Obtiene el indice de un elemento en un array.
+            Si existe retorna indice si no -1
+
+
+
+
+---RECORRER LOS ARRAY ---
+
+for(let i =0; i<array.length;i++){
+    console.log(array[i]);
+}
+
+
+
