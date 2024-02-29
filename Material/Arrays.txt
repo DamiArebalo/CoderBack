@@ -17,21 +17,6 @@ Tienen distinto tipos de Propiedades (buscar mas propiedades)
 
 .length  --> indica la cantidad de elemento/posiciones que tiene LONGITUD
 
-.push(elementoNuevo) --> Agregar un elemento al final de la lista
-
-.unshift(elemntoNuevo)  --> Agregar un elemento al Inicio de la lista
-
-.shift() -- Elimina el Primer elemento (no necesita parametros)
-
-.pop() -- elimina el ultimo elemento).
-
-.join() -- genera un string con todos los elemento del array, 
-            separandolos con un valor que elijamos por parametro
-
-.indexof()-- Obtiene el indice de un elemento en un array.
-            Si existe retorna indice si no -1
-
-
 
 
 ---RECORRER LOS ARRAY ---
@@ -39,6 +24,59 @@ Tienen distinto tipos de Propiedades (buscar mas propiedades)
 for(let i =0; i<array.length;i++){
     console.log(array[i]);
 }
+
+
+--- FUNCIONES NECESARIAS ---
+
+.push(elementoNuevo) --> Agregar un elemento al final de la lista
+
+.unshift(elemntoNuevo)  --> Agregar un elemento al Inicio de la lista
+
+.shift() --> Elimina el Primer elemento (no necesita parametros)
+
+.pop() --> elimina el ultimo elemento.
+
+.join() --> genera un string con todos los elemento del array, 
+            separandolos con un valor que elijamos por parametro
+
+.indexof(Elemento a Buscar)--> Obtiene el indice de un elemento en un array.
+            Si existe retorna indice si no -1
+
+.includes(elemento a Buscar) --> Pregunta si existe o no dentro del array (BOOL)           
+
+.sort() --> Ordena de Manera Alfabetica todos los elementos
+
+.reverse() --> Invierte el orden del array
+
+
+---OBJETOS LITERALES --
+
+tipo de dato que permite guarda claves y valores en un formato textual
+
+const perro = {
+    nombre: ""
+    edad : 11
+    castrado : true 
+}
+
+
+--- funciones  objetos ---
+
+for(const producto of producto){  -->> FOR OF
+    //tarea
+
+}
+
+iterador y ejecutador de bolque de codigo
+
+
+---array de objetos----
+
+Guardar info personalizada dentro de los arrays
+
+
+
+
 
 
 
