@@ -49,7 +49,4 @@ function cerrarPopupProductos() {
     document.getElementById("productPopup").style.display = "none";
 }
 
-// function addProduct() {
-//     // Lógica para agregar el producto (no implementada en este ejemplo)
-//     closePopupProduct();
-// }
+
