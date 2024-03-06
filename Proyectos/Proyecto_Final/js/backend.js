@@ -44,9 +44,6 @@ function abrirPopupProductos() {
     document.getElementById("productPopup").style.display = "block";
 }
 
-function cerrarPopupProductos() {
-    document.getElementById("modalBackgroundProducts").style.display = "none";
-    document.getElementById("productPopup").style.display = "none";
-}
+
 
 

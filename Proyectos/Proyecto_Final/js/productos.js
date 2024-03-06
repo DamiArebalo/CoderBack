@@ -1,12 +1,64 @@
-const productos = [];
 
-function validarProductos(){
+
+    let id = document.getElementById("productId");
+    let nombre= document.getElementById("productName");
+    let descripLarga = document.getElementById("productLongDescription");
+    let descripCorta= document.getElementById("productShortDescription");
+    let precio = document.getElementById("productPrice");
+    let img = document.getElementById("productImg");
+
+//funcion de cerrado del PopUp
+function cerrarPopupProductos() {
+    document.getElementById("modalBackgroundProducts").style.display = "none";
+    document.getElementById("productPopup").style.display = "none";
+}
+
+const productos = []; // Generacion del vector Global
+
+const addProduct = () => {
+    console.log("inicio de funcion");
+
     const id = document.getElementById("productId");
     const nombre= document.getElementById("productName");
     const descripLarga = document.getElementById("productLongDescription");
     const descripCorta= document.getElementById("productShortDescription");
     const precio = document.getElementById("productPrice");
     const img = document.getElementById("productImg");
+
+    let producto = {
+        id: id.value , 
+        nombre: nombre.value,
+        descripCorta: descripCorta.value,
+        descripLarga: descripLarga.value,
+        precio: precio.value,
+        img: img.value 
+    }
+
+    if(validarProductos()==true){
+        
+
+
+        productos.push(producto)
+
+        console.log("producto agregado correctamente");
+
+        cerrarPopupProductos();
+
+    }else{
+        console.warn("Error en la carga de datos")
+    }
+    
+ 
+    
+}
+
+
+
+function validarProductos(){
+    //Inicializacion de componentes
+    let parsedId = parseInt(id.value);
+    let parsedPrice = parseFloat(precio.value);
+    
 
     // Validación para productShortDescription (descripCorta)
     const valShortDescription = descripCorta =>{     
@@ -23,30 +75,44 @@ function validarProductos(){
         if (descripCorta.value.length > 70) {
             console.error("Error: productLongDescription no debe exceder los 70 caracteres.");
             return false;
+        }else{
+            return true;
         }
     }
 
     // Validación para productPrice (precio)
     const valPrecio = precio =>{
-        const parsedPrice = parseFloat(precio.value);
+        
         if (isNaN(parsedPrice) || parsedPrice < 0) {
             console.error("Error: productPrice debe ser un valor numérico no negativo.");
             return false;
+        }else{
+            return true;
         }
     }
+
+    
    
     // Validación para ID (id)
     const valID = id =>{
-        const parsedId = parseInt(id.value);
-        if (isNaN(parsedId) || parsedId < 0) {
-            console.error("Error: ID debe ser un número no negativo.");
-            return false;
+        
+        for(const producto of productos){
+            // Verificación de existencia del ID en el array "productos"
+
+            if(parsedId == producto.id){
+                console.error("Error: El ID ya existe en la lista de productos.");
+                return false;
+            }
         }
 
-        // Verificación de existencia del ID en el array "productos"
-        if (productos.includes(parsedId)) {
-            console.error("Error: El ID ya existe en la lista de productos.");
+        if (parsedId < 0) {
+            console.error("Error: ID no debe ser un número negativo.");
             return false;
+        }else if(isNaN(parsedId)){
+            console.error("no se ingreso bien el ID")
+            return false;
+        }else{
+            return true;
         }
     }
     
@@ -59,12 +125,14 @@ function validarProductos(){
         if (!extensionsTrues.includes(imgExtension)) {
             console.error("Error: El archivo de imagen debe tener una extensión válida (.jpg, .jpeg, .png, .gif, .bmp, .svg).");
             return false;
+        }else{
+            return true;
         }
     }
         
 
 
-   if(valID(id)&& valShortDescription(descripCorta)&& valImg(img)&& valLongDescription(descripLarga)&& valPrecio(precio)){
+   if(valID(parsedId)==true&& valShortDescription(descripCorta)&& valImg(img)&& valLongDescription(descripLarga)&& valPrecio(parsedPrice)){
     return true
    }
 
@@ -72,34 +140,3 @@ function validarProductos(){
 
 }
 
-const addProduct = () => {
-
-    if(validarProductos()){
-        const id = document.getElementById("productId");
-        let nombre= document.getElementById("productName");
-        let descripLarga = document.getElementById("productLongDescription");
-        let descripCorta= document.getElementById("productShortDescription");
-        let precio = document.getElementById("productPrice");
-        let img = document.getElementById("productImg");
-
-
-        const producto = {
-            id: id , 
-            nombre: nombre,
-            descripCorta: descripCorta,
-            descripLarga: descriplarga,
-            precio: precio,
-            img: img
-        }
-
-        productos.push(producto)
-
-        console.log("producto agregado correctamente");
-
-        closePopupProduct();
-
-    }
-    
- 
-    
-}

@@ -1,5 +1,6 @@
-<html lang="en">
 <!DOCTYPE html>
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,8 +11,8 @@
     <link rel="stylesheet" type="text/css" href="./css/Carrousel.css">
     <link rel="stylesheet" type="text/css" href="./css/popUp.css">
     <!-- /* LINKEO DE JS  -->
-    <script defer  src="./js/backend.js"></script>
-    <script defer  src="./js/productos.js"></script>
+    <script async src="./js/backend.js"></script>
+    <script async  src="./js/productos.js"></script>
 </head>
 <body>
     <!-- ENCABEZADO*/ -->
@@ -88,7 +89,9 @@
                                 <input type="text" id="productLongDescription" placeholder="Descripción extensa">
                                 <input type="number" id="productPrice" placeholder="Precio del producto">
                                 <input type="number" id="productId" placeholder="Identificador del Producto">
+                                <button class="add-products" onclick="addProduct()">Add Products</button>
                             </div>
+
                         </div>
                     </div>
                 </div>
