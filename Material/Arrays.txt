@@ -48,6 +48,8 @@ for(let i =0; i<array.length;i++){
 
 .reverse() --> Invierte el orden del array
 
+.splice(2,1) ---> BORRAR ELEMENTO primero la posicion inicial y luego cuantos borra a partir de ahi
+
 
 ---OBJETOS LITERALES --
 
@@ -62,7 +64,7 @@ const perro = {
 
 --- funciones  objetos ---
 
-for(const producto of producto){  -->> FOR OF
+for(const producto of productos){  -->> FOR OF
     //tarea
 
 }

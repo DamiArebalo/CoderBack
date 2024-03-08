@@ -96,15 +96,6 @@ function validarProductos(){
     // Validación para ID (id)
     const valID = id =>{
         
-        for(const producto of productos){
-            // Verificación de existencia del ID en el array "productos"
-
-            if(parsedId == producto.id){
-                console.error("Error: El ID ya existe en la lista de productos.");
-                return false;
-            }
-        }
-
         if (parsedId < 0) {
             console.error("Error: ID no debe ser un número negativo.");
             return false;
@@ -112,6 +103,14 @@ function validarProductos(){
             console.error("no se ingreso bien el ID")
             return false;
         }else{
+            for(const producto of productos){
+                // Verificación de existencia del ID en el array "productos"
+    
+                if(parsedId == producto.id){
+                    console.error("Error: El ID ya existe en la lista de productos.");
+                    return false;
+                }
+            }
             return true;
         }
     }
@@ -130,7 +129,7 @@ function validarProductos(){
         }
     }
         
-
+    console.log("id: "+valID(parsedId)+"\ncorta: "+valShortDescription(descripCorta)+"\nlarga: "+valLongDescription(descripLarga)+"\n precio: "+valPrecio(parsedPrice));
 
    if(valID(parsedId)==true&& valShortDescription(descripCorta)&& valImg(img)&& valLongDescription(descripLarga)&& valPrecio(parsedPrice)){
     return true
