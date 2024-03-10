@@ -1,0 +1,129 @@
+----PROGRAMACION ORIENTADA A OBJETOS ----
+
+Informacion en bloques interconectados
+
+Objetos creados por clases
+
+Clases : Son la plantillas para crear objetos
+
+proceso de creacion con clases --> INSTANCIAR
+
+un objeto creado con clase --> instancia
+
+El paradigma de objetos son 4 principios:
+
+Abstracion: creacion abstracta de objeto
+-
+Encapsulamiento : Atributos y Metodos para comunicarse entre si o no
+- 
+Polimorfismo : misma accion ejecutandose por diferentes medios 
+ - 
+ 
+ Herencia : Un objeto hereda elementos atributos o metodos de otros objetos /clases
+
+
+
+class <Nombre plural>{ //primera letra en mayuscula
+    constructor(var1,var2,var3...){
+        this.var1
+        this.var2
+        this.var3 ---> this --- instancia creada
+        .....
+    }
+
+    //agregar las funciones que quieras
+}
+
+
+
+const <nombre singular> = new Persona(var1,var2,var3....)
+
+
+funciones constructoras vs clases
+
+son funciones diseñadas para la creacion de objetos y de manera automatico retornan ese mismo objeto
+
+function Objeto(name){
+
+    this.name = name
+    this.var = var
+}
+
+const objeto = new Objeto(name)
+
+
+-----
+
+function Persona(nombre, edad, calle){ 
+
+    this.nombre = nombre
+    this.edad = edad
+    this.calle = calle
+
+    this.hablar = function(){// se pueden agregar funciones
+
+        console.log("hola soy", this.nombre) //no hace falta usar "+" 
+    }
+}
+
+------------
+
+JAVASCRIPT NO TIENE CLASES PRIVADAS 
+
+LOS OBJETOS EN JS DOS TIPOS DE CAMPOS
+**Propiedades
+**Metodos
+
+Pueden ser publicas o privadas
+
+class CLiente{
+    static id - 0; //propiedad estatica
+
+    constructor(nombre, direccion){
+        this id - ++Cliente.id; // suma uno cada que se cree un Cliente
+
+        let email - " "; //propiedad privada porque es LET Y ESTA DENTRO DE LA FUNCTION constructoras
+
+        //PROPIEDADES publicas
+
+        this.nombre = nombre
+        this.direccion = direccion
+
+        //METODO publico para acceder a la propiedad privada
+        this.getEmail = function(){
+            return email;
+        }
+
+        //METODO publico para modificar propiedad privada
+        this.changeEmail = function(nuevoEmail){
+            email = nuevoEmail
+        }
+    }
+}
+
+//creamos objetos con la clase Cliente
+const cliente1 = new cliente{"Nombre1","direccion1"};
+....2
+....3
+
+//Acceder a la propiedades publicas
+console.log(Nombre1.noombre)
+
+console.log(Nombre1.email)//NO se puede acceder a las propiedades privadas
+
+console.log(getEmail())//SI podemos acceder a los metodos publicos que retornan resultados privados
+
+console.log(changeEmail("correo-cliente")) //Y modificarlos con funciones
+
+//Agregar propiedades
+
+Nombre1.<propiedad_Nueva> = "propiedad"
+
+NO MEZCLAR HTML CON NUESTRAS CLASES JS
+
+USAR ARRAY COMO PARAMETRO DE LOS OBJETOS
+
+PENSAR ABSTRACTO QUE DEVUELVAN UN VALOR ABSTRACTO
+
+
+
