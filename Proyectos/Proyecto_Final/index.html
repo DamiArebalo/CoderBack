@@ -13,6 +13,7 @@
     <!-- /* LINKEO DE JS  -->
     <script defer src="./js/backend.js"></script>
     <script defer  src="./js/productos.js"></script>
+    <script defer src="./js/users.js"></script>
 </head>
 <body>
     <!-- ENCABEZADO*/ -->
@@ -40,14 +41,15 @@
     <!-- Pop-up para el formulario de inicio de sesión -->
     <div class="background" id="modalBackground">
         <div class="popup" id="loginPopup">
-            <span class="close-button" onclick="cerrarPopup()">×</span>
-            <h2>Welcome to Our Website</h2>
+            <span class="close-button" onclick="cerrarPopupLogin()">×</span>
+            <h2>Registro en RITY JUST</h2>
+            <input type="text" id="nombre" placeholder="Nombre de Usuario">
             <input type="text" id="email" placeholder="Correo electrónico">
             <p id="emailError"></p>
             <input type="password" id="password" placeholder="Contraseña">
             <p id="passwordError"></p>
-            <label><input type="checkbox"> ¿Perfil de Administrador?</label>
-            <button onclick="validarYCerrar()">Login</button>
+            <label><input type="checkbox" id="checkAdmin"> ¿Perfil de Administrador?</label>
+            <button onclick="agregarUsuario()">Login</button>
         </div>
     </div>
             
@@ -89,7 +91,7 @@
                                 <input type="text" id="productLongDescription" placeholder="Descripción extensa">
                                 <input type="number" id="productPrice" placeholder="Precio del producto">
                                 <input type="number" id="productId" placeholder="Identificador del Producto">
-                                <button class="add-products" onclick="addProduct()">Add Products</button>
+                                <button class="add-products" onclick="">Add Products</button>
                             </div>
 
                         </div>

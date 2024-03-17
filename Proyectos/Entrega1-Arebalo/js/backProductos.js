@@ -10,8 +10,8 @@ let precio
 
 //FUNCION PARA PEDIR DATOS DEL PRODUCTO
  function pedirDatos(){
-    id = parseInt(prompt("INGRESAR ID DEL PRODUCTO"))
-    nombre= prompt("INGRESAR NOMBRE DEL PRODUCTO")
+    // id = parseInt(prompt("INGRESAR ID DEL PRODUCTO"))
+    nombre= prompt("INGRESAR NOMBRE DEL PRODUCTO").toLowerCase()
     descripCorta= prompt("INGRESAR DESCRIPCION CORTA DEL PRODUCTO")
     descripLarga = prompt("INGRESAR DESCRIPCION LARGA DEL PRODUCTO")
     precio = parseFloat(prompt("INGRESAR PRECIO DEL PRODUCTO"))
@@ -21,7 +21,7 @@ let precio
 }//Fin pedirDatos()
 
 //FUNCION QUE VALIDA LA ENTRADA DE CADA VARIABLE
-function validarProductos(id,precio,descripCorta,descripLarga,nombre){ 
+function validarProductos(precio,descripCorta,descripLarga,nombre){ 
 
     let parsedId = parseInt(id) // declaracion de variable dentro de la funcion parseando la entrada del usuario
 
@@ -51,7 +51,7 @@ function validarProductos(id,precio,descripCorta,descripLarga,nombre){
 
     // Validación para productPrice (precio) -- positivo y numerico
     const valPrecio = parsedPrice =>{
-        
+        console.log(parsedPrice);
         if (isNaN(parsedPrice) || parsedPrice < 0) {
             alert("Error: El Precio debe ser un valor numérico no negativo."); //Mensaje de error indicativo
             return false;
@@ -64,22 +64,22 @@ function validarProductos(id,precio,descripCorta,descripLarga,nombre){
     
    
     // Validación para ID (id) -- mayor o = a 0 / dato numerico / no debe existir en el array
-    const valID = parsedId => {
-        if (isNaN(parsedId) || parsedId < 0) {
-            alert("Error: ID no debe ser un número negativo."); //Mensaje de error indicativo
-            return false;
-        }
-        for (const producto of productos) {
-            if (producto.id == parsedId) {
+    // const valID = parsedId => {
+    //     if (isNaN(parsedId) || parsedId < 0) {
+    //         alert("Error: ID no debe ser un número negativo."); //Mensaje de error indicativo
+    //         return false;
+    //     }
+    //     for (const producto of productos) {
+    //         if (producto.id == parsedId) {
 
-                console.error("Error: El ID ya existe en la lista de productos."); //Mensaje de error con motivo
-                return false;
-            }
-          }
+    //             console.error("Error: El ID ya existe en la lista de productos."); //Mensaje de error con motivo
+    //             return false;
+    //         }
+    //       }
         
-        return true;
+    //     return true;
               
-    }//fin valID()
+    // }//fin valID()
 
     //--Solucion de validar exitencia con un metodo mas avanzado--
     // let idExists = productos.some(producto => parsedId == producto.id);
@@ -111,11 +111,11 @@ function validarProductos(id,precio,descripCorta,descripLarga,nombre){
     
     
     //Puesto de control BOOL    
-    console.log("Puesto de control:\nid: "+valID(parsedId)+"\ncorta: "+valShortDescription(descripCorta)+"\nlarga: "+valLongDescription(descripLarga)+"\nprecio: "+valPrecio(parsedPrice));
+    console.log("Puesto de control:\nnombre: "+valNombre(nombre)+"\n corta: "+valShortDescription(descripCorta)+"\nlarga: "+valLongDescription(descripLarga)+"\nprecio: "+valPrecio(parsedPrice));
 
 
     //CONDICIONAL DE SOLO SI TODOS LAS VALIDACIONES SON POSITIVAS SE APRUEBAN LOS DATOS INGRESADOS
-    if(valID(parsedId)&&valNombre(nombre)&&valShortDescription(descripCorta)&& valLongDescription(descripLarga)&& valPrecio(parsedPrice)){
+    if(valNombre(nombre)&&valShortDescription(descripCorta)&& valLongDescription(descripLarga)&& valPrecio(parsedPrice)){
 
         console.log("✨Validado Correctamente✨"); 
         return true;
@@ -143,22 +143,25 @@ function arrayVacio(){
 
 
 //Funcion Global para Agregar Productos
-function agregarProductos(id1,precio1,descripCorta1,descripLarga1,nombre1){ 
+function agregarProductos(precio1,descripCorta1,descripLarga1,nombre1){ 
     //Puesto de control
     console.log("inicio agregarProducto()");
 
-    //Inicializacion de objeto
-    let producto = { 
-        id: id1, 
-        nombre: nombre1.toLowerCase(),
-        descripCorta: descripCorta1,
-        descripLarga: descripLarga1,
-        precio: precio1
+    // //Inicializacion de objeto
+    // let producto = { 
+    //     id: id1, 
+    //     nombre: nombre1.toLowerCase(),
+    //     descripCorta: descripCorta1,
+    //     descripLarga: descripLarga1,
+    //     precio: precio1
          
-    }
+    // }
 
     //Ingresar solo si son datos validos
-    if(validarProductos(id1,precio1,descripCorta1,descripLarga1,nombre1)){ 
+    if(validarProductos(precio1,descripCorta1,descripLarga1,nombre1)){ 
+
+        const producto = new Producto(precio1,descripCorta1,descripLarga1,nombre1)
+
         productos.push(producto)
 
         alert("✨PRODUCTO AGREGADO CORRECTAMENTE✨");
@@ -171,17 +174,64 @@ function agregarProductos(id1,precio1,descripCorta1,descripLarga1,nombre1){
     
 }//Fin del Agregado de productos
 
+class Producto {
+    static id = 0
+    
+    constructor(precioLista,descripCorta,descripLarga,nombre){
+        this.id = ++Producto.id
+        this.precioLista = precioLista;
+        this.descripCorta = descripCorta;
+        this.descripLarga = descripLarga;
+        this.nombre = nombre;
+        this.oferta = 0;
+    }
+
+    agregarOferta = descuento =>{
+        descuento = this.precioLista * (descuento / 100);
+        this.oferta = this.precioLista - descuento;
+        console.log(`Se aplicó un descuento. \nEl nuevo precio es: ${this.oferta}`);
+    } 
+}
+
+const ofertaNueva = () =>{
+
+    console.log("incio de ofertas")
+    let nombreProducto = prompt("Ingresa Nombre de producto").toLowerCase();
+    let descuento = parseFloat(prompt("ingresa el porcentaje de descuento"));
+
+    for (const producto of productos) {
+        producto.nombre = producto.nombre.toLowerCase(); // Normalización de entrada
+
+        if (producto.nombre === nombreProducto) {
+            producto.agregarOferta(descuento);
+        }
+    }
+
+    
+
+
+
+}
+
+
+
+
 
 //------------ARRANCA EL ALGORITMO PRINCIPAL-----------------
+function inicio(){
+ let iniciar = confirm("Empezamos a Trabajar?")
+ return iniciar
 
-let inicio = confirm("Empezamos a Trabajar?") //CONTROL DE CICLO
+} 
+
+//CONTROL DE CICLO
 
 
-while(inicio){ //INCIO DEL CICLO PRINCIPAL
+while(inicio()==true){ //INCIO DEL CICLO PRINCIPAL
 
     //BIENVENIDA Y MENU DE ACCIONES
 
-    let accion = parseInt(prompt("Bienvenid@ a Rity-Just\n\n ---MENU DE ADMINISTRADOR---\n 1-Agregar Productos\n 2-Eliminar Productos\n 3-Ver tabla de productos \n Pulse otra letra para salir"));
+    let accion = parseInt(prompt("Bienvenid@ a Rity-Just\n\n ---MENU DE ADMINISTRADOR---\n 1-Agregar Productos\n 2-Eliminar Productos\n 3-Ver tabla de productos \n 4-Agregar Oferta \n 0 <--ATRAS \n Pulse otra letra para salir"));
 
     //INICIO SWITCH
     switch(accion){
@@ -189,7 +239,7 @@ while(inicio){ //INCIO DEL CICLO PRINCIPAL
         //ACCION 1 --> AGREGAR OBJETO
         case 1:
             pedirDatos(); //Declaracion del Objeto
-            agregarProductos(id,precio,descripCorta,descripLarga,nombre);//Agregar Objeto
+            agregarProductos(precio,descripCorta,descripLarga,nombre);//Agregar Objeto
             
             inicio = confirm("Seguimos trabajando?");//Validacion de Ciclo
         
@@ -294,6 +344,21 @@ while(inicio){ //INCIO DEL CICLO PRINCIPAL
                 inicio = confirm("Seguimos trabajando?");
             }
         break//CIERRE ACCION 3
+
+        case 4:
+
+            if(arrayVacio()==true){
+                console.table(productos)
+                ofertaNueva()
+                console.table(productos)
+                inicio = confirm("Seguimos trabajando?");
+            }else{
+                arrayVacio()
+                inicio = confirm("Seguimos trabajando?");
+            }
+            
+        
+        break;//Cierre accion 4
         
         //ERROR
         default:
