@@ -1,0 +1,70 @@
+Function de orden superior
+
+son las que llaman o devuelven otras funciones
+
+--- recorrer buscar y modificar---
+
+FOR EACH -- recorrer
+
+array.forEach((num)=>{
+    /*//tarea a realizar por cada elemento de array*/
+
+}
+)
+
+FIND ---> busca si nuesto parametro esta dentro del array usado
+
+resultado = cursos.find( (el) => el.nombre === "busqueda")
+
+SI ES TRUE DEVUELVE OBJETO SI NO UNDEFINDED
+
+FILTER --> compara cada elemento y si es true agrega el objeto a un array
+
+resultado = cursos.filter( (el) => el.nombre === "busqueda")
+
+
+SOME ---> parecido a find ---> some retorna booleanos
+
+console.log( cursos.some(el => el.nombre == "nombre"));
+
+
+
+SORT ---> ordena un array y devuelve el arreglo ordenado (destructivo)
+
+items.sort((a,b)=>{
+    if (a.name > b.name)
+        return 1 ---> acsendente
+    
+    if (a.name < b.name)
+        return -1 ---> descendente
+
+    return 0
+})
+
+
+ordenamiento por burbuja:
+
+compara cada elemento y chekea si se puede intercambiar con otros elementos
+
+for (let k )
+
+
+funcion MAP()--- crea un array modificando cada elemento del array parametro 
+
+CONST resultado = arrays.map(elem => elem.atributo) //devuelve un array con el key atributo ejemplo
+
+
+REDUCE() --> integra todo un array y devuelve un valor unico pasado por funcion parametro
+
+const total = numeros.reduce((acc,elem) => acc + elem, 0)
+
+recibe dos parametros primero funcion luego posicion inical
+
+const total = miCompra.reduce((acc,elem) => acc + elem.precio, 0)
+
+
+
+
+
+
+

@@ -1,0 +1,20 @@
+DEBUGGER: 
+Herramienta del navegador que podemos acceder por consola 
+y nos va a ayudar a detectar errores
+
+sources 
+|
+recursos
+|
+codigo
+|
+info
+
+un breaxkpoint pausa la ejecucion del navegador
+
+debugger ; comando solo funcionan cuando el panel de desarrollador este abierto
+
+
+
+
+
