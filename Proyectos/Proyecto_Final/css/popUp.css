@@ -51,10 +51,13 @@
 /* Estilos para el botón de cerrar */
 .close-button {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
+    top: 15px;
+    right: 15px;
+    font-size: 25px;
     cursor: pointer;
+    margin-top: 1em;
+    margin-right: 1em;
+    color: #b1e4dc;
 }
 
 
@@ -98,7 +101,7 @@
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.4); /* Fondo transparente */
+    
     
     transition: background-color 0.3s ease; /* Transición suave */
 }

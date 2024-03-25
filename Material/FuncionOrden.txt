@@ -62,9 +62,10 @@ recibe dos parametros primero funcion luego posicion inical
 
 const total = miCompra.reduce((acc,elem) => acc + elem.precio, 0)
 
-
-
-
-
+***********
+cuando metes la función en el argumento, 
+no tenes que ponerle nombre, 
+arrancas directamente desde los parametros
+******************
 
 
