@@ -1,0 +1,81 @@
+---------DOM---------
+** 5 NODOS PRINCIPALES **
+
+DOCUMENT
+ELEMENT
+ATTRIBUTE
+TEXT
+COMMENT
+
+Document
+
+getElementById
+getElementByClassName --- RETORNA ARRAY CON LOS ELEMENTO QUE COINCIDAN(nodos)
+getElementByTagName-- retorna array con los tag que coincidan (nodos)
+
+
+querySelector(). --- PRIMER REFERENCIA ENCONTRADA.
+
+querySelectorAll() -- todos los coincidentes
+
+---acceso Y MODIFICACION---
+
+innerHTML -- DEVUELVE EL CONTENIDO 
+
+innerText -- accede y/o modifica el contenido textual
+
+.className --  accede y/o modifica el nombre de su clases (CSS)
+
+
+for of -- para recorrer
+
+createElement("nombre de etiqueta"):
+
+append//appendChild -- pushea el contenido al html
+
+.remove() -- elimina un nodo html 
+
+.value()--- accede o cambia el valor de inputs
+
+
+
+----EVENTOS----
+
+controlar las acciones del usario y actuar frente a ellas
+
+
+---acceder a un evento ---
+
+**addEventListener(nombre, respuesta) --  recibe dos parametros porque necesita saber que es lo que controla y que es lo que tiene que hacer
+
+**NODOS -- nombre del evento + prefijo ON (RECOMENDABLE FUNCION FLECHA)
+ej: boton.onclick = () =>{//funcion}
+
+**SIntaxis en html -- mismo ejemplo que nodo pero en html (NO SE RECOMIEDA)
+
+EVENTOS COMUNES 
+
+*mouse{
+	mouse down/up : se se oprime/suelta boton de raton en un elemento
+	mouse over/out: el puntero del mouse se mueve sobre/sale del elemento
+	mouse move: El movimiento sobre el elemento activa el evento
+	click: se activa despues de mousedown o mouseup sobre un elemento valido
+}	
+*teclado{
+	keydown: se presiona
+	keyup: se suelta una tecla
+}
+
+*change-- cuando cambia el valor del elemento
+	
+*input-- cada que se tipea sobre el campo (conviene trabajar con addEvent)
+
+*submit-- cuando el formu es enviado -- (conviene trabajar con addEvent)
+
+*otros
+
+
+
+
+
+
