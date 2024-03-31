@@ -95,7 +95,9 @@
 }
 
 /* Estilos para las filas de entrada de texto */
-.product-form input {
+.product-form input 
+.product-form select
+{
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;

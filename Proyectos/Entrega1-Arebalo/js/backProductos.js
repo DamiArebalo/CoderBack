@@ -146,17 +146,7 @@ function arrayVacio(){
 function agregarProductos(precio1,descripCorta1,descripLarga1,nombre1){ 
     //Puesto de control
     console.log("inicio agregarProducto()");
-
-    // //Inicializacion de objeto
-    // let producto = { 
-    //     id: id1, 
-    //     nombre: nombre1.toLowerCase(),
-    //     descripCorta: descripCorta1,
-    //     descripLarga: descripLarga1,
-    //     precio: precio1
-         
-    // }
-
+    
     //Ingresar solo si son datos validos
     if(validarProductos(precio1,descripCorta1,descripLarga1,nombre1)){ 
 

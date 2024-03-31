@@ -19,29 +19,43 @@
 
 /* Encabezado */
 header {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+   
     background-color: #e0fef2;
     color: white;
-    padding:10px 0;
-    position: sticky;
     top: 0;
     z-index: 1;
 }
-.left-header, .right-header, .opcion {
+
+/* Estilos para el header */
+.sticky-header {
+    position: sticky;
+    top: 0;
+ 
     display: flex;
     align-items: center;
-    gap: 7px;
-    margin: 0 10px;
-
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.right-header {
+    margin-left: auto;
+}
+
+/* Estilos para las opciones (botones) */
+.opcion {
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+/* Estilos específicos para dispositivos móviles */
+@media (max-width: 768px) {
+    .logo img {
+        max-width: 80px; /* Ajusta el tamaño según tus necesidades */
+    }
+}
 
 /* Estilos para la parte derecha */
 .right-header {
-    display: flex;
-    align-items: center;
     gap: 7px;
     margin: 0 10px;
     color: #21203f;
@@ -130,7 +144,16 @@ header {
     
 }
 
+.product-list{
+    display: flex;
+    height: 30vh;
+    flex-wrap: wrap;
+}
 
+.product-list img{
+   
+    max-height: 10rem;
+}
    
 
 /* Fin de encabezado */

@@ -31,9 +31,6 @@ const usuarios = []
 const admins = []
 
 
-
-
-
 //Cerrar popup del login
 function cerrarPopupLogin() { 
     document.getElementById("modalBackground").style.display = "none";

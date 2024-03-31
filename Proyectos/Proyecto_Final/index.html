@@ -13,20 +13,14 @@
     <link rel="stylesheet" type="text/css" href="./css/Carrito.css">
     <!-- /* LINKEO DE JS  -->
     <script defer src="./js/backend.js"></script>
-    <script defer  src="./js/productos.js"></script>
+    <script defer type="module" src="./js/productos.js"></script>
     <script defer src="./js/users.js"></script>
-    <script defer src="./js/carrito.js"></script>
+    <script defer type="module" src="./js/carritoIndex.js"></script>
 </head>
 <body>
     <!-- ENCABEZADO*/ -->
-    <header>
-        <!-- /*PARTE IZQUIERDA*/ -->
-        <div class="left-header">
-            <div class="search">
-                <span>🔍</span>
-                <input type="text" placeholder="Busca tu Producto">
-            </div>
-            
+    <header class="sticky-header" >
+        <!-- /*PARTE IZQUIERDA*/ -->   
         </div>
         <!-- /*PARTE CENTRAL*/ -->
         <div class="logo">
@@ -91,18 +85,26 @@
                         <div class="product-form">
                             <div class="left-column">
                                 <div class="contendor-img">
-                                    <input type="file" id="productImg" placeholder="Ingresa Imagen" accept="image/*">
+                                    <input class="dato" type="file" id="productImg" placeholder="Ingresa Imagen" accept="image/*">
                                    
                                 </div>
                                 
-                                <input type="text" id="productName" placeholder="Nombre del producto">
+                                <input class="dato" type="text" id="productName" placeholder="Nombre del producto">
                             </div>
                             <div class="right-column">
-                                <input type="text" id="productShortDescription" placeholder="Descripción breve">
-                                <input type="text" id="productLongDescription" placeholder="Descripción extensa">
-                                <input type="number" id="productPrice" placeholder="Precio del producto">
-                                <input type="number" id="productStock" placeholder="Stock Inicial">
-                                <button class="add-products" type="submit" id="agregarProd">Add Products</button>
+                                <input class="dato"type="text" id="productShortDescription" placeholder="Descripción breve">
+                                <input class="dato"type="text" id="productLongDescription" placeholder="Descripción extensa">
+                                <input class="dato" type="number" id="productPrice" placeholder="Precio del producto">
+                                <input class="dato"type="number" id="productStock" placeholder="Stock Inicial">
+                                
+                                <label for="categoria">Selecciona una categoría:</label>
+                                <select class="dato"id="categoria" name="categoria">
+                                    <option value="fisico">Físico</option>
+                                    <option value="frecuente">Frecuente</option>
+                                    <option value="aromaterapia">Aromaterapia</option>
+                                </select>
+
+                                <button class="add-products " type="submit" id="agregarProd">Add Products</button>
                             </div>
 
                         </div>
@@ -112,17 +114,9 @@
                 <!--CARROUSEL-->
                 <div class="carousel-container"> 
                     <!-- CARD DE PRODUCTOS-->
-                    <div class="carousel-track">
-                        <div class="product-card">
-                            <img src="./Img/Productos/Oleo31.jpg" alt="Oleo 31">
-                            <h3 class="product-name">Oleo 31</h3>
-                            <p class="product-description">Multifunctional oil</p>
-                            <hr class="divider">
-                            <p class="product-price">$1,000</p>
-                            <button class="add-to-cart">Add to Cart</button>
-                        </div>
-
-                    </div>
+                    <ul class="product-list">
+                        <!--AGREGAR LOS PRODUCTOS POR JAVASCRIPT-->
+                    </ul>
                     <button class="carousel-prev">←</button>
                     <button class="carousel-next">→</button>
                 </div>
@@ -138,7 +132,7 @@
                 <div class="carousel-container">
                     <div class="carousel-track">
                         <div class="product-card">
-                            <img src="./Img/Productos/Oleo31.jpg" alt="Oleo 31">
+                            <img src="" alt="Oleo 31">
                             <h3 class="product-name">Oleo 31</h3>
                             <p class="product-description">Multifunctional oil</p>
                             <hr class="divider">
