@@ -187,11 +187,16 @@
     border-radius: 5px;
 }
 
+#busqueda-Eliminar{
+    display: block;
+}
+
 .offer-card{
     height: 5rem;
     width: 4rem;
     flex-direction: column;
     border: 1px solid var(--clr-green-light);
+    
 }
 
 .img-offer{

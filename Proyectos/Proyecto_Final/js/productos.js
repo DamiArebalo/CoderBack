@@ -1,38 +1,88 @@
 // DECLARACION DE VARIABLES DE FORMULARIO
 let formuProducto = document.querySelectorAll(".dato")
-   // console.log(formuProducto)
+//puesto de control
+// console.log(formuProducto)
 
+//CLASE - PLANTILLA DE PRODUCTOS
+class Producto{
+    static id = 0
+    
+    constructor(precioLista,descripCorta,descripLarga,nombre,imgProd,stockInicial, categoria){
+        
+        this.id = ++Producto.id
+       
+        this.precioLista = precioLista;
+        this.descripCorta = descripCorta;
+        this.descripLarga = descripLarga;
+        this.nombre = nombre;
+        this.oferta = 0;
+        this.img = imgProd;
+        this.stock = stockInicial;
+        this.categoria =categoria
+        this.descuento = 0
+    }
+
+
+
+}
+
+//declaracion de elementos necesarios
 const productContainer = document.querySelector('.contenedor-productos');
 const botonesCategorias = document.querySelectorAll(".boton-categoria");
 const tituloPrincipal = document.querySelector("#titulo-principal");
 let agregarCarrito = document.querySelectorAll(".producto-agregar");
 const numerito = document.querySelector("#numerito");
 const preview = document.querySelector("#preview-img")
-
-let productosEnCarrito = []
-
-console.log(preview)
+let rutaimg
+let inputImg = document.getElementById('productImg'); //selector de imagen
 
 
 // Generacion del Array Global
+let productosEnCarrito =[]
 let productos = [];
 let ofertasCreadas = []
 
+//recupero de LOCALSTORAGE
 let productosenLS = JSON.parse(localStorage.getItem("array-productos"))
-console.log(productosenLS)
+let ofertasCreadasLS = JSON.parse(localStorage.getItem("ofertas"))
+let CarritoLS = JSON.parse(localStorage.getItem("productos-en-carrito"))
 
-if(productosenLS){
+console.log(productosenLS)
+console.log(productos)
+//si hay algo el array global es igual al de local storage
+function productosCheck(){
+    if(productosenLS){
     productos = productosenLS
-}else{
+
+    }else{
     productosenLS = []
+    }
+    console.log(productos)
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    agregarProductoAlDOM(productos)
-})
+function carritoCheck(){
+    if(CarritoLS){
+        productosEnCarrito = CarritoLS
+    }else{
+        productosEnCarrito = []
+    }
+}
+
+function offerChek(){
+    if(ofertasCreadasLS){
+        ofertasCreadas = ofertasCreadasLS
+    }{
+        ofertasCreadas = []
+    }
+}
 
 
-//FUNCION CERRAR POPUP
+
+//puesto de control
+//console.log(ofertasCreadasLS)
+
+
+//CLON FUNCION CERRAR POPUP
 function cerrarPopupProductos() {
     document.getElementById("modalBackgroundProducts").style.display = "none";
     document.getElementById("productPopup").style.display = "none";
@@ -51,63 +101,12 @@ function arrayVacio(){
 
 }//Fin de la validacion de Array
 
-
-let rutaimg
-
-let inputImg = document.getElementById('productImg'); //selector de imagen
-
-
-//llegar a la ruta del usuario de la imagen
-//Evento DE INGRESO DE IMAGENES
-inputImg.onchange =  (event) => {  
-
-    //Elemento elegido
-    const selectedFile = event.target.files[0];//
-    //Si realmente se ingreso una imagen vaida
-    if(selectedFile){
-        let reader = new FileReader();
-        
-        //Conversion de ruta - solucion al error ../fakepath/
-        reader.readAsDataURL(selectedFile) 
-        //--cuando cargue la imagen
-        reader.onload = function(e){ 
-            //Guardar ruta en una variable gobal
-            rutaimg = e.target.result
-            //console.log(e.target.result)
-            mostrarImagen(e.target.result) 
-        }
-
-    }else{
-        console.warn("no se selecciono ninguna imagen")
-    }
-
-   
-}
-
+//Funcion global para mostrar imagen en formulario
 function mostrarImagen (ruta){
     preview.innerHTML =" "
     let imagenCode = document.createElement("img")
     imagenCode.src=ruta
     preview.append(imagenCode)
-}
-
-//CLASE - PLANTILLA DE PRODUCTOS
-class Producto{
-    static id = 0
-    
-    constructor(precioLista,descripCorta,descripLarga,nombre,imgProd,stockInicial, categoria){
-        this.id = Producto.id++
-        this.precioLista = precioLista;
-        this.descripCorta = descripCorta;
-        this.descripLarga = descripLarga;
-        this.nombre = nombre;
-        this.oferta = 0;
-        this.img = imgProd;
-        this.stock = stockInicial;
-        this.categoria =categoria
-        this.descuento = 0
-    }
-
 }
 
 //FUNCION PARA VALIDAR LA ENTRADA DE INFO
@@ -166,7 +165,7 @@ function validarProductos(precioLista,descripCorta,descripLarga,nombre,stock){
     //validacion de nombre
     const valNombre = (nombre) => {
         let nombreExists = productos.some(producto => nombre === producto.nombre);
-        console.log(nombreExists)
+        // console.log(nombreExists)
         if (nombreExists) {
             return false;
         } else {
@@ -209,6 +208,7 @@ function agregarProductos(){
     //Ingresar solo si son datos validos
     if(validarProductos(precioLista,descripCorta1,descripLarga1,nombre1,imgProd,stock)){
 
+        productosCheck()
         const producto = new Producto(precioLista,descripCorta1,descripLarga1,nombre1,imgProd,stock,categoria)
 
         productos.push(producto)
@@ -225,18 +225,8 @@ function agregarProductos(){
 
 }//Fin del Agregado de productos
 
-
-//EVENTOS Y CODIGO EN MARCHA
-const agregarProd = document.getElementById("agregarProd"); //BOTON DE FORMULARIO PRODUCTOS
-
-//--AGREGAR PRODUCTOS AL ARRAY y LOCALSTORAGE---
-agregarProd.onclick = () =>{
-    agregarProductos()
-    console.table(productos);
-    alamacenArray()
-    
-}
-function getPrecioActual (producto){
+//Funcion para saber si el precio actual es con oferta o es el precio de lista
+function getPrecioActual(producto){
     if(producto.oferta>0){
         return(producto.oferta)
     }else{
@@ -277,14 +267,52 @@ function agregarProductoAlDOM(productosElegidos) {
     actualizaragregarCarrito();
 }
 
-
 //funcion para guardar el array productos en el LocalStorage
-let productosLS 
 function alamacenArray() {
+    productosenLS = productos
+    localStorage.setItem("array-productos", JSON.stringify(productosenLS));
+}
 
-    productosLS = productos
+//-------------------EVENTOS DE FORMULARIO-------------
 
-    localStorage.setItem("array-productos", JSON.stringify(productosLS));
+const agregarProd = document.getElementById("agregarProd"); //BOTON DE FORMULARIO PRODUCTOS
+
+//PROBLEMATICA: llegar a la ruta del usuario de la imagen
+//Evento DE INGRESO DE IMAGENES
+inputImg.onchange =  (event) => {  
+
+    //Elemento elegido
+    const selectedFile = event.target.files[0];//
+
+    //Si realmente se ingreso una imagen vaida
+    if(selectedFile){
+        //Leo el archivo
+        let reader = new FileReader();
+
+        //Conversion de ruta - solucion al error ../fakepath/
+        reader.readAsDataURL(selectedFile) 
+
+        //--cuando cargue la imagen
+        reader.onload = function(e){ 
+            //Guardar ruta en una variable gobal
+            rutaimg = e.target.result
+            //puesto de control
+            //console.log(preview)
+            //console.log(e.target.result)
+            mostrarImagen(e.target.result) 
+        }
+
+    }else{
+        console.warn("no se selecciono ninguna imagen")
+    } 
+}
+
+//--AGREGAR PRODUCTOS AL ARRAY y LOCALSTORAGE---
+agregarProd.onclick = () =>{
+    agregarProductos()
+    console.table(productos);
+    alamacenArray()
+    
 }
 
 //EVENTO POR CADA CLICK EN CAMBIO DE CATEGORIA
@@ -320,7 +348,10 @@ botonesCategorias.forEach(boton => {
     })
 });
 
- 
+
+//----------------------CARRITO---------------
+
+
 
 //BOTON PARA AGREGAR AL CARRITO
 function actualizaragregarCarrito() {
@@ -333,48 +364,59 @@ function actualizaragregarCarrito() {
     });
 }
 
+
 //FUNCION DE BOTON AGREGAR AL CARRITOO
 function agregarAlCarrito(e) {
     //TOMO EL BOTON CLICKEADO
     const idBoton = e.currentTarget.id;
     let parseID = Number(idBoton)
-    //BUSCO EL OBJETO PRODUCTO QUE SE SELECCIONO
 
+    //BUSCO EL OBJETO PRODUCTO QUE SE SELECCIONO
     let productoAgregado = productos.find(producto => producto.id === parseID);
+    
     //SI ESTA EN CARRITO SUMO 1 A LA CANTIDAD 
     if(productosEnCarrito.some(producto => producto.id === parseID)) {
+        
         //BUSCO LA POSICION DEL PRODUCTO 
-        const index = productosEnCarrito.findIndex(producto => producto.id === parseID);
-        console.log(index)
+        const index = productosEnCarrito.findIndex(producto => producto.id === parseID);       
         console.log(productosEnCarrito)
-
+        
         //SUMO CANTIDAD
-        productosEnCarrito[index].cantidad++;
+        productosEnCarrito[index].cantidad++; 
         
-       
-        
-    }else{
-        console.log(productosEnCarrito)
-        //ARRANCA EN UNO
-        productoAgregado.cantidad = 1;
+    }else{  
+       //ARRANCA EN UNO
+       productoAgregado.cantidad = 1;
         //PUSHEO A CARRITO
+        carritoCheck()
         productosEnCarrito.push(productoAgregado);
     }
 
     actualizarNumerito();
+    console.log(productosEnCarrito)
     //GUARDO EN LOCALSTORAGE EL CARRITO
     localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito));
 }
+
+let numeritoActual
+
 
 //FUNCION PARA ACTUALIZAR EL PREVIEW DEL CARRITO
 function actualizarNumerito() {
     let nuevoNumerito = productosEnCarrito.reduce((acc, producto) => acc + producto.cantidad, 0);
     numerito.innerText = nuevoNumerito;
+    numeritoActual = nuevoNumerito
+    console.log(numeritoActual)
 }
 
+//------------------SECCION OFERTAS-------------
 const ofertas = document.querySelector("#ofertas-DOM")
 
-
+//FUNCION PARA ACTUALIZAR ARRAY OFERTAS
+function checkOffer (){
+    return (productos.some((producto) => producto.oferta > 0)) 
+     
+}
 
 function crearTarjetaOferta(producto) {
     const offerCard = document.createElement('div');
@@ -394,8 +436,10 @@ function crearTarjetaOferta(producto) {
 
     return offerCard;
 }
+
 function agregarOfertasDOM (ofertasNuevas){
     ofertas.innerHTML = " "
+    ofertasCreadas = Array.from(ofertasCreadas)
 
     ofertasNuevas.forEach((producto) =>{
         let productCard = crearTarjetaOferta(producto)
@@ -405,4 +449,136 @@ function agregarOfertasDOM (ofertasNuevas){
     
 }
 
+document.addEventListener("DOMContentLoaded", ()=>{
+    
+    //SI hay porductos con ofertas muestralos en el dom
+    
+    ofertasCreadas = productos.filter(producto =>producto.oferta > 0)
+    
+
+    if(CarritoLS.length !=0){
+        numeritoActual = CarritoLS.reduce((acc, producto) => acc + producto.cantidad, 0);
+    }
+    
+    productosCheck()
+    
+    if(ofertasCreadasLS == null){
+        ofertasCreadasLS = ofertasCreadas
+    }else if(ofertasCreadas>0 || ofertasCreadasLS>0){
+        agregarOfertasDOM(ofertasCreadasLS)
+    }
+
+    if(numeritoActual< 0 || numeritoActual==undefined){
+        numerito.innerText = 0;
+    }else{
+        numerito.innerText = numeritoActual;
+    }
+    
+    agregarProductoAlDOM(productos)
+    offerChek()
+    console.log(ofertasCreadasLS)
+})
+
+const busquedaEliminar = document.querySelector("#busquedaEliminar")
+const contentELiminar = document.querySelector("#productosEliminar")
+
+console.log(busquedaEliminar)
+console.log(contentELiminar)
+
+function crearTarjetaEliminar(producto){
+    //crea un div
+    let eliminarCard = document.createElement('div');
+    //le pone clase
+    eliminarCard.classList.add('offer-card');
+
+    //crea tarjeta con HTML y variables de cada producto ofertado
+    eliminarCard= `
+        <div class="offer-card>
+            <h4 class="name-offer">${producto.nombre}</h4>
+            <button class="agregar-oferta" id="${producto.id}">Eliminar</button>
+        </div>
+    `
+
+    //Devuelve la taarjeta
+    return eliminarCard;
+
+}
+// Función para filtrar productos según la búsqueda
+function filtrarProductosEliminar(textobusqueda) {
+    //crea un array con los productos que contienen las letras buscadas  -->> mejorar con letras ordenadas
+    const productosFiltrados = productos.filter(producto =>
+        producto.nombre.toLowerCase().includes(textobusqueda)
+    );
+    //puesto de control
+        // console.log(productosFiltrados)
+        // console.log(contentOffer)
+
+    //dentro del contenedor mapea el array creado y devuelve otro con cada tarjeta del las ofertas
+    contentELiminar.innerHTML=productosFiltrados.map(producto =>crearTarjetaEliminar(producto))
+    
+    //actualizo un array con todas las tarjetas
+    cardsOfertas = document.querySelectorAll(".offer-card")
+    
+}
+
+//EVENTO CADA QUE SE SUELTA UNA LETRA A BUSCAR
+busquedaEliminar.addEventListener("keyup",(e)=>{
+    
+    //instancio conjunto de letras
+    textoBusqueda = e.target.value.toLowerCase()
+
+    //filtro por cada producto en array
+    filtrarProductosEliminar(textoBusqueda)
+
+    //lleno mi array con cada boton de agregar-oferta
+    eliminarbotones = document.querySelectorAll(".agregar-oferta")
+    
+    //puesto de control 
+    console.log(eliminarbotones) 
+
+    //recorro todos los botones
+    eliminarbotones.forEach(boton =>{
+        //por cada boton clickeado
+        boton.onclick = (e) =>{
+            //rescato su ID
+            const botonId = e.currentTarget.id
+            console.log(botonId)
+            //Rescato el producto dentro del ARRAY GLOBAL CON EL MISMO ID
+            const productoSeleccion = productos.find(producto => producto.id == botonId)
+            console.log(productoSeleccion)
+            //Rescato el INDEX del PRODUCTO en array global con el MISMO ID
+            let productIndex = productos.findIndex(producto => producto.nombre == productoSeleccion.nombre)
+            let checkCarrito = CarritoLS.some((producto) => producto.id == productoSeleccion.id)
+            
+            //puestod de control
+            //console.log(productos[productIndex])
+            //console.log(productIndex)
+
+            //Elimino el producto elegido
+            if(checkCarrito){
+                let  indexCarrito = CarritoLS.findIndex(producto => producto.id == botonId);
+    
+                //puesto de control
+                // console.log(CarritoLS)
+                // console.log(indexCarrito)
+                
+                //Elimino el producto elegido
+                CarritoLS.splice(indexCarrito, 1);
+                localStorage.setItem("productos-en-carrito", JSON.stringify(CarritoLS));
+
+            }
+            productos.splice(productIndex, 1);
+
+            //vuelvo a cargar al DOM 
+            agregarProductoAlDOM(productos);
+
+            //actualizo el LS
+            alamacenArray();
+            //puesto de control
+            // console.log(productos)
+            // console.log(productosenLS)
+        }
+
+    })
+})//FIN ALGORITMO
 

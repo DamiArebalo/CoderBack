@@ -19,8 +19,8 @@
     <!-- /* LINKEO DE JS  -->
     <script defer src="./js/backend.js"></script>
     <script defer src="./js/productos.js"></script>
-    <script defer src="./js/carritoIndex.js"></script> 
-    <script defer src="./js/productosAll.js"></script>
+    <!-- <script defer src="./js/carritoIndex.js"></script>  -->
+    <script defer src="./js/ofertas.js"></script>
 </head>
 <body>
     <!-- ENCABEZADO*/ -->
@@ -129,7 +129,7 @@
                             <button id="todos" class="boton-menu boton-categoria active"><i class="bi bi-hand-index-thumb-fill"></i> Todos los productos</button>
                         </li>
                         <li>
-                            <button id="frecuente" class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb"></i> BOTIQUIN</button>
+                            <button id="frecuente" class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb"></i> BOTIQUIN NATURAL</button>
                         </li>
                         <li>
                             <button id="fisico" class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb"></i> CUIDADO DEL CUERPO</button>
@@ -182,6 +182,29 @@
                                 <input type="text"  id="busqueda" placeholder="Buscar producto...">
                             </div>
                             <div class="muestraProductos" id="productosDiv">
+                                <!-- Aquí se agregarán los productos mediante JavaScript -->
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                </div>
+
+            </div>
+
+            <div class="background" id="backEliminar">
+                <div class="accionOferta" id="accionEliminar" >
+                    <div class="contentoffer">
+                        <span class="close-button" id="cerrarEliminar">×</span>
+                        <h4 class="subtitulo">Eliminar Un Producto</h4>
+                        
+                        <div class="seleccionProd" id="busqueda-Eliminar">
+                            <!-- Barra de búsqueda -->
+                            <div class="search">
+                                <i class="bi bi-search"></i>
+                                <input type="text"  id="busquedaEliminar" placeholder="Buscar producto...">
+                            </div>
+                            <div class="muestraProductos" id="productosEliminar">
                                 <!-- Aquí se agregarán los productos mediante JavaScript -->
                             </div>
                         </div>

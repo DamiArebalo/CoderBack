@@ -88,7 +88,17 @@ header {
     padding: 2rem;
     border-radius: 15px;
     transition: background-color 0.3s ease;
+   
     
+}
+
+#btnCarrito{
+    text-decoration: none;
+    color: var(--clr-green);
+}
+#btnCarrito:hover{
+    background-color: var(--clr-green);
+    color: var(--clr-main);
 }
 
 .opcion:hover {
@@ -228,6 +238,10 @@ footer {
 @media (max-width: 768px) {
     .logo img {
         max-width: 3rem; /* Ajusta el tamaño según tus necesidades */
+    }
+
+    .offer-card{
+        max-height: 2rem;
     }
 }
 

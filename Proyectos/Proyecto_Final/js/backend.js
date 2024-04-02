@@ -5,8 +5,11 @@ const btnCarrito = document.getElementById("btnCarrito"); // BOTON CARRITO
 const btnLAdmin = document.getElementById("btnAdmin"); // BOTON ADMIN
 const btnUser = document.getElementById("btnUser")// BOTON USER
 const btnOferta = document.querySelector("#btnOferta")//BOTON OFERTA
-const cerrarOffer = document.querySelector("#cerrarOffer")
+const cerrarOffer = document.querySelector("#cerrarOffer")//Cerrar Oferta
+let btnEliminar = document.querySelector("#btnEliminar")//boton eliminar
+const cerrarEliminar = document.querySelector("#cerrarEliminar")//Cerrar eliminar
 
+console.log(btnEliminar)
 
 function abrirPopupProductos() {
     document.getElementById("modalBackgroundProducts").style.display = "block";
@@ -23,7 +26,7 @@ function cerrarPopupProductos() {
 function abrirPopupOferta() {
     document.getElementById("backOffer").style.display = "block";
    let popupoffer= document.getElementById("accionOferta")
-   console.log(popupoffer)
+
    popupoffer.style.display = "block";
 }
 
@@ -32,6 +35,21 @@ function cerrarPopupOferta(){
     document.getElementById("accionOferta").style.display = "none";
 }
 
+function abrirPopupEliminar() {
+    document.getElementById("backEliminar").style.display = "block";
+    document.getElementById("accionEliminar").style.display = "block";
+}
+
+function cerrarPopupEliminar(){ 
+    document.getElementById("backEliminar").style.display = "none";
+    document.getElementById("accionEliminar").style.display = "none";
+
+}
+
+
+btnEliminar.addEventListener("click", ()=>{abrirPopupEliminar()})
+
+cerrarEliminar.onclick = () => {cerrarPopupEliminar()}
 
 const elementosAdmin = document.querySelectorAll(".admin")
 function modoAdmin(){
@@ -49,10 +67,6 @@ function modoUser(){
 }
 
 
-
-console.log(btnOferta)
-
-
 btnProd.onclick = () => abrirPopupProductos();
 cerrarProd.onclick = () => cerrarPopupProductos();
 btnAdmin.onclick = () => {modoAdmin();btnAdmin.classList.add("admin")};
@@ -65,6 +79,8 @@ btnOferta.addEventListener("click", (e)=>{
     console.log(e.currentTarget)
     abrirPopupOferta()
 })
+
+
 
 
 document.getElementById('offerAll').addEventListener('click', function() {
