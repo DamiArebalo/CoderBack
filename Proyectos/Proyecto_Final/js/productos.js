@@ -1,14 +1,36 @@
 // DECLARACION DE VARIABLES DE FORMULARIO
-    let formuProducto = document.querySelectorAll(".dato")
-    console.log(formuProducto)
+let formuProducto = document.querySelectorAll(".dato")
+   // console.log(formuProducto)
+
+const productContainer = document.querySelector('.contenedor-productos');
+const botonesCategorias = document.querySelectorAll(".boton-categoria");
+const tituloPrincipal = document.querySelector("#titulo-principal");
+let agregarCarrito = document.querySelectorAll(".producto-agregar");
+const numerito = document.querySelector("#numerito");
+const preview = document.querySelector("#preview-img")
+
+let productosEnCarrito = []
+
+console.log(preview)
 
 
 // Generacion del Array Global
-const productos = [];
+let productos = [];
+let ofertasCreadas = []
 
-let rutaimg
+let productosenLS = JSON.parse(localStorage.getItem("array-productos"))
+console.log(productosenLS)
 
-const inputImg = document.querySelector('#productImg'); //selector de imagen
+if(productosenLS){
+    productos = productosenLS
+}else{
+    productosenLS = []
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    agregarProductoAlDOM(productos)
+})
+
 
 //FUNCION CERRAR POPUP
 function cerrarPopupProductos() {
@@ -28,11 +50,16 @@ function arrayVacio(){
     }
 
 }//Fin de la validacion de Array
+
+
+let rutaimg
+
+let inputImg = document.getElementById('productImg'); //selector de imagen
+
+
 //llegar a la ruta del usuario de la imagen
-
-
 //Evento DE INGRESO DE IMAGENES
-inputImg.addEventListener('change', (event) => {  
+inputImg.onchange =  (event) => {  
 
     //Elemento elegido
     const selectedFile = event.target.files[0];//
@@ -46,7 +73,8 @@ inputImg.addEventListener('change', (event) => {
         reader.onload = function(e){ 
             //Guardar ruta en una variable gobal
             rutaimg = e.target.result
-            // mostrarImagen(e.target.result) //--Agregar div contendor para muestra previa
+            //console.log(e.target.result)
+            mostrarImagen(e.target.result) 
         }
 
     }else{
@@ -54,20 +82,21 @@ inputImg.addEventListener('change', (event) => {
     }
 
    
-});
+}
 
 function mostrarImagen (ruta){
+    preview.innerHTML =" "
     let imagenCode = document.createElement("img")
     imagenCode.src=ruta
-    nodo.appendChild(imagenCode)
+    preview.append(imagenCode)
 }
 
 //CLASE - PLANTILLA DE PRODUCTOS
 class Producto{
     static id = 0
-
+    
     constructor(precioLista,descripCorta,descripLarga,nombre,imgProd,stockInicial, categoria){
-        this.id = ++Producto.id
+        this.id = Producto.id++
         this.precioLista = precioLista;
         this.descripCorta = descripCorta;
         this.descripLarga = descripLarga;
@@ -76,45 +105,18 @@ class Producto{
         this.img = imgProd;
         this.stock = stockInicial;
         this.categoria =categoria
-
+        this.descuento = 0
     }
-
-
-
-    agregarOferta = descuento =>{
-        descuento = this.precioLista * (descuento / 100);
-        this.oferta = this.precioLista - descuento;
-        console.log(`Se aplicó un descuento. \nEl nuevo precio es: ${this.oferta}`);
-    }
-
-}
-
-//Agregar oferta  SUMNAR AL DOM
-const ofertaNueva = () =>{
-
-    console.log("incio de ofertas")
-    let nombreProducto = prompt("Ingresa Nombre de producto").toLowerCase();
-    let descuento = parseFloat(prompt("ingresa el porcentaje de descuento"));
-
-
-    //--Solucion de validar exitencia con un metodo mas avanzado--
-    let idExists = productos.some(producto => nombreProducto == producto.nombre);
-    if (idExists) {
-        producto.agregarOferta(descuento)
-    }
-
-
-
 
 }
 
 //FUNCION PARA VALIDAR LA ENTRADA DE INFO
-function validarProductos(precioLista,descripCorta,descripLarga,nombre,imgProd,stock){
+function validarProductos(precioLista,descripCorta,descripLarga,nombre,stock){
     //Inicializacion de componentes
 
     let parsedPrice = parseFloat(precioLista);
     let parsedStock = parseInt(stock)
-    let nombreMinus = nombre.toLowerCase
+    
 
 
     // Validación para productShortDescription (descripCorta)
@@ -162,9 +164,9 @@ function validarProductos(precioLista,descripCorta,descripLarga,nombre,imgProd,s
     }
 
     //validacion de nombre
-    const valNombre = (nombreMinus) => {
-        let nombreExists = productos.some(producto => nombreMinus == producto.nombre);
-
+    const valNombre = (nombre) => {
+        let nombreExists = productos.some(producto => nombre === producto.nombre);
+        console.log(nombreExists)
         if (nombreExists) {
             return false;
         } else {
@@ -172,28 +174,14 @@ function validarProductos(precioLista,descripCorta,descripLarga,nombre,imgProd,s
         }
     }
 
-
-    // Validación para imagen (img)
-    // const valImg = imgProd =>{
-    //     const extensionsTrues = [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".svg"];
-    //     const imgFileName = imgProd.toLowerCase();
-    //     const imgExtension = imgFileName.substring(imgFileName.lastIndexOf("."));
-    //     if (!extensionsTrues.includes(imgExtension)) {
-    //         console.error("Error: El archivo de imagen debe tener una extensión válida (.jpg, .jpeg, .png, .gif, .bmp, .svg).");
-    //         return false;
-    //     }else{
-    //         return true;
-    //     }
-    // }
-
     //Puesto DE CONTROL
-    console.log("stock: "+valStock(stock)+"\nNombre: "+valNombre(nombreMinus)+"\ncorta: "+
+    console.log("stock: "+valStock(stock)+"\nNombre: "+valNombre(nombre)+"\ncorta: "+
                 valShortDescription(descripCorta)+"\nlarga: "+valLongDescription(descripLarga)+
                 "\n precio: "+valPrecio(parsedPrice));
 
 
     //VALIDACION GENERAL
-    if(valStock(stock)&& valShortDescription(descripCorta)&& valLongDescription(descripLarga)&& valPrecio(parsedPrice)&&valNombre(nombreMinus)){
+    if(valStock(stock)&& valShortDescription(descripCorta)&& valLongDescription(descripLarga)&& valPrecio(parsedPrice)&&valNombre(nombre)){
         return true
     }else{
         return false
@@ -217,18 +205,18 @@ function agregarProductos(){
     let stock = formuProducto[5].value;
     let categoria = formuProducto[6].value;
     
-
+   
     //Ingresar solo si son datos validos
     if(validarProductos(precioLista,descripCorta1,descripLarga1,nombre1,imgProd,stock)){
 
         const producto = new Producto(precioLista,descripCorta1,descripLarga1,nombre1,imgProd,stock,categoria)
 
         productos.push(producto)
-        agregarProductoAlDOM(producto);
+        agregarProductoAlDOM(productos);
+        cerrarPopupProductos()
 
         console.log("✨PRODUCTO AGREGADO CORRECTAMENTE✨");
-          productos
-
+       
     }else{
         console.error("❌Error en la carga de Productos❌ \nIntente denuevo mas tarde ");
     }
@@ -238,53 +226,183 @@ function agregarProductos(){
 }//Fin del Agregado de productos
 
 
-
-
-
 //EVENTOS Y CODIGO EN MARCHA
 const agregarProd = document.getElementById("agregarProd"); //BOTON DE FORMULARIO PRODUCTOS
 
-//--AGREGAR PRODUCTOS AL ARRAY---
+//--AGREGAR PRODUCTOS AL ARRAY y LOCALSTORAGE---
 agregarProd.onclick = () =>{
     agregarProductos()
     console.table(productos);
+    alamacenArray()
+    
 }
+function getPrecioActual (producto){
+    if(producto.oferta>0){
+        return(producto.oferta)
+    }else{
+        return(producto.precioLista)
+    }
 
+}
 
 //----CARD DE PRODUCTOS -----
 // Función para crear una tarjeta de producto
 function crearTarjetaProducto(producto) {
-    const productCard = document.createElement('li');
+    const productCard = document.createElement('div');
     productCard.classList.add('product-card');
 
     productCard.innerHTML = `
-        <img src="${producto.img}" alt="${producto.nombre}">
-        <h3 class="product-name">${producto.nombre}</h3>
-        <p class="product-description">${producto.descripCorta}</p>
-        <hr class="divider">
-        <p class="product-price">$${producto.precioLista}</p>
-        <button class="add-to-cart" id="${producto.id}">Add to Cart</button>
+        <img  src="${producto.img}" alt="${producto.nombre}">
+        
+            <h4 class="product-name">${producto.nombre}</h4>
+            <p class="product-description">${producto.descripCorta}</p>
+            <p class="product-price">$${getPrecioActual(producto)}</p>
+            <button class="producto-agregar" id="${producto.id}">Agregar</button>
+        
     `;
 
     return productCard;
 }
 
 // Agregar las tarjetas de productos al DOM
-function agregarProductoAlDOM(producto) {
+function agregarProductoAlDOM(productosElegidos) {
     
-    const productContainer = document.querySelector('.product-list');
     productContainer.innerHTML=" "
-    productos.forEach((producto) =>{
+
+    productosElegidos.forEach((producto) =>{
         let productCard = crearTarjetaProducto(producto)
         productContainer.appendChild(productCard);
     })
+
+    actualizaragregarCarrito();
 }
 
 
 //funcion para guardar el array productos en el LocalStorage
-function actualizarProductos (){
-    //AlGORITMO
+let productosLS 
+function alamacenArray() {
+
+    productosLS = productos
+
+    localStorage.setItem("array-productos", JSON.stringify(productosLS));
 }
 
-//funcion para filtrar por categoria 
-export default productos
+//EVENTO POR CADA CLICK EN CAMBIO DE CATEGORIA
+botonesCategorias.forEach(boton => {
+    boton.addEventListener("click", (e) => {
+
+        //RECORRO TODO LOS BOTONES Y LES SACO LA CLASE QUE MUESTRA ACTIVO
+        botonesCategorias.forEach(boton => boton.classList.remove("active"));
+         
+
+        //AL QUE **SI** ESTOY CLICKEANDO LO DEJA ACTIVO
+        e.currentTarget.classList.add("active");
+       console.log(e.currentTarget.innerText)
+    
+        //SI EL ID DEL BOTON QUE ESTOY CLICKEANDO ES DISTINTO A TODOS.. 
+        if (e.currentTarget.id!= "todos") {
+
+            // CAMBIO EL TITULO DE LA BUSQUEDA
+            tituloPrincipal.innerText = e.currentTarget.innerText ;
+
+            //GUARDO EL ID DEL PRODUCTO === ID DEL BOTON
+            const productosBoton = productos.filter(producto => producto.categoria === e.currentTarget.id);
+
+            //MUESTRO LOS PRODUCTOS DE ESA CATEGORIA
+            agregarProductoAlDOM(productosBoton);
+
+        } else {
+            //SI ES TODOS MUESTRA TODOS LOS PRODUCTOS
+            tituloPrincipal.innerText = "Todos los productos";
+            agregarProductoAlDOM(productos);
+        }
+
+    })
+});
+
+ 
+
+//BOTON PARA AGREGAR AL CARRITO
+function actualizaragregarCarrito() {
+    //actualizo contenido
+    agregarCarrito = document.querySelectorAll(".producto-agregar");
+
+    //recorro todo los botones de las cards y al que le haga clik lo agrega al carrito
+    agregarCarrito.forEach(boton => {
+        boton.addEventListener("click", agregarAlCarrito);
+    });
+}
+
+//FUNCION DE BOTON AGREGAR AL CARRITOO
+function agregarAlCarrito(e) {
+    //TOMO EL BOTON CLICKEADO
+    const idBoton = e.currentTarget.id;
+    let parseID = Number(idBoton)
+    //BUSCO EL OBJETO PRODUCTO QUE SE SELECCIONO
+
+    let productoAgregado = productos.find(producto => producto.id === parseID);
+    //SI ESTA EN CARRITO SUMO 1 A LA CANTIDAD 
+    if(productosEnCarrito.some(producto => producto.id === parseID)) {
+        //BUSCO LA POSICION DEL PRODUCTO 
+        const index = productosEnCarrito.findIndex(producto => producto.id === parseID);
+        console.log(index)
+        console.log(productosEnCarrito)
+
+        //SUMO CANTIDAD
+        productosEnCarrito[index].cantidad++;
+        
+       
+        
+    }else{
+        console.log(productosEnCarrito)
+        //ARRANCA EN UNO
+        productoAgregado.cantidad = 1;
+        //PUSHEO A CARRITO
+        productosEnCarrito.push(productoAgregado);
+    }
+
+    actualizarNumerito();
+    //GUARDO EN LOCALSTORAGE EL CARRITO
+    localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito));
+}
+
+//FUNCION PARA ACTUALIZAR EL PREVIEW DEL CARRITO
+function actualizarNumerito() {
+    let nuevoNumerito = productosEnCarrito.reduce((acc, producto) => acc + producto.cantidad, 0);
+    numerito.innerText = nuevoNumerito;
+}
+
+const ofertas = document.querySelector("#ofertas-DOM")
+
+
+
+function crearTarjetaOferta(producto) {
+    const offerCard = document.createElement('div');
+    offerCard.classList.add('product-card');
+
+    offerCard.innerHTML = `
+        <img class="img-offer" src="${producto.img}" alt="${producto.nombre}">
+        <h4 class="product-name">${producto.nombre}</h4>
+        <p class="product-description">${producto.descripCorta}</p>
+        <div class="precio-oferta">
+            <p class="offer-price">$${producto.oferta}</p>
+            <p class="descuento">%${producto.descuento}</p>
+        </div>
+        <button class="producto-agregar" id="${producto.id}">Agregar</button>
+    
+    `;
+
+    return offerCard;
+}
+function agregarOfertasDOM (ofertasNuevas){
+    ofertas.innerHTML = " "
+
+    ofertasNuevas.forEach((producto) =>{
+        let productCard = crearTarjetaOferta(producto)
+        ofertas.appendChild(productCard);
+    })
+
+    
+}
+
+

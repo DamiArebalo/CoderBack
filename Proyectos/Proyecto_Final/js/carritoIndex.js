@@ -1,5 +1,4 @@
-// carrito.js
-import productos from './productos.js';
+
 
 
 //-----CARRITO------

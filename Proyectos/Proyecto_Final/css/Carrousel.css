@@ -1,109 +1,31 @@
  /* Carrousel */
+ .ofertas-carrusel{
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: scroll;
+    height: 40vh;
+    gap: 2.5rem;
+ }
+
+ .oferCheck {
+    width: 30rem;  
+ }
 
 
     /* Product carousel styles */
-    .product-carousel {
-        position: relative;
+    .product-section {
         text-align: right;
         padding: 10px;
-        background-color: #b1e4dc;
-        box-shadow: inset;
-    }
-
-    .add-products {
-        background-color: #333;
-        color: white;
-        border: none;
-        padding: 8px 12px;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
-
-    .add-products:hover {
-        background-color: #c3c3c3;
-    }
-
-    .carousel-container {
-        position: relative;
-        overflow: hidden;
-        margin-top: 2px;
-    }
-
-    .carousel-track {
+        background-color: var(--clr-main);
         display: flex;
-        gap: 10px;
-        transition: transform 0.3s;
+        justify-content: space-between;
+        height: 5rem;
+
     }
 
-    .carousel-prev,
-    .carousel-next {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background: none;
-        border: none;
-        font-size: 20px;
-        cursor: pointer;
-    }
+ 
 
-    .carousel-prev {
-        left: 10px;
-    }
-
-    .carousel-next {
-        right: 10px;
-    }
-
-    /* Card de productos */
-    .product-card {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        background-color: #f9f9f9;
-        box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
-        padding: 20px;
-        border-radius: 8px;
-        width: 12%;
-        margin: 0 auto;
-    }
-
-    /* imagen de pructo */
-    .product-card img {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-    }
-
-    .product-card:hover{
-        background-color: rgba(81, 174, 168, 0.706)
-    }
-
-    /* Titulo de Productos */
-    .product-name {
-        font-size: 22px;
-        color: #008080; /* Another color from the palette */
-        margin-top: 10px;
-    }
-
-    /* Descripcion*/
-    .product-description {
-        font-size: 12px;
-        color: #555;
-    }
-
-    /* Linea divisoria*/
-    .divider {
-        border: 1px solid #ccc;
-        margin: 10px 0;
-    }
-
-    /*Precio*/
-    .product-price {
-        font-size: 20px;
-        color: rgb(53, 18, 181);
-        
-    }
+  
 
     /* Boton de compra */
 

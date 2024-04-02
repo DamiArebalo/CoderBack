@@ -9,25 +9,6 @@
     background-color: rgba(0, 0, 0, 0.7);
     z-index: 1;
 }
-
-/*Estilos para el pop-up
- .popup {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 4em; /* Doble de grande 
-    background-color: #21203f; /* Color de fondo verdoso 
-    color: #b1e4dc; /* Color de texto verdoso 
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    text-align: center;
-    width: 80%;
-    max-width: 400px;
-    z-index: 2;
-} */
-
 /* Estilos para el pop-up de productos */
 .popup {
     display: none;
@@ -35,32 +16,28 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 80px; /* Doble de grande */
-    background-color: rgba(33, 32, 63, 0.6); /* Color de fondo verdoso con transparencia */
-    
-    border-radius: 10px;
+    padding: 4rem; 
+    background-color: var(--clr-green); /* Color de fondo verdoso con transparencia */
+    border-radius: 5%;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    text-align: center;
-    width: 80%;
-    max-width: 600px;
+    text-align: left;
+    max-width: 80rem;
     z-index: 2;
     display: flex; /* Añadido */
-    justify-content: space-between; /* Añadido */
+
 }
 
 /* Estilos para el botón de cerrar */
 .close-button {
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: -1rem;
+    right: 1rem;
     font-size: 25px;
     cursor: pointer;
     margin-top: 1em;
     margin-right: 1em;
-    color: #b1e4dc;
+    color: var(--clr-main);
 }
-
-
  /* Estilos adicionales para el formulario */
 .popup input[type="text"],
 .popup input[type="password"] {
@@ -69,42 +46,38 @@
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    
+
 }
 
 .popup button {
-    background-color: #b1e4dc; /* Color del botón */
+    background-color:var(--clr-green-light); /* Color del botón */
     color: #21203f;
     border: none;
-    padding: 10px 20px;
+    padding: .5rem;
     border-radius: 5px;
     cursor: pointer;
-} 
-
-
-
+}
 
 /* Línea divisoria vertical en el centro */
 .product-form {
     display: flex;
-    align-items:stretch;
-    padding: 20px 0px 20 0px;
-    margin: 20px 0px 20 0px ;
-    flex: 1;
-    color: #fff;
+    align-content: center;
+    color: var(--clr-main);
+    position: relative;
+
 }
 
 /* Estilos para las filas de entrada de texto */
-.product-form input 
+.product-form input
 .product-form select
 {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
+    padding: 2rem;
+    margin-bottom: 2rem;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    
-    
+    border-radius: 5%;
+   
+
     transition: background-color 0.3s ease; /* Transición suave */
 }
 
@@ -114,20 +87,27 @@
 }
 
 .right-column {
-    border-left: 5px solid #b1e4dc; /* Color del borde izquierdo */
-    padding-left: 20px; /* Espacio entre el borde y el contenido */
+    border-left: .2rem solid #b1e4dc; /* Color del borde izquierdo */
+    padding-left: 1rem; /* Espacio entre el borde y el contenido */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: .5rem;
+    padding: 1rem .5rem;
 }
 
 .left-column{
-    padding-right: 30px;
+    padding-right: 2rem;
+    padding-left: 0;
+    margin-left: 0;
 }
 
 /* Estilos para el input de imágenes */
 .contendor-img{
     height: 75%; /* Triple de su tamaño original */
-    color: white; /* Letras blancas */
-    width: 110%;
-    
+    color: var(--clr-main); /* Letras blancas */
+    width: 100%;
+
 }
 
 #productImage{
@@ -151,3 +131,109 @@
 #productImage::file-selector-button:hover {
     background: #0d45a5; /* Color de fondo al pasar el cursor sobre el botón */
 }
+
+.preview-img img{
+    width: 100%;
+    height: 12rem;
+    border-radius: 5% ;
+
+}
+
+.preview-img{
+    margin: 1rem 0;
+    border: .2rem solid var(--clr-green-light);
+    border-radius: 2%;
+}
+
+.botonAccion button {
+    gap: 5rem;
+    /* Estilos adicionales para los botones */
+}
+
+.accionOferta {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 6rem; 
+    background-color: var(--clr-green); /* Color de fondo verdoso con transparencia */
+    border-radius: 5%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    text-align: left;
+    max-width: 80rem;
+    display: flex; 
+    
+}
+
+.offerSeleccion,
+.seleccionProd {
+    display: none;
+    /* Estilos adicionales para los divs ocultos */
+}
+
+.contentoffer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 15rem;
+}
+
+/* Estilos para la barra de búsqueda */
+#busqueda {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.offer-card{
+    height: 5rem;
+    width: 4rem;
+    flex-direction: column;
+    border: 1px solid var(--clr-green-light);
+}
+
+.img-offer{
+    width: 20rem;
+    height: 20rem;
+}
+  
+#productosDiv img{
+    width: 5rem;
+    height: 5rem;
+}
+#productosDiv{
+    display: flex;
+    width: 100%; 
+    color: var(--clr-main); 
+    align-items: center; 
+    gap: 1rem;
+    margin-top: 1rem;
+    
+}
+
+.agregar-oferta{
+    width: 100%;
+    margin-top: .5rem;
+    background-color: var(--clr-main);
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.precio-oferta{
+    display: flex;
+    gap: 1rem;
+    margin: 1rem .5rem ;
+    align-items: center;
+
+}
+
+.descuento{
+    padding: .5rem;
+    border: 1px dashed var(--clr-green);
+}
+
+
+
+

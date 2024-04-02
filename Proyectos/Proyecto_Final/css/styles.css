@@ -1,17 +1,18 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
 /*configuracion principal */
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Rubik', sans-serif;
 }
 
+
  body {
-    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #e0fef2;
+    background-color: var(--clr-green);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -19,58 +20,175 @@
 
 /* Encabezado */
 header {
-   
-    background-color: #e0fef2;
+    background-color: var(--clr-main);
     color: white;
     top: 0;
     z-index: 1;
+    margin-bottom: 0;
+    padding-bottom:0 ;
+    justify-content: space-between;
+}
+
+.titulo{
+    text-align: center;
+    color: var(--clr-green);
+    position: relative;
+    padding-left: 14rem;
+}
+
+.admin{
+    display: none;
+    visibility: hidden;
 }
 
 /* Estilos para el header */
 .sticky-header {
     position: sticky;
     top: 0;
- 
     display: flex;
     align-items: center;
     padding: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.right-header {
-    margin-left: auto;
-}
-
-/* Estilos para las opciones (botones) */
-.opcion {
-    margin-right: 20px;
+.botonfuncion{
+    background-color: var(--clr-green-light);
+    color: var(--clr-main);
+    border: none;
+    padding:.5rem;
+    margin-right: 1.5rem;
+    border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s;
+    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    max-height: 30%;
+    margin: 1rem 1rem;
+   
+   
+    
+}
+.botonfuncion:hover {
+    background-color: var(--clr-green);
 }
 
-/* Estilos específicos para dispositivos móviles */
-@media (max-width: 768px) {
-    .logo img {
-        max-width: 80px; /* Ajusta el tamaño según tus necesidades */
-    }
-}
 
 /* Estilos para la parte derecha */
 .right-header {
-    gap: 7px;
-    margin: 0 10px;
-    color: #21203f;
+    gap: 2rem;
+    color: var(--clr-green);
+    display: flex;
+    
+    
 }
 
 .opcion {
     cursor: pointer;
-    padding: 10px;
+    padding: 2rem;
     border-radius: 15px;
     transition: background-color 0.3s ease;
+    
 }
 
 .opcion:hover {
-    background-color: #c8fde8;
+    background-color: var(--clr-green);
+    color: var(--clr-main);
 }
+
+
+
+/* menu secundario */
+.nav-links {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    position: sticky;
+    top: 40px; /* Adjusted to avoid overlap with header */
+    height: 3em;
+    align-items: center;
+    
+}
+.nav-links ul {
+    display: flex;
+    gap: 3px;
+    padding: 0;
+    border-right: 1px solid var(--clr-blue);
+    border-left: 1px solid var(--clr-blue);
+
+    list-style-type: none;
+}
+.nav-links a {
+    color: var(--clr-blue);
+    text-decoration: none;
+    padding: 0 10px;
+}
+
+.logo{
+    display: flex;
+    justify-content: center;
+    max-width: 5rem;
+    margin-left: 2rem;
+}
+
+.logo img{
+    max-width: 5rem;
+}
+
+.subtitulo{
+    text-align: center;
+    align-items: center;
+    text-shadow: var(--clr-soft) 2px 2px;
+    text-transform: uppercase;
+    margin-top: 3rem;
+    color: var(--clr-green-green);
+
+}
+.product-title{
+    padding-right: 2rem;
+    max-width: 100%;
+    margin-top: 0;
+    font-size: 2rem;
+    margin-bottom: 20%;
+    margin-right: 0;
+}
+
+.producto-imagen{
+    display: flex;
+    height: 30vh;
+    flex-wrap: wrap;
+}
+
+.producto-imagen img{
+   
+    max-height: 5rem;
+}
+   
+
+/* Fin de encabezado */
+
+/* contenido principal */
+main {
+    background-color: var(--clr-main);
+    flex-grow: 1;
+}
+
+
+/* Pie de pagina */
+footer {
+    background-color: var(--clr-green);
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+    }
+}
+
 
 /* Estilos para la barra de búsqueda */
 .search {
@@ -79,10 +197,10 @@ header {
     background-color: #f5f5f5;
     border-radius: 20px;
     padding: 5px;
-    border: 1px solid #21203f;
+    border: 1px solid var(--clr-blue);
 }
 
-.search span {
+.search i {
     margin-right: 10px;
     font-size: 18px;
 }
@@ -106,79 +224,10 @@ header {
     transition: width 0.3s ease;
 }
 
-/* menu secundario */
-.nav-links {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    background-color: #b1e4dc;
-    position: sticky;
-    top: 40px; /* Adjusted to avoid overlap with header */
-    height: 3em;
-    align-items: center;
-    
-}
-.nav-links ul {
-    display: flex;
-    gap: 3px;
-    padding: 0;
-    border-right: 1px solid #21203f;
-    border-left: 1px solid #21203f;
-
-    list-style-type: none;
-}
-.nav-links a {
-    color: #21203f;
-    text-decoration: none;
-    padding: 0 10px;
-}
-
-.logo{
-    display: flex;
-    justify-content: center;
-}
-
-.logo img{
-    width:12%;
-    object-position: center;
-    
-}
-
-.product-list{
-    display: flex;
-    height: 30vh;
-    flex-wrap: wrap;
-}
-
-.product-list img{
-   
-    max-height: 10rem;
-}
-   
-
-/* Fin de encabezado */
-
-/* contenido principal */
-main {
-    margin: 20px;
-    background-color: #e0fef2;
-    flex-grow: 1;
-}
-
-
-/* Pie de pagina */
-footer {
-    background-color: #40E0D0;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-    header {
-        flex-direction: column;
+/* Estilos específicos para dispositivos móviles */
+@media (max-width: 768px) {
+    .logo img {
+        max-width: 3rem; /* Ajusta el tamaño según tus necesidades */
     }
 }
-
 

@@ -1,20 +1,18 @@
+//DECLARACION DE ELEMENTOS DE ABRIR Y CERRAR POPUP   
+const btnProd = document.getElementById("abrirProductos"); // BOTON PRODUCTOS
+const cerrarProd = document.getElementById("cerrarProd"); // CERRAR PRODUCTOS
+const btnCarrito = document.getElementById("btnCarrito"); // BOTON CARRITO
+const btnLAdmin = document.getElementById("btnAdmin"); // BOTON ADMIN
+const btnUser = document.getElementById("btnUser")// BOTON USER
+const btnOferta = document.querySelector("#btnOferta")//BOTON OFERTA
+const cerrarOffer = document.querySelector("#cerrarOffer")
 
-
-function abrirPopup() {
-    document.getElementById("modalBackground").style.display = "block";
-    document.getElementById("loginPopup").style.display = "block";
-}
 
 function abrirPopupProductos() {
     document.getElementById("modalBackgroundProducts").style.display = "block";
     document.getElementById("productPopup").style.display = "block";
 }
 
-//Cerrar popup del login
-function cerrarPopupLogin() { 
-    document.getElementById("modalBackground").style.display = "none";
-    document.getElementById("loginPopup").style.display = "none";
-}
 
 //funcion de cerrado del PopUp
 function cerrarPopupProductos() {
@@ -22,20 +20,65 @@ function cerrarPopupProductos() {
     document.getElementById("productPopup").style.display = "none";
 }
 
+function abrirPopupOferta() {
+    document.getElementById("backOffer").style.display = "block";
+   let popupoffer= document.getElementById("accionOferta")
+   console.log(popupoffer)
+   popupoffer.style.display = "block";
+}
 
-//DECLARACION DE ELEMENTOS DE ABRIR Y CERRAR POPUP   
-const cerrarLogin = document.getElementById("cerrarLogin"); // CERRAR LOGIN
-const btnProd = document.getElementById("abrirProductos"); // BOTON PRODUCTOS
-const cerrarProd = document.getElementById("cerrarProd"); // CERRAR PRODUCTOS
-const btnCarrito = document.getElementById("btnCarrito"); // BOTON CARRITO
-const btnLog = document.getElementById("btnLogin"); // BOTON LOGIN
+function cerrarPopupOferta(){
+    document.getElementById("backOffer").style.display = "none";
+    document.getElementById("accionOferta").style.display = "none";
+}
 
 
-cerrarLogin.onclick = () =>{cerrarPopupLogin()};
+const elementosAdmin = document.querySelectorAll(".admin")
+function modoAdmin(){
+    elementosAdmin.forEach((elem =>{
+        elem.classList.remove("admin")
+    }))
+
+}
+
+function modoUser(){
+    elementosAdmin.forEach((elem =>{
+        elem.classList.add("admin")
+    }))
+
+}
+
+
+
+console.log(btnOferta)
+
+
 btnProd.onclick = () => abrirPopupProductos();
 cerrarProd.onclick = () => cerrarPopupProductos();
-btnLog.onclick = () => {abrirPopup()};
+btnAdmin.onclick = () => {modoAdmin();btnAdmin.classList.add("admin")};
+btnUser.onclick =()=>{modoUser();btnAdmin.classList.remove("admin")}
 btnCarrito.onclick = () => console.log("click carrito")
+
+cerrarOffer.onclick = () => cerrarPopupOferta()
+
+btnOferta.addEventListener("click", (e)=>{
+    console.log(e.currentTarget)
+    abrirPopupOferta()
+})
+
+
+document.getElementById('offerAll').addEventListener('click', function() {
+    document.getElementById('descuentoAllDiv').style.display = 'block';
+    document.getElementById('busquedaDiv').style.display = 'none';
+});
+
+document.getElementById('offerUnico').addEventListener('click', function() {
+    document.getElementById('descuentoAllDiv').style.display = 'none';
+    document.getElementById('busquedaDiv').style.display = 'block';
+});
+
+
+
 
 
 

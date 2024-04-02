@@ -1,121 +1,123 @@
-productos = [
+// Generacion del Array Global
+
+console.log(productosenLS)
+
+if(productosenLS){
+    productos = productosenLS
+}else{
+    productosenLS = []
+}
+
+let busqueda = document.querySelector("#busqueda")
+
+const contentOffer = document.querySelector("#productosDiv")
+console.log(busqueda)
+
+function ofertasDOM(filtro){
+    contentOffer.innerHTML=" "
+
+    filtro.forEach((producto) =>{
+        let productCard = crearTarjetaOferta(producto)
+        productContainer.appendChild(productCard);
+    })
+
+}
+
+function crearTarjetaSearch(producto) {
+    let offerCard = document.createElement('div');
+    offerCard.classList.add('offer-card');
+ 
+    offerCard= `
+        <div class="offer-card>
+            
+            <h4 class="name-offer">${producto.nombre}</h4>
+            <input type="number" class="desc-offer" id="${producto.id}" placeholder="Agrega Porcentaje">
+            <button class="agregar-oferta" id="${producto.id}">Agregar</button>
+        </div>
+    `
+
+    return offerCard;
+}
+
+// Función para filtrar productos según la búsqueda
+function filtrarProductos(textobusqueda) {
+    const productosFiltrados = productos.filter(producto =>
+        producto.nombre.toLowerCase().includes(textobusqueda)
+    );
     
-]
-
-
-const contenedorProductos = document.querySelector("#contenedor-productos");
-const botonesCategorias = document.querySelectorAll(".boton-categoria");
-const tituloPrincipal = document.querySelector("#titulo-principal");
-let botonesAgregar = document.querySelectorAll(".producto-agregar");
-const numerito = document.querySelector("#numerito");
-
-
-botonesCategorias.forEach(boton => boton.addEventListener("click", () => {
-    aside.classList.remove("aside-visible");
-}))
-
-
-function cargarProductos(productosElegidos) {
-
-    contenedorProductos.innerHTML = "";
-
-    productosElegidos.forEach(producto => {
-
-        const div = document.createElement("div");
-        div.classList.add("producto");
-        div.innerHTML = `
-            <img class="producto-imagen" src="${producto.imagen}" alt="${producto.titulo}">
-            <div class="producto-detalles">
-                <h3 class="producto-titulo">${producto.titulo}</h3>
-                <p class="producto-precio">$${producto.precio}</p>
-                <button class="producto-agregar" id="${producto.id}">Agregar</button>
-            </div>
-        `;
-
-        contenedorProductos.append(div);
-    })
-
-    actualizarBotonesAgregar();
+    contentOffer.innerHTML=productosFiltrados.map(producto =>crearTarjetaSearch(producto))
+    cardsOfertas = document.querySelectorAll(".offer-card")
+    
 }
+let textoBusqueda
+let agregarOferta = document.querySelectorAll(".agregar-oferta")
 
 
-botonesCategorias.forEach(boton => {
-    boton.addEventListener("click", (e) => {
+busqueda.addEventListener("keyup",(e)=>{
+    agregarOferta=[]
+    textoBusqueda = e.target.value.toLowerCase()
+    filtrarProductos(textoBusqueda)
+    agregarOferta = document.querySelectorAll(".agregar-oferta")
+    let cardsOfertas = document.querySelectorAll(".desc-offer")
+    
+    console.log(agregarOferta) //puesto de control 
 
-        botonesCategorias.forEach(boton => boton.classList.remove("active"));
-        e.currentTarget.classList.add("active");
+    agregarOferta.forEach(boton =>{
+        boton.onclick = (e) =>{
+            const botonId = e.currentTarget.id
 
-        if (e.currentTarget.id != "todos") {
-            const productoCategoria = productos.find(producto => producto.categoria.id === e.currentTarget.id);
-            tituloPrincipal.innerText = productoCategoria.categoria.nombre;
-            const productosBoton = productos.filter(producto => producto.categoria.id === e.currentTarget.id);
-            cargarProductos(productosBoton);
-        } else {
-            tituloPrincipal.innerText = "Todos los productos";
-            cargarProductos(productos);
+            const productoSeleccion = productos.find(producto => producto.id == botonId)
+            let productIndex = productos.findIndex(producto => producto.id == productoSeleccion.id)
+            console.log(productIndex)
+            let agregarOfertaArray = Array.from(agregarOferta);
+            let indexOffer = agregarOfertaArray.findIndex(card => card.id === botonId);
+            let descuento = cardsOfertas[indexOffer].value
+            productos[productIndex].oferta = productoSeleccion.precioLista * ((100 - descuento) / 100)
+            productos[productIndex].descuento = descuento
+            productosenLS = productos
+
+            ofertasCreadas= productos.filter(producto =>producto.oferta > 0)
+            console.log(ofertasCreadas)
+            agregarOfertasDOM(ofertasCreadas)
+            if(checkOffer){
+                agregarProductoAlDOM(productos)
+            }
+
         }
-
     })
-});
+})
 
-function actualizarBotonesAgregar() {
-    botonesAgregar = document.querySelectorAll(".producto-agregar");
+let descuentoAll = document.querySelector("#descuentoALL");
+const btnAll = document.querySelector("#btnAll");
 
-    botonesAgregar.forEach(boton => {
-        boton.addEventListener("click", agregarAlCarrito);
-    });
-}
+btnAll.onclick = ()=>{
+    productos.forEach(producto =>{
+     producto.oferta = producto.precioLista * ((100 - descuentoAll.value) / 100);
+     producto.descuento = descuentoAll.value
+    })
 
-let productosEnCarrito;
-
-let productosEnCarritoLS = localStorage.getItem("productos-en-carrito");
-
-if (productosEnCarritoLS) {
-    productosEnCarrito = JSON.parse(productosEnCarritoLS);
-    actualizarNumerito();
-} else {
-    productosEnCarrito = [];
-}
-
-function agregarAlCarrito(e) {
-
-    Toastify({
-        text: "Producto agregado",
-        duration: 3000,
-        close: true,
-        gravity: "top", // `top` or `bottom`
-        position: "right", // `left`, `center` or `right`
-        stopOnFocus: true, // Prevents dismissing of toast on hover
-        style: {
-          background: "linear-gradient(to right, #4b33a8, #785ce9)",
-          borderRadius: "2rem",
-          textTransform: "uppercase",
-          fontSize: ".75rem"
-        },
-        offset: {
-            x: '1.5rem', // horizontal axis - can be a number or a string indicating unity. eg: '2em'
-            y: '1.5rem' // vertical axis - can be a number or a string indicating unity. eg: '2em'
-          },
-        onClick: function(){} // Callback after click
-      }).showToast();
-
-    const idBoton = e.currentTarget.id;
-    const productoAgregado = productos.find(producto => producto.id === idBoton);
-
-    if(productosEnCarrito.some(producto => producto.id === idBoton)) {
-        const index = productosEnCarrito.findIndex(producto => producto.id === idBoton);
-        productosEnCarrito[index].cantidad++;
-    } else {
-        productoAgregado.cantidad = 1;
-        productosEnCarrito.push(productoAgregado);
+    productosenLS = productos
+    ofertasCreadas= productos.filter(producto =>producto.oferta > 0)
+ 
+    agregarOfertasDOM(ofertasCreadas)
+    if(checkOffer){
+        agregarProductoAlDOM(productos)
     }
+ }
 
-    actualizarNumerito();
+ function checkOffer (){
+   return (productos.some((producto) => producto.oferta > 0)) 
+        
+ }
 
-    localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito));
-}
 
-function actualizarNumerito() {
-    let nuevoNumerito = productosEnCarrito.reduce((acc, producto) => acc + producto.cantidad, 0);
-    numerito.innerText = nuevoNumerito;
-}
+
+
+
+
+
+
+
+
+
+

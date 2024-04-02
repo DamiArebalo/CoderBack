@@ -5,49 +5,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <!-- /*TITULO DE PESTAÑA*/ -->
-    <title>RityJust - Cleaning Supplies</title>
+    <title>RityJust</title>
+    <link rel="shortcut icon" href="./Img/Logos/rityJust.jpg">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <!-- /*LINKEO DE CSS*/ -->
     <link rel="stylesheet" type="text/css" href="./css/styles.css">
     <link rel="stylesheet" type="text/css" href="./css/Carrousel.css">
     <link rel="stylesheet" type="text/css" href="./css/popUp.css">
     <link rel="stylesheet" type="text/css" href="./css/Carrito.css">
+    <link rel="stylesheet" type="text/css" href="./css/productosycarritos.css">
+    
     <!-- /* LINKEO DE JS  -->
     <script defer src="./js/backend.js"></script>
-    <script defer type="module" src="./js/productos.js"></script>
-    <script defer src="./js/users.js"></script>
-    <script defer type="module" src="./js/carritoIndex.js"></script>
+    <script defer src="./js/productos.js"></script>
+    <script defer src="./js/carritoIndex.js"></script> 
+    <script defer src="./js/productosAll.js"></script>
 </head>
 <body>
     <!-- ENCABEZADO*/ -->
     <header class="sticky-header" >
-        <!-- /*PARTE IZQUIERDA*/ -->   
-        </div>
-        <!-- /*PARTE CENTRAL*/ -->
+        <!-- /*PARTE IZQUIERDA*/ --> 
         <div class="logo">
             <img src="./Img/Logos/rityJust.jpg">    
-        </div>
+        </div>  
+        
+        <!-- /*PARTE CENTRAL*/ -->
+        <h1 class="titulo">RITY JUST</h1>
         
         <!-- /*PARTE DERECHA*/ -->
         <div class="right-header">
-            <div class="opcion" id="btnLogin">🔑 Iniciar sesión</div> <!--evento-->
-            <div class="opcion" id="btnCarrito">🛒 Carrito</div>
+            <div class="opcion" id="btnAdmin"><i class="bi bi-code-square"></i>Modo Admin</div>
+            <div class="opcion admin" id="btnUser"><i class="bi bi-person-circle"></i>Modo User</div>
+            <a href="./carrito.html" class="opcion" id="btnCarrito"><i class="bi bi-cart-fill"></i> Carrito</a>
         </div>
     
-
-    <!-- Pop-up para el formulario de inicio de sesión -->
-    <div class="background" id="modalBackground">
-        <div class="popup" id="loginPopup">
-            <span class="close-button" id="cerrarLogin">  × </span> <!--evento-->
-            <h2>Registro en RITY JUST</h2>
-            <input type="text" id="nombre" placeholder="Nombre de Usuario">
-            <input type="text" id="email" placeholder="Correo electrónico">
-            <p id="emailError" class="error"></p>
-            <input type="password" id="password" placeholder="Contraseña">
-            <p id="passwordError"></p>
-            <label><input type="checkbox" id="checkAdmin"> ¿Perfil de Administrador?</label>
-            <button ">Login</button> 
-        </div>
-    </div>
 
     <div id="cart" class="cart">
         <span id="closeCart" class="close-cart">x</span>
@@ -72,13 +64,22 @@
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
+        <!-- Seccion de ofertas*/ -->
+        <section id="offers">
+            <h2 class="subtitulo">OFERTAS</h2>
+            <div class="ofertas-carrusel" id="ofertas-DOM">
+               
+                <!--AGREGAR OFERTAS CON JS-->
+                
+            </div>
+        </section>
 
         <!-- /*Seccion de productos*/ -->
         <section id="products">
             
-            <h2>Nuestros Productos</h2>
-            <div class="product-carousel">
-                <button class="add-products" id="abrirProductos" >Add Products</button> <!--evento-->
+            <div class="product-section">
+                
+                <!-- POP UP FORMULARIO AGREGAR PRODUCTOS-->
                 <div class="background" id="modalBackgroundProducts">
                     <div class="popup" id="productPopup">
                         <span class="close-button" id="cerrarProd">×</span><!--cerrarPopupProductos()-->
@@ -86,7 +87,9 @@
                             <div class="left-column">
                                 <div class="contendor-img">
                                     <input class="dato" type="file" id="productImg" placeholder="Ingresa Imagen" accept="image/*">
-                                   
+                                    <div id="preview-img" class="preview-img">
+                                        <!--PREVIEW DE IMG POR JS-->
+                                    </div>   
                                 </div>
                                 
                                 <input class="dato" type="text" id="productName" placeholder="Nombre del producto">
@@ -97,52 +100,96 @@
                                 <input class="dato" type="number" id="productPrice" placeholder="Precio del producto">
                                 <input class="dato"type="number" id="productStock" placeholder="Stock Inicial">
                                 
-                                <label for="categoria">Selecciona una categoría:</label>
+                                <label for="categoria">Categoría:</label>
                                 <select class="dato"id="categoria" name="categoria">
                                     <option value="fisico">Físico</option>
                                     <option value="frecuente">Frecuente</option>
                                     <option value="aromaterapia">Aromaterapia</option>
                                 </select>
 
-                                <button class="add-products " type="submit" id="agregarProd">Add Products</button>
+                                <button class="add-products" type="submit" id="agregarProd">Add Products</button>
                             </div>
 
                         </div>
                     </div>
                 </div>
-
-                <!--CARROUSEL-->
-                <div class="carousel-container"> 
-                    <!-- CARD DE PRODUCTOS-->
-                    <ul class="product-list">
-                        <!--AGREGAR LOS PRODUCTOS POR JAVASCRIPT-->
-                    </ul>
-                    <button class="carousel-prev">←</button>
-                    <button class="carousel-next">→</button>
-                </div>
             </div>    
 
         </section>
+        <section class="wrapper">
+            <aside>
+                <button class="close-menu" id="close-menu">
+                    <i class="bi bi-x"></i>
+                </button>
+                
+                <nav>
+                    <h3 class="subtitulo product-title">categorias</h3>
+                    <ul class="menu">
+                        <li>
+                            <button id="todos" class="boton-menu boton-categoria active"><i class="bi bi-hand-index-thumb-fill"></i> Todos los productos</button>
+                        </li>
+                        <li>
+                            <button id="frecuente" class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb"></i> BOTIQUIN</button>
+                        </li>
+                        <li>
+                            <button id="fisico" class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb"></i> CUIDADO DEL CUERPO</button>
+                        </li>
+                        <li>
+                            <button id="aromaterapia" class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb"></i>AROMATERAPIA</button>
+                        </li>
+                        <li>
+                            <a class="boton-menu boton-carrito" href="./carrito.html" ">
+                                <i class="bi bi-cart-fill"></i> Carrito <span id="numerito" class="numerito">0</span>
+                            </a>
+                        </li>
+                        
+                    </ul>
+                    <div class="botonesAdmin">
+                        <button class="botonfuncion admin" id="abrirProductos" >Nuevo Producto</button>
+                        <button class="botonfuncion admin" id="btnEliminar" >Eliminar Producto</button>
+                        <button class="botonfuncion admin" id="btnOferta" >Agregar Oferta</button>
 
-        <!-- Seccion de ofertas*/ -->
-        <section id="offers">
-            <h2>OFERTAS</h2>
-            <div class="product-carousel">
-                <button class="add-products">Add Products</button>
-                <div class="carousel-container">
-                    <div class="carousel-track">
-                        <div class="product-card">
-                            <img src="" alt="Oleo 31">
-                            <h3 class="product-name">Oleo 31</h3>
-                            <p class="product-description">Multifunctional oil</p>
-                            <hr class="divider">
-                            <p class="product-price">$1,000</p>
-                            <button class="add-to-cart">Add to Cart</button>
-                        </div>
                     </div>
-                    <button class="carousel-prev">←</button>
-                    <button class="carousel-next">→</button>
+                    
+                </nav>
+                
+            </aside>
+            <section class="muestraProductos">
+                <h2 class="titulo-principal" id="titulo-principal">Todos los productos</h2>
+                <div id="contenedor-productos" class="contenedor-productos">
+                    <!-- Esto se va a rellenar con JS -->
                 </div>
+            </section class="muestraProductos">
+
+            <div class="background" id="backOffer">
+                <div class="accionOferta" id="accionOferta" >
+                    <div class="contentoffer">
+                        <span class="close-button" id="cerrarOffer">×</span>
+                        <h4 class="subtitulo">Crear Oferta</h4>
+                        <div class="botonAccion">
+                            <button id="offerAll">TODOS LOS PRODUCTOS</button>
+                            <button id="offerUnico">UN SOLO PRODUCTO</button>
+                        </div>
+                        <div class="offerSeleccion" id="descuentoAllDiv">
+                            <p>PORCENTAJE DE DESCUENTO</p>
+                            <input type="number" id="descuentoALL">
+                            <button class="add-products"  id="btnAll">Agregar Descuento</button>
+                        </div>
+                        <div class="seleccionProd" id="busquedaDiv">
+                            <!-- Barra de búsqueda -->
+                            <div class="search">
+                                <i class="bi bi-search"></i>
+                                <input type="text"  id="busqueda" placeholder="Buscar producto...">
+                            </div>
+                            <div class="muestraProductos" id="productosDiv">
+                                <!-- Aquí se agregarán los productos mediante JavaScript -->
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                </div>
+
             </div>
         </section>
 
