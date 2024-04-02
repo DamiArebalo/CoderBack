@@ -1,3 +1,4 @@
+//------RECUPERO CARRITO ------------------
 let carritoProductos = localStorage.getItem("productos-en-carrito");
 carritoProductos = JSON.parse(carritoProductos);
 
@@ -14,6 +15,7 @@ const botonVaciar = document.querySelector("#carrito-acciones-vaciar");
 const contenedorTotal = document.querySelector("#total");
 const botonComprar = document.querySelector("#carrito-acciones-comprar");
 
+//FUNCION DE PRECIO ACTUAL (LISTA // OFERTA)
 function getPrecioActual(producto){
     if(producto.oferta>0){
         return(producto.oferta)
@@ -70,6 +72,7 @@ function cargarProductosCarrito() {
     actualizarTotal();
 	
     } else {
+        //SI NO VACIO
         contenedorCarritoVacio.classList.remove("disabled");
         contenedorCarritoProductos.classList.add("disabled");
         contenedorCarritoAcciones.classList.add("disabled");
@@ -77,9 +80,10 @@ function cargarProductosCarrito() {
     }
 
 }
-
+//CARGO PRODUCTOS
 cargarProductosCarrito();
 
+//ACTUALIZO LOS ID DE LOS BOTONES
 function actualizarBotonesEliminar() {
     botonesEliminar = document.querySelectorAll(".carrito-producto-eliminar");
 
@@ -88,7 +92,7 @@ function actualizarBotonesEliminar() {
     });
 }
 
-
+//FUNCION PARA ELIMINAR
 function eliminarDelCarrito(e) {
     //Recupero el id del boton que es = al del producto en su array
     let idBoton = e.currentTarget.id;
@@ -110,8 +114,10 @@ function eliminarDelCarrito(e) {
     localStorage.setItem("productos-en-carrito", JSON.stringify(carritoProductos));
 
 }
-
+//---EVENTO PARA VACIAR CARRITO
 botonVaciar.addEventListener("click", vaciarCarrito);
+
+//VACIAR CARRITO
 function vaciarCarrito() {
     //Vacio el array
     carritoProductos.length = 0;
@@ -129,12 +135,17 @@ function actualizarTotal() {
     total.innerText = `$${totalCalculado}`;
 }
 
+//FUNCION DE COMPRA
 botonComprar.addEventListener("click", comprarCarrito);
+
+//SIMULACION DE COMPRA
 function comprarCarrito() {
 
+    //VACIO CARRITO
     carritoProductos.length = 0;
     localStorage.setItem("productos-en-carrito", JSON.stringify(carritoProductos));
     
+    //MUESTRO MENSAJE DE COMPRA
     contenedorCarritoVacio.classList.add("disabled");
     contenedorCarritoProductos.classList.add("disabled");
     contenedorCarritoAcciones.classList.add("disabled");

@@ -449,13 +449,14 @@ function agregarOfertasDOM (ofertasNuevas){
     
 }
 
+//-------------EVENTO DE RECARGA DE PAGINA ------------------
+
 document.addEventListener("DOMContentLoaded", ()=>{
     
     //SI hay porductos con ofertas muestralos en el dom
     
     ofertasCreadas = productos.filter(producto =>producto.oferta > 0)
     
-
     if(CarritoLS.length !=0){
         numeritoActual = CarritoLS.reduce((acc, producto) => acc + producto.cantidad, 0);
     }
@@ -468,23 +469,28 @@ document.addEventListener("DOMContentLoaded", ()=>{
         agregarOfertasDOM(ofertasCreadasLS)
     }
 
+    //Cambia numerito
     if(numeritoActual< 0 || numeritoActual==undefined){
         numerito.innerText = 0;
     }else{
         numerito.innerText = numeritoActual;
     }
     
+    //AGREGA PRODUCTOS Y OFERTAS AL DOM
     agregarProductoAlDOM(productos)
     offerChek()
-    console.log(ofertasCreadasLS)
+    
 })
 
+//-----------------------------POPUP DE ELIMAR-----------------
 const busquedaEliminar = document.querySelector("#busquedaEliminar")
 const contentELiminar = document.querySelector("#productosEliminar")
 
-console.log(busquedaEliminar)
-console.log(contentELiminar)
+//PUESTO DE CONTROL
+// console.log(busquedaEliminar)
+// console.log(contentELiminar)
 
+//FUNCION QUE CREAD LAS CARDS DE LA BUSQUEDA
 function crearTarjetaEliminar(producto){
     //crea un div
     let eliminarCard = document.createElement('div');
@@ -503,6 +509,7 @@ function crearTarjetaEliminar(producto){
     return eliminarCard;
 
 }
+
 // Función para filtrar productos según la búsqueda
 function filtrarProductosEliminar(textobusqueda) {
     //crea un array con los productos que contienen las letras buscadas  -->> mejorar con letras ordenadas
@@ -546,7 +553,7 @@ busquedaEliminar.addEventListener("keyup",(e)=>{
             //Rescato el producto dentro del ARRAY GLOBAL CON EL MISMO ID
             const productoSeleccion = productos.find(producto => producto.id == botonId)
             console.log(productoSeleccion)
-            //Rescato el INDEX del PRODUCTO en array global con el MISMO ID
+            //Rescato el INDEX del PRODUCTO en array global con el MISMO ID O NOMBRE
             let productIndex = productos.findIndex(producto => producto.nombre == productoSeleccion.nombre)
             let checkCarrito = CarritoLS.some((producto) => producto.id == productoSeleccion.id)
             

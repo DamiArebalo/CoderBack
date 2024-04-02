@@ -9,8 +9,8 @@ const cerrarOffer = document.querySelector("#cerrarOffer")//Cerrar Oferta
 let btnEliminar = document.querySelector("#btnEliminar")//boton eliminar
 const cerrarEliminar = document.querySelector("#cerrarEliminar")//Cerrar eliminar
 
-console.log(btnEliminar)
 
+//ABRIR PRODUCTOS
 function abrirPopupProductos() {
     document.getElementById("modalBackgroundProducts").style.display = "block";
     document.getElementById("productPopup").style.display = "block";
@@ -23,6 +23,7 @@ function cerrarPopupProductos() {
     document.getElementById("productPopup").style.display = "none";
 }
 
+//ABRIR POPUP
 function abrirPopupOferta() {
     document.getElementById("backOffer").style.display = "block";
    let popupoffer= document.getElementById("accionOferta")
@@ -30,23 +31,26 @@ function abrirPopupOferta() {
    popupoffer.style.display = "block";
 }
 
+//CERRAR OFERTA
 function cerrarPopupOferta(){
     document.getElementById("backOffer").style.display = "none";
     document.getElementById("accionOferta").style.display = "none";
 }
 
+//ABRIR BAJA
 function abrirPopupEliminar() {
     document.getElementById("backEliminar").style.display = "block";
     document.getElementById("accionEliminar").style.display = "block";
 }
 
+//CERRAR BAJA
 function cerrarPopupEliminar(){ 
     document.getElementById("backEliminar").style.display = "none";
     document.getElementById("accionEliminar").style.display = "none";
 
 }
 
-
+//---------------EVENTOS--------------------
 btnEliminar.addEventListener("click", ()=>{abrirPopupEliminar()})
 
 cerrarEliminar.onclick = () => {cerrarPopupEliminar()}
