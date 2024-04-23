@@ -148,6 +148,18 @@ busqueda.addEventListener("keyup",(e)=>{
             //creo un array con las ofertas hechas
             ofertasCreadas= productos.filter(producto =>producto.oferta > 0)
 
+            Toastify({
+                text: `✅Oferta Nueva para ${productos[productIndex].nombre.toUpperCase()}`,
+                className: "info",
+                duration: 3000,
+                close: true,
+                position: "center", 
+                style: {
+                  background: "linear-gradient(to left, #34c765, #054d33)",
+                //   
+                }
+              }).showToast();
+
             //puesto de control
             console.log(ofertasCreadas)
 
@@ -202,6 +214,18 @@ btnAll.onclick = ()=>{
 
     actualizarOfertasLS()
     agregarProductoAlDOM(productos)
+
+    Toastify({
+        text: "✅OFERTA CREADA EN TODOS LOS PRODUCTOS",
+        className: "info",
+        duration: 3000,
+        close: true,
+        position: "center", 
+        style: {
+          background: "linear-gradient(to left, #34c765, #054d33)",
+        //   
+        }
+      }).showToast();
     
 
 }//FIN ALGORITMO

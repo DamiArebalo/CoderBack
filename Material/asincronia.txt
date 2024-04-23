@@ -1,0 +1,146 @@
+//setTime Out
+
+let largada = setTimeOut( () =>{
+
+    //funcion de largada
+}, 1000) -->tiempo en ms
+
+//no hace invocar a la funcion/variable
+
+clearTimeOut("VARIABLE CON EL setTimeOut")
+
+//setInterval
+let interval = setInterval( ( )=>{
+
+}, 1000)
+
+//try-catch-finally(opcional)
+
+
+try{
+    if(timebueno < 3){
+        //buen tiempo
+    }else{
+        throw new error("tiempo lento") --->> puede haber varios en el codigo pero muestra el primer error
+    }
+
+
+}catch(err){
+
+}
+
+
+//promesas -peticiones
+
+function podioChecker(posicion){
+    return new Promise( (resolve,reject) =>{
+        if(posicion > 3){
+            return reject(`terminaste en la posicion ${posicion}`)
+        }
+        setTimeOut(()=>{  ----NECESARIO
+            resolve({
+                posicion,
+                result: "entraste al podio"
+            })
+        }0) --- INMEDIATO O CUALQUIER TIEMPO
+    })
+}
+
+
+//metodo para llamar o usar la funcion porque es asyncronico (se resuelve luego de la carga del DOM)
+podioChecker(posicionFINAL).then(resultado =>console.log(resultado))
+
+
+function funcionAsincronica(){
+    try{
+        console.log("inicio de funcion");
+
+        let obj = await podioChecker(2) ------> MARCAR LA ASINCRONIA CON AWAIT
+
+        console.log("ESTAS EN EL PODIO", obj.posicion,obj.result)
+
+    }catch (err){
+        console.log("NO ESTAS EN EL PODIO)
+
+    }
+}
+
+
+const obtenerUsuarios = asyn ( ) => {
+    let URL = "API----URL"
+    const userError ="mensaje de error"
+    let apiCargada = ""
+
+    try{
+
+        let  solicitud = AWAIT fetch(url)
+        let respuesta = AWAIT  solicitud.JSON()
+
+        respuesta.forEach( user =>{
+            renderizado += "CARD DE USUARIOS"
+        })
+
+    } catch(err){
+        //error detectado
+        renderizado = userError
+
+    }finally{
+    documente.body.innerhtml = renderizado
+}
+
+}
+
+
+
+fetch -- siempre se usa de la misma forma
+
+API -- rutinas 
+
+externas -- nativas
+
+natvias son del propio lenguaje
+
+externas -- codificacion de terceros
+
+REST -- CRUD desde plataformas externas
+|
+| CREATE --> POST
+| UPDATE ---> PUT
+| READ ---> GET
+| DELETE ---> DELETE
+
+
+Cliente y servidor (POR SEPARADO)
+
+//objeto a crear
+let recurso ={
+    key: value
+    key: value
+}
+
+//parametro para enviar con fetch
+
+const info = {
+    method: "POST",
+    body: JSON.sringify(recurso),
+    headers: {
+        "content-type" : ----
+
+    }
+}
+
+//peticion de fetch
+
+fetch(URL, info)
+.then(response => response.json())
+.then(data => console.table(data));
+
+
+Estados de las promesas
+pending
+resolve
+reject
+
+
+LIBRERIAS dentro de JS -- LUXON Y SWEET ALERT
+

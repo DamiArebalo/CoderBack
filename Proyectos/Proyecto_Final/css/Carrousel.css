@@ -5,6 +5,8 @@
     overflow: scroll;
     height: 40vh;
     gap: 2.5rem;
+    justify-content: center;
+    align-items: center;
  }
 
  .oferCheck {

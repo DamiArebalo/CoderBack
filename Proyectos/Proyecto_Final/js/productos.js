@@ -1,3 +1,4 @@
+// #region RECURSOS
 // DECLARACION DE VARIABLES DE FORMULARIO
 let formuProducto = document.querySelectorAll(".dato")
 //puesto de control
@@ -38,9 +39,9 @@ let inputImg = document.getElementById('productImg'); //selector de imagen
 
 
 // Generacion del Array Global
-let productosEnCarrito =[]
+let productosEnCarrito =[];
 let productos = [];
-let ofertasCreadas = []
+let ofertasCreadas = [];
 
 //recupero de LOCALSTORAGE
 let productosenLS = JSON.parse(localStorage.getItem("array-productos"))
@@ -49,6 +50,10 @@ let CarritoLS = JSON.parse(localStorage.getItem("productos-en-carrito"))
 
 console.log(productosenLS)
 console.log(productos)
+
+
+//#region FUNCIONES
+
 //si hay algo el array global es igual al de local storage
 function productosCheck(){
     if(productosenLS){
@@ -76,11 +81,8 @@ function offerChek(){
     }
 }
 
-
-
 //puesto de control
 //console.log(ofertasCreadasLS)
-
 
 //CLON FUNCION CERRAR POPUP
 function cerrarPopupProductos() {
@@ -273,6 +275,8 @@ function alamacenArray() {
     localStorage.setItem("array-productos", JSON.stringify(productosenLS));
 }
 
+
+//#region FORMUALRIOS
 //-------------------EVENTOS DE FORMULARIO-------------
 
 const agregarProd = document.getElementById("agregarProd"); //BOTON DE FORMULARIO PRODUCTOS
@@ -312,6 +316,18 @@ agregarProd.onclick = () =>{
     agregarProductos()
     console.table(productos);
     alamacenArray()
+    //TOASTYFY 
+    Toastify({
+        text: "PRODUCTO AGREGADO",
+        className: "info",
+        duration: 3000,
+        close: true,
+        position: "center", 
+        style: {
+          background: "linear-gradient(to left, #34c765, #054d33)",
+        //   
+        }
+      }).showToast();
     
 }
 
@@ -349,6 +365,7 @@ botonesCategorias.forEach(boton => {
 });
 
 
+//#region CARRITO
 //----------------------CARRITO---------------
 
 
@@ -360,7 +377,7 @@ function actualizaragregarCarrito() {
 
     //recorro todo los botones de las cards y al que le haga clik lo agrega al carrito
     agregarCarrito.forEach(boton => {
-        boton.addEventListener("click", agregarAlCarrito);
+        boton.addEventListener("click",agregarAlCarrito);
     });
 }
 
@@ -383,6 +400,18 @@ function agregarAlCarrito(e) {
         
         //SUMO CANTIDAD
         productosEnCarrito[index].cantidad++; 
+
+        Toastify({
+            text: "✅Agregado al Carrito",
+            className: "info",
+            duration: 3000,
+            close: true,
+            position: "center", 
+            style: {
+              background: "linear-gradient(to left, #34c765, #054d33)",
+            //   
+            }
+          }).showToast();
         
     }else{  
        //ARRANCA EN UNO
@@ -390,6 +419,18 @@ function agregarAlCarrito(e) {
         //PUSHEO A CARRITO
         carritoCheck()
         productosEnCarrito.push(productoAgregado);
+
+        Toastify({
+            text: "✅Agregado al Carrito",
+            className: "info",
+            duration: 3000,
+            close: true,
+            position: "center", 
+            style: {
+              background: "linear-gradient(to left, #34c765, #054d33)",
+            //   
+            }
+          }).showToast();
     }
 
     actualizarNumerito();
@@ -406,9 +447,11 @@ function actualizarNumerito() {
     let nuevoNumerito = productosEnCarrito.reduce((acc, producto) => acc + producto.cantidad, 0);
     numerito.innerText = nuevoNumerito;
     numeritoActual = nuevoNumerito
-    console.log(numeritoActual)
+    //console.log(numeritoActual)
 }
 
+
+//#region OFERTAS 
 //------------------SECCION OFERTAS-------------
 const ofertas = document.querySelector("#ofertas-DOM")
 
@@ -449,13 +492,14 @@ function agregarOfertasDOM (ofertasNuevas){
     
 }
 
+//#region RELOAD
 //-------------EVENTO DE RECARGA DE PAGINA ------------------
 
 document.addEventListener("DOMContentLoaded", ()=>{
     
     //SI hay porductos con ofertas muestralos en el dom
     
-    ofertasCreadas = productos.filter(producto =>producto.oferta > 0)
+    
     
     if(CarritoLS.length !=0){
         numeritoActual = CarritoLS.reduce((acc, producto) => acc + producto.cantidad, 0);
@@ -463,11 +507,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
     
     productosCheck()
     
-    if(ofertasCreadasLS == null){
-        ofertasCreadasLS = ofertasCreadas
-    }else if(ofertasCreadas>0 || ofertasCreadasLS>0){
-        agregarOfertasDOM(ofertasCreadasLS)
-    }
+   
+    agregarOfertasDOM(ofertasCreadasLS)
+    
 
     //Cambia numerito
     if(numeritoActual< 0 || numeritoActual==undefined){
@@ -482,7 +524,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
     
 })
 
-//-----------------------------POPUP DE ELIMAR-----------------
+
+//#region DELETE
+//-----------------------------POPUP DE ELIMINAR-----------------
 const busquedaEliminar = document.querySelector("#busquedaEliminar")
 const contentELiminar = document.querySelector("#productosEliminar")
 

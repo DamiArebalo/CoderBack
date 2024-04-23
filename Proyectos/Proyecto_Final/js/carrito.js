@@ -1,3 +1,4 @@
+//#region RECURSOS
 //------RECUPERO CARRITO ------------------
 let carritoProductos = localStorage.getItem("productos-en-carrito");
 carritoProductos = JSON.parse(carritoProductos);
@@ -14,6 +15,68 @@ let botonesEliminar = document.querySelectorAll(".carrito-producto-eliminar");
 const botonVaciar = document.querySelector("#carrito-acciones-vaciar");
 const contenedorTotal = document.querySelector("#total");
 const botonComprar = document.querySelector("#carrito-acciones-comprar");
+const $btnDolar = document.querySelector("#carrito-acciones-moneda")
+
+console.log($btnDolar)
+
+let dolarActive = false
+// Declara una variable global para almacenar los datos
+let valorDolarBlue;
+
+async function obtenerValorDolarBlue() {
+    try {
+        const response = await fetch('https://dolarapi.com/v1/dolares/blue');
+        const data = await response.json();
+       // console.log(data.venta);      
+    
+        return new Promise((resolve,reject) =>{
+            setTimeout(() => {
+                const datos = data.venta ; // Datos simulados
+                resolve(datos); // Resolvemos la promesa con los datos
+            },0);
+        });
+
+
+    } catch (error) {
+    console.error('Error al obtener el valor del dólar blue:', error);
+    return null;
+    }
+}
+
+async function calcularPrecioEnDolar() {
+    try {
+    valorDolarBlue = await obtenerValorDolarBlue();
+
+        if (valorDolarBlue !== null) {
+           // console.log(valorDolarBlue)
+            return valorDolarBlue 
+        
+        } else {
+            console.error('No se pudo obtener el valor del dólar blue.');
+        }
+    } catch (error) {
+    console.error('Error al calcular el precio en dólares:', error);
+    }
+}
+
+
+$btnDolar.onclick = () =>{
+    if(dolarActive){
+        dolarActive = false
+    }else{
+        dolarActive = true
+    }
+    // puesto de control
+    console.log("Precio en dolar: ", dolarActive)
+
+    cargarProductosCarrito()
+
+    
+    actualizarBotonesEliminar();
+    actualizarTotal();
+}
+
+
 
 //FUNCION DE PRECIO ACTUAL (LISTA // OFERTA)
 function getPrecioActual(producto){
@@ -25,24 +88,10 @@ function getPrecioActual(producto){
 
 }
 
-//Funcion para cargar productos
-function cargarProductosCarrito() {
 
-    if (carritoProductos && carritoProductos.length > 0) {
+function tarjetaCarritoPesos (producto){
 
-        //se desactivan los elementos vacio y comprado y se activan los del carrito activo
-        contenedorCarritoVacio.classList.add("disabled");
-        contenedorCarritoProductos.classList.remove("disabled");
-        contenedorCarritoAcciones.classList.remove("disabled");
-        contenedorCarritoComprado.classList.add("disabled");
-        
-        //Reinicio de contenido
-        contenedorCarritoProductos.innerHTML = "";
-        
-        //Recorro array carrito
-        carritoProductos.forEach(producto => {
-    
-            const div = document.createElement("div");
+    const div = document.createElement("div");
             div.classList.add("carrito-producto");
             div.innerHTML = `
                 <img class="carrito-producto-imagen" src="${producto.img}" alt="${producto.nombre}">
@@ -66,6 +115,62 @@ function cargarProductosCarrito() {
             `;
     
             contenedorCarritoProductos.append(div);
+}
+
+ async function tarjetaCarritoDolar (producto,precioDolar){
+
+    const div = document.createElement("div");
+            div.classList.add("carrito-producto");
+            
+            div.innerHTML = `
+                <img class="carrito-producto-imagen" src="${producto.img}" alt="${producto.nombre}">
+                <div class="carrito-producto-titulo">
+                    <small>Título</small>
+                    <h3>${producto.nombre}</h3>
+                </div>
+                <div class="carrito-producto-cantidad">
+                    <small>Cantidad</small>
+                    <p>${producto.cantidad}</p>
+                </div>
+                <div class="carrito-producto-precio">
+                    <small>Precio</small>
+                    <p>U$D ${((getPrecioActual(producto)) / await precioDolar).toFixed(2)}</p>
+                </div>
+                <div class="carrito-producto-subtotal">
+                    <small>Subtotal</small>
+                    <p>U$D ${((getPrecioActual(producto) * producto.cantidad)/ await precioDolar).toFixed(2)}</p>
+                </div>
+                <button class="carrito-producto-eliminar" id="${producto.id}"><i class="bi bi-trash-fill"></i></button>
+            `;
+    
+            contenedorCarritoProductos.append(div);
+}
+
+//#region CARGAR PRODUCTOS
+//Funcion para cargar productos
+async function cargarProductosCarrito() {
+
+    if (carritoProductos && carritoProductos.length > 0) {
+
+        //se desactivan los elementos vacio y comprado y se activan los del carrito activo
+        contenedorCarritoVacio.classList.add("disabled");
+        contenedorCarritoProductos.classList.remove("disabled");
+        contenedorCarritoAcciones.classList.remove("disabled");
+        contenedorCarritoComprado.classList.add("disabled");
+        
+        //Reinicio de contenido
+        contenedorCarritoProductos.innerHTML = "";
+        
+        //Recorro array carrito
+        carritoProductos.forEach(producto => {
+            if(dolarActive){
+                tarjetaCarritoDolar(producto,  calcularPrecioEnDolar())
+
+            }else{
+                tarjetaCarritoPesos (producto)
+            }
+    
+            
         })
     
     actualizarBotonesEliminar();
@@ -80,8 +185,13 @@ function cargarProductosCarrito() {
     }
 
 }
+
+
+
+
 //CARGO PRODUCTOS
 cargarProductosCarrito();
+
 
 //ACTUALIZO LOS ID DE LOS BOTONES
 function actualizarBotonesEliminar() {
@@ -114,8 +224,7 @@ function eliminarDelCarrito(e) {
     localStorage.setItem("productos-en-carrito", JSON.stringify(carritoProductos));
 
 }
-//---EVENTO PARA VACIAR CARRITO
-botonVaciar.addEventListener("click", vaciarCarrito);
+
 
 //VACIAR CARRITO
 function vaciarCarrito() {
@@ -125,14 +234,23 @@ function vaciarCarrito() {
     localStorage.setItem("productos-en-carrito", JSON.stringify(carritoProductos));
     //Actualizo al DOM
     cargarProductosCarrito()
-    console.log("vaciaste carrito")
+    //console.log("vaciaste carrito")
    
 }
 
+//---EVENTO PARA VACIAR CARRITO
+botonVaciar.addEventListener("click", vaciarCarrito);
+
 //Actualizo el valor TOTAL CON LA ACCUMULACION DE TODOS LOS SUBTOTALES
-function actualizarTotal() {
+async function actualizarTotal() {
     const totalCalculado = carritoProductos.reduce((acc, producto) => acc + (getPrecioActual(producto) * producto.cantidad), 0);
-    total.innerText = `$${totalCalculado}`;
+    if(dolarActive){
+        total.innerText = `$${(totalCalculado / await calcularPrecioEnDolar()).toFixed(2)}`;
+    }else{
+        total.innerText = `$${totalCalculado}`;
+    }
+    
+    
 }
 
 //FUNCION DE COMPRA
@@ -142,8 +260,7 @@ botonComprar.addEventListener("click", comprarCarrito);
 function comprarCarrito() {
 
     //VACIO CARRITO
-    carritoProductos.length = 0;
-    localStorage.setItem("productos-en-carrito", JSON.stringify(carritoProductos));
+    vaciarCarrito()
     
     //MUESTRO MENSAJE DE COMPRA
     contenedorCarritoVacio.classList.add("disabled");
@@ -151,4 +268,9 @@ function comprarCarrito() {
     contenedorCarritoAcciones.classList.add("disabled");
     contenedorCarritoComprado.classList.remove("disabled");
 
+    //Sweet ALert
+
+
+
 }
+
