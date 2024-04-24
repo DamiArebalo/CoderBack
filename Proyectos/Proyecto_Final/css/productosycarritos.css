@@ -235,6 +235,12 @@ aside {
     gap: .25rem;
 }
 
+#seccionCant{
+    display: flex;
+    gap: .5rem;
+    background-color: var(--clr-gray);
+    margin-top: .3rem;
+}
 
 .producto-agregar {
     border: 0;
@@ -360,6 +366,8 @@ aside {
 .disabled {
     display: none;
 }
+
+
 
 /*** MEDIA QUERIES ***/
 

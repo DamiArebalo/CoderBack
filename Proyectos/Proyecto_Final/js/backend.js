@@ -80,11 +80,9 @@ btnCarrito.onclick = () => console.log("click carrito")
 cerrarOffer.onclick = () => cerrarPopupOferta()
 
 btnOferta.addEventListener("click", (e)=>{
-    console.log(e.currentTarget)
+   // console.log(e.currentTarget)
     abrirPopupOferta()
 })
-
-
 
 
 document.getElementById('offerAll').addEventListener('click', function() {

@@ -18,7 +18,8 @@ const botonComprar = document.querySelector("#carrito-acciones-comprar");
 const $btnDolar = document.querySelector("#carrito-acciones-moneda")
 
 console.log($btnDolar)
-
+//#endregion 
+//#region DOLAR
 let dolarActive = false
 // Declara una variable global para almacenar los datos
 let valorDolarBlue;
@@ -101,11 +102,16 @@ function tarjetaCarritoPesos (producto){
                 </div>
                 <div class="carrito-producto-cantidad">
                     <small>Cantidad</small>
-                    <p>${producto.cantidad}</p>
+                    <div id="seccionCant">
+                        <button class="boton-restar" id="${producto.id}" disabled>-</button>
+                        <p id="cantidad-producto">${producto.cantidad}</p>
+                        <button class="boton-sumar" id="${producto.id}">+</button>
+                    </div>
                 </div>
                 <div class="carrito-producto-precio">
                     <small>Precio</small>
                     <p>$${getPrecioActual(producto)}</p>
+                    
                 </div>
                 <div class="carrito-producto-subtotal">
                     <small>Subtotal</small>
@@ -130,7 +136,9 @@ function tarjetaCarritoPesos (producto){
                 </div>
                 <div class="carrito-producto-cantidad">
                     <small>Cantidad</small>
-                    <p>${producto.cantidad}</p>
+                    <button class="boton-restar" id="${producto.id}" disabled>-</button>
+                    <p id="cantidad-producto">${producto.cantidad}</p>
+                    <button class="boton-sumar" id="${producto.id}">+</button>
                 </div>
                 <div class="carrito-producto-precio">
                     <small>Precio</small>
@@ -146,7 +154,10 @@ function tarjetaCarritoPesos (producto){
             contenedorCarritoProductos.append(div);
 }
 
-//#region CARGAR PRODUCTOS
+
+//#endregion
+
+//#region CARGAR 
 //Funcion para cargar productos
 async function cargarProductosCarrito() {
 
@@ -172,6 +183,13 @@ async function cargarProductosCarrito() {
     
             
         })
+
+        let botonSumar = document.querySelectorAll('.boton-sumar');
+        let botonRestar = document.querySelectorAll('.boton-restar');
+
+        console.log(botonSumar)
+        console.log(botonRestar)    
+
     
     actualizarBotonesEliminar();
     actualizarTotal();
@@ -184,7 +202,10 @@ async function cargarProductosCarrito() {
         contenedorCarritoComprado.classList.add("disabled");
     }
 
+    
+
 }
+
 
 
 

@@ -1,0 +1,22 @@
+Canal : FRONT
+Solapa : OFERTA_DESTINO
+Id de localidad : 3471
+Localidad : Santa Fe
+Partido : Santa Fe
+Provincia : Santa Fe
+Política : Especial
+Tipo de trámite : RETENCION
+Red actual del cliente : HFC
+Servicio actual del cliente : INTERNET
+Segmento : INDIVIDUO
+Servicio actual de tv : NO_CLIENTE
+Servicio actual de internet : HFC
+Velocidad actual : 300MB
+Tiene línea fija? : No
+Rango ingesado : 7
+¿Hace cuánto es Full Price? : 
+Servicio actual móvil : CLARO
+Crm : FAN
+Ciclo de Facturación hogar : 28
+Acepta portarse? : No
+Red preferida : sin definir

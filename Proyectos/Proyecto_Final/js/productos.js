@@ -6,11 +6,11 @@ let formuProducto = document.querySelectorAll(".dato")
 
 //CLASE - PLANTILLA DE PRODUCTOS
 class Producto{
-    static id = 0
+    
     
     constructor(precioLista,descripCorta,descripLarga,nombre,imgProd,stockInicial, categoria){
         
-        this.id = ++Producto.id
+        this.id = productos.length + 1
        
         this.precioLista = precioLista;
         this.descripCorta = descripCorta;
@@ -48,8 +48,10 @@ let productosenLS = JSON.parse(localStorage.getItem("array-productos"))
 let ofertasCreadasLS = JSON.parse(localStorage.getItem("ofertas"))
 let CarritoLS = JSON.parse(localStorage.getItem("productos-en-carrito"))
 
-console.log(productosenLS)
-console.log(productos)
+productosCheck()
+console.log("Ls: ",productosenLS)
+console.log("Array ",productos)
+console.log("ofertasLS ", ofertasCreadasLS)
 
 
 //#region FUNCIONES
@@ -57,7 +59,7 @@ console.log(productos)
 //si hay algo el array global es igual al de local storage
 function productosCheck(){
     if(productosenLS){
-    productos = productosenLS
+     productos = productosenLS
 
     }else{
     productosenLS = []
@@ -217,10 +219,10 @@ function agregarProductos(){
         agregarProductoAlDOM(productos);
         cerrarPopupProductos()
 
-        console.log("✨PRODUCTO AGREGADO CORRECTAMENTE✨");
+        //console.log("✨PRODUCTO AGREGADO CORRECTAMENTE✨");
        
     }else{
-        console.error("❌Error en la carga de Productos❌ \nIntente denuevo mas tarde ");
+        //console.error("❌Error en la carga de Productos❌ \nIntente denuevo mas tarde ");
     }
 
 
@@ -417,7 +419,7 @@ function agregarAlCarrito(e) {
        //ARRANCA EN UNO
        productoAgregado.cantidad = 1;
         //PUSHEO A CARRITO
-        carritoCheck()
+        //carritoCheck()
         productosEnCarrito.push(productoAgregado);
 
         Toastify({
@@ -497,30 +499,25 @@ function agregarOfertasDOM (ofertasNuevas){
 
 document.addEventListener("DOMContentLoaded", ()=>{
     
-    //SI hay porductos con ofertas muestralos en el dom
-    
-    
-    
-    if(CarritoLS.length !=0){
+    if(CarritoLS!=null && CarritoLS.length!=0){
         numeritoActual = CarritoLS.reduce((acc, producto) => acc + producto.cantidad, 0);
     }
     
-    productosCheck()
     
-   
-    agregarOfertasDOM(ofertasCreadasLS)
-    
-
     //Cambia numerito
     if(numeritoActual< 0 || numeritoActual==undefined){
         numerito.innerText = 0;
     }else{
         numerito.innerText = numeritoActual;
     }
+
+    productos = productosenLS
     
     //AGREGA PRODUCTOS Y OFERTAS AL DOM
     agregarProductoAlDOM(productos)
     offerChek()
+    productosCheck()
+    agregarOfertasDOM(ofertasCreadasLS)
     
 })
 
