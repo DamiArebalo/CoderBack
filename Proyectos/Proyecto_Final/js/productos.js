@@ -48,7 +48,7 @@ let productosenLS = JSON.parse(localStorage.getItem("array-productos"))
 let ofertasCreadasLS = JSON.parse(localStorage.getItem("ofertas"))
 let CarritoLS = JSON.parse(localStorage.getItem("productos-en-carrito"))
 
-productosCheck()
+//productosCheck()
 // console.log("Ls: ",productosenLS)
 // console.log("Array ",productos)
 // console.log("ofertasLS ", ofertasCreadasLS)
@@ -370,7 +370,16 @@ botonesCategorias.forEach(boton => {
 //#region CARRITO
 //----------------------CARRITO---------------
 
+function agregarCarritoOferta() {
+    //actualizo contenido
+    let agregarCarritoOfertas = document.querySelectorAll(".producto-agregar-offer");
 
+    console.log(agregarCarritoOfertas)
+    //recorro todo los botones de las cards y al que le haga clik lo agrega al carrito
+    agregarCarritoOfertas.forEach(boton => {
+        boton.addEventListener("click",agregarAlCarrito);
+    });
+}
 
 //BOTON PARA AGREGAR AL CARRITO
 function actualizaragregarCarrito() {
@@ -392,6 +401,9 @@ function agregarAlCarrito(e) {
 
     //BUSCO EL OBJETO PRODUCTO QUE SE SELECCIONO
     let productoAgregado = productos.find(producto => producto.id === parseID);
+
+    carritoCheck()
+
     
     //SI ESTA EN CARRITO SUMO 1 A LA CANTIDAD 
     if(productosEnCarrito.some(producto => producto.id === parseID)) {
@@ -436,8 +448,9 @@ function agregarAlCarrito(e) {
     }
 
     actualizarNumerito();
-    //console.log(productosEnCarrito)
+    console.log(productosEnCarrito)
     //GUARDO EN LOCALSTORAGE EL CARRITO
+
     localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito));
 }
 
@@ -445,7 +458,7 @@ let numeritoActual
 
 
 //FUNCION PARA ACTUALIZAR EL PREVIEW DEL CARRITO
-function actualizarNumerito() {
+ function actualizarNumerito() {
     let nuevoNumerito = productosEnCarrito.reduce((acc, producto) => acc + producto.cantidad, 0);
     numerito.innerText = nuevoNumerito;
     numeritoActual = nuevoNumerito
@@ -456,6 +469,9 @@ function actualizarNumerito() {
 //#region OFERTAS 
 //------------------SECCION OFERTAS-------------
 const ofertas = document.querySelector("#ofertas-DOM")
+
+
+
 
 //FUNCION PARA ACTUALIZAR ARRAY OFERTAS
 function checkOffer (){
@@ -475,7 +491,7 @@ function crearTarjetaOferta(producto) {
             <p class="offer-price">$${producto.oferta}</p>
             <p class="descuento">%${producto.descuento}</p>
         </div>
-        <button class="producto-agregar" id="${producto.id}">Agregar</button>
+        <button class="producto-agregar-offer" id="${producto.id}">Agregar</button>
     
     `;
 
@@ -489,15 +505,17 @@ function agregarOfertasDOM (ofertasNuevas){
     ofertasNuevas.forEach((producto) =>{
         let productCard = crearTarjetaOferta(producto)
         ofertas.appendChild(productCard);
-    })
+    }) 
 
-    
+    agregarCarritoOferta()
 }
 
 //#region RELOAD
 //-------------EVENTO DE RECARGA DE PAGINA ------------------
 
 document.addEventListener("DOMContentLoaded", ()=>{
+
+    
     
     if(CarritoLS!=null && CarritoLS.length!=0){
         numeritoActual = CarritoLS.reduce((acc, producto) => acc + producto.cantidad, 0);

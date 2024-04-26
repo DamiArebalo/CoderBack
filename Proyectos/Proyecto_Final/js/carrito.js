@@ -1,7 +1,16 @@
 //#region RECURSOS
+
+
 //------RECUPERO CARRITO ------------------
 let carritoProductos = localStorage.getItem("productos-en-carrito");
 carritoProductos = JSON.parse(carritoProductos);
+
+let productosLS = JSON.parse(localStorage.getItem("array-productos"))
+
+productos = productosLS
+
+
+console.log(productos)
 
 //puesto de control
 //console.log(carritoProductos)
@@ -20,7 +29,7 @@ const $btnDolar = document.querySelector("#carrito-acciones-moneda")
 //console.log($btnDolar)
 //#endregion 
 //#region DOLAR
-let dolarActive = false
+let dolarActive 
 // Declara una variable global para almacenar los datos
 let valorDolarBlue;
 
@@ -32,8 +41,8 @@ async function obtenerValorDolarBlue() {
     
         return new Promise((resolve,reject) =>{
             setTimeout(() => {
-                const datos = data.venta ; // Datos simulados
-                resolve(datos); // Resolvemos la promesa con los datos
+                const datos = data.venta ; 
+                resolve(datos); 
             },0);
         });
 
@@ -60,15 +69,15 @@ async function calcularPrecioEnDolar() {
     }
 }
 
-
 $btnDolar.onclick = () =>{
+    console.log(dolarActive)
     if(dolarActive){
         dolarActive = false
     }else{
         dolarActive = true
     }
     // puesto de control
-    //console.log("Precio en dolar: ", dolarActive)
+    console.log("Precio en dolar: ", dolarActive)
 
     cargarProductosCarrito()
 
@@ -76,8 +85,6 @@ $btnDolar.onclick = () =>{
     actualizarBotonesEliminar();
     actualizarTotal();
 }
-
-
 
 //FUNCION DE PRECIO ACTUAL (LISTA // OFERTA)
 function getPrecioActual(producto){
@@ -158,25 +165,12 @@ function tarjetaCarritoPesos (producto){
 }
 
 
-
-
-    
-
-
-    
-    
-
-
-
-
-//#endregion
-
 //#region CARGAR 
 //Funcion para cargar productos
 async function cargarProductosCarrito() {
 
     if (carritoProductos && carritoProductos.length > 0) {
-
+        
         //se desactivan los elementos vacio y comprado y se activan los del carrito activo
         contenedorCarritoVacio.classList.add("disabled");
         contenedorCarritoProductos.classList.remove("disabled");
@@ -261,7 +255,6 @@ async function cargarProductosCarrito() {
     
 }
 
-
 //CARGO PRODUCTOS
 cargarProductosCarrito();
 
@@ -297,7 +290,6 @@ function eliminarDelCarrito(e) {
 
 }
 
-
 //VACIAR CARRITO
 function vaciarCarrito() {
     //Vacio el array
@@ -316,11 +308,17 @@ botonVaciar.addEventListener("click", vaciarCarrito);
 //Actualizo el valor TOTAL CON LA ACCUMULACION DE TODOS LOS SUBTOTALES
 async function actualizarTotal() {
     const totalCalculado = carritoProductos.reduce((acc, producto) => acc + (getPrecioActual(producto) * producto.cantidad), 0);
+    let totalEnDolar = (totalCalculado / await calcularPrecioEnDolar()).toFixed(2)
+    
     if(dolarActive){
-        total.innerText = `U$D ${(totalCalculado / await calcularPrecioEnDolar()).toFixed(2)}`;
+        total.innerText = `U$D ${totalEnDolar}`;
+        return totalEnDolar
     }else{
         total.innerText = `AR$ ${totalCalculado}`;
+        return totalCalculado
     }
+
+    
     
     
 }
@@ -328,21 +326,102 @@ async function actualizarTotal() {
 //FUNCION DE COMPRA
 botonComprar.addEventListener("click", comprarCarrito);
 
+//funcion de alerta de compra
+async function alertaDeCompra(){
+    try {
+       let result = await Swal.fire({
+        title: 'Ingresa tus datos',
+        html: `
+            <button id="swal-close" style="float: right; border: none; background: none;">X</button>
+            <input id="swal-nombre" class="swal2-input" placeholder="Nombre/Apodo">
+            <input id="swal-correo" class="swal2-input" placeholder="Correo Electrónico">
+            <input id="swal-telefono" class="swal2-input" placeholder="Número Telefónico">
+        `,
+        focusConfirm: false,
+        showConfirmButton: true, // Oculta el botón de confirmación
+        preConfirm: () => {
+            const nombre = Swal.getPopup().querySelector('#swal-nombre').value
+            const correo = Swal.getPopup().querySelector('#swal-correo').value
+            const telefono = Swal.getPopup().querySelector('#swal-telefono').value
+
+            if (!nombre || !correo || !telefono) {
+                Swal.showValidationMessage(`Por favor ingresa todos los campos`)
+            }
+
+            return { nombre: nombre, correo: correo, telefono: telefono }
+        }
+        })
+        
+        if (result.isConfirmed) {
+            // Guardar los datos en el objeto contacto
+            return(result.value);
+
+                
+        }
+        
+
+        // Agrega un evento de click al botón de cierre
+        document.querySelector('#swal-close').addEventListener('click', () => {
+            Swal.close();
+            throw new Error('Formulario cerrado sin completar');
+        });
+
+    }catch (error) {
+        console.error(error);
+  
+    }
+}
+
 //SIMULACION DE COMPRA
-function comprarCarrito() {
+async function comprarCarrito() {
+    let contacto
+
+    await  alertaDeCompra().then(result => {
+        contacto = result;
+            
+    });
+
+    
+    let total = await actualizarTotal()
+    let cotizacion = await calcularPrecioEnDolar()
+    let fecha = luxon.DateTime.now();
+    let momento = fecha.toLocaleString(luxon.DateTime.DATETIME_SHORT);
+    
+    carritoProductos.forEach(producto=>{
+        //console.log(producto)
+        productoElejido = productos.find(item => item.id === producto.id)
+        productoElejido.stock -= producto.cantidad;
+        //console.log(productoElejido)   
+    })
+
+    localStorage.setItem("array-productos", JSON.stringify(productos))
 
     //VACIO CARRITO
-    vaciarCarrito()
+   // vaciarCarrito()
     
     //MUESTRO MENSAJE DE COMPRA
-    contenedorCarritoVacio.classList.add("disabled");
-    contenedorCarritoProductos.classList.add("disabled");
-    contenedorCarritoAcciones.classList.add("disabled");
-    contenedorCarritoComprado.classList.remove("disabled");
+    // contenedorCarritoVacio.classList.add("disabled");
+    // contenedorCarritoProductos.classList.add("disabled");
+    // contenedorCarritoAcciones.classList.add("disabled");
+    // contenedorCarritoComprado.classList.remove("disabled");
 
-    //Sweet ALert
+    
 
 
 
+}
+
+let comprasHistory=[];
+
+class CompraHistory{
+    constructor(carrito,fecha,total,cotizacion){
+        this.id = comprasHistory.length +1
+        this.carrito = carrito
+        this.fecha = fecha
+        this.total = total
+        this.total = dolarActive
+        this.cotizacion = cotizacion
+        this.estado = "pendiente"
+    }
 }
 

@@ -131,6 +131,8 @@ function actualizarOfertasLS(){
     }
 }
 
+
+
 //-----------------------------EVENTOS DE OFERTAS----------------------------------
 
 //---------------ALGORITMO PARA BUSCAR PRODUCTOS Y AGREGARLE SU OFERTA-----------------

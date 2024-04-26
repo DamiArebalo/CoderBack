@@ -247,7 +247,7 @@ aside {
     margin-top: .3rem;
 }
 
-.producto-agregar {
+.producto-agregar, .producto-agregar-offer {
     border: 0;
     background-color: var(--clr-green);
     color: var(--clr-main);
@@ -259,7 +259,7 @@ aside {
     transition: background-color .2s, color .2s;
 }
 
-.producto-agregar:hover {
+.producto-agregar:hover, .producto-agregar-offer:hover {
     background-color: var(--clr-main);
     color: var(--clr-green);
 }
