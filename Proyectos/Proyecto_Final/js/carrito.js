@@ -4,7 +4,7 @@ let carritoProductos = localStorage.getItem("productos-en-carrito");
 carritoProductos = JSON.parse(carritoProductos);
 
 //puesto de control
-console.log(carritoProductos)
+//console.log(carritoProductos)
 
 //Declaracion de elementos 
 const contenedorCarritoVacio = document.querySelector("#carrito-vacio");
@@ -17,7 +17,7 @@ const contenedorTotal = document.querySelector("#total");
 const botonComprar = document.querySelector("#carrito-acciones-comprar");
 const $btnDolar = document.querySelector("#carrito-acciones-moneda")
 
-console.log($btnDolar)
+//console.log($btnDolar)
 //#endregion 
 //#region DOLAR
 let dolarActive = false
@@ -68,7 +68,7 @@ $btnDolar.onclick = () =>{
         dolarActive = true
     }
     // puesto de control
-    console.log("Precio en dolar: ", dolarActive)
+    //console.log("Precio en dolar: ", dolarActive)
 
     cargarProductosCarrito()
 
@@ -103,19 +103,19 @@ function tarjetaCarritoPesos (producto){
                 <div class="carrito-producto-cantidad">
                     <small>Cantidad</small>
                     <div id="seccionCant">
-                        <button class="boton-restar" id="${producto.id}" disabled>-</button>
+                        <button class="boton-restar" id="${producto.id}" >-</button>
                         <p id="cantidad-producto">${producto.cantidad}</p>
                         <button class="boton-sumar" id="${producto.id}">+</button>
                     </div>
                 </div>
                 <div class="carrito-producto-precio">
                     <small>Precio</small>
-                    <p>$${getPrecioActual(producto)}</p>
+                    <p>AR$ ${getPrecioActual(producto)}</p>
                     
                 </div>
                 <div class="carrito-producto-subtotal">
                     <small>Subtotal</small>
-                    <p>$${getPrecioActual(producto) * producto.cantidad}</p>
+                    <p>AR$ ${getPrecioActual(producto) * producto.cantidad}</p>
                 </div>
                 <button class="carrito-producto-eliminar" id="${producto.id}"><i class="bi bi-trash-fill"></i></button>
             `;
@@ -136,9 +136,11 @@ function tarjetaCarritoPesos (producto){
                 </div>
                 <div class="carrito-producto-cantidad">
                     <small>Cantidad</small>
-                    <button class="boton-restar" id="${producto.id}" disabled>-</button>
-                    <p id="cantidad-producto">${producto.cantidad}</p>
-                    <button class="boton-sumar" id="${producto.id}">+</button>
+                    <div id="seccionCant">
+                        <button class="boton-restar" id="${await producto.id}" >-</button>
+                        <p id="cantidad-producto">${await producto.cantidad}</p>
+                        <button class="boton-sumar" id="${await producto.id}">+</button>
+                    </div>
                 </div>
                 <div class="carrito-producto-precio">
                     <small>Precio</small>
@@ -152,7 +154,19 @@ function tarjetaCarritoPesos (producto){
             `;
     
             contenedorCarritoProductos.append(div);
+    
 }
+
+
+
+
+    
+
+
+    
+    
+
+
 
 
 //#endregion
@@ -172,27 +186,65 @@ async function cargarProductosCarrito() {
         //Reinicio de contenido
         contenedorCarritoProductos.innerHTML = "";
         
-        //Recorro array carrito
-        carritoProductos.forEach(producto => {
+        // Crear un array de promesas
+        const promises = carritoProductos.map(producto => {
             if(dolarActive){
-                tarjetaCarritoDolar(producto,  calcularPrecioEnDolar())
-
-            }else{
-                tarjetaCarritoPesos (producto)
+            return tarjetaCarritoDolar(producto, calcularPrecioEnDolar());
+            } else {
+            return tarjetaCarritoPesos(producto);
             }
-    
-            
+        });
+
+        // Esperar a que todas las promesas se resuelvan
+        await Promise.all(promises);
+
+        let botonRestar = document.querySelectorAll('.boton-restar');
+        let botonSumar = document.querySelectorAll('.boton-sumar')
+
+        let idSuma,indexSuma;
+        let idResta , indexResta ;
+        
+        botonRestar.forEach((boton, index) =>{
+        //console.log(index)
+
+            if(carritoProductos[index].cantidad == 1){
+             botonRestar[index].disabled = true;
+            }
+
+            boton.onclick = (e) =>{
+                //console.log(e.currentTarget.id)
+                idResta = parseInt(e.currentTarget.id)
+                indexResta = carritoProductos.findIndex(producto => producto.id === idResta);
+             
+                productoSeleccionado = carritoProductos[indexResta];
+                productoSeleccionado.cantidad -= 1;
+                //console.log(carritoProductos[indexSuma])
+
+                cargarProductosCarrito();
+                //check0(productoSeleccionado, botonRestar,indexResta)
+                localStorage.setItem("productos-en-carrito", JSON.stringify(carritoProductos))
+            }
         })
 
-        let botonSumar = document.querySelectorAll('.boton-sumar');
-        let botonRestar = document.querySelectorAll('.boton-restar');
-
-        console.log(botonSumar)
-        console.log(botonRestar)    
-
+        botonSumar.forEach(boton =>{
+           // console.log(boton)
+            boton.onclick = (e) =>{
+                //console.log(e.currentTarget.id)
+                idSuma = parseInt(e.currentTarget.id)
+                indexSuma = carritoProductos.findIndex(producto => producto.id === idSuma);
+                
+                let productoSeleccionado = carritoProductos[indexSuma] ;
+                productoSeleccionado.cantidad += 1;
+                cargarProductosCarrito();
+                //check0(productoSeleccionado, botonSumar, indexSuma)
     
-    actualizarBotonesEliminar();
-    actualizarTotal();
+                localStorage.setItem("productos-en-carrito", JSON.stringify(carritoProductos))
+            }
+        })
+        
+    
+        actualizarBotonesEliminar();
+        actualizarTotal();
 	
     } else {
         //SI NO VACIO
@@ -202,17 +254,16 @@ async function cargarProductosCarrito() {
         contenedorCarritoComprado.classList.add("disabled");
     }
 
+     
+
     
-
+    
+    
 }
-
-
-
 
 
 //CARGO PRODUCTOS
 cargarProductosCarrito();
-
 
 //ACTUALIZO LOS ID DE LOS BOTONES
 function actualizarBotonesEliminar() {
@@ -266,9 +317,9 @@ botonVaciar.addEventListener("click", vaciarCarrito);
 async function actualizarTotal() {
     const totalCalculado = carritoProductos.reduce((acc, producto) => acc + (getPrecioActual(producto) * producto.cantidad), 0);
     if(dolarActive){
-        total.innerText = `$${(totalCalculado / await calcularPrecioEnDolar()).toFixed(2)}`;
+        total.innerText = `U$D ${(totalCalculado / await calcularPrecioEnDolar()).toFixed(2)}`;
     }else{
-        total.innerText = `$${totalCalculado}`;
+        total.innerText = `AR$ ${totalCalculado}`;
     }
     
     

@@ -1,6 +1,6 @@
 //------------------RECUPERANDO ELEMENTOS----------------
 //Chequeo SI estoy recuperando array-productos ene ste archivo,
-console.log(productosenLS)
+//console.log(productosenLS)
 
 //si hay productos cargados
 if(productosenLS){

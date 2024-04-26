@@ -22,6 +22,11 @@ a {
     text-decoration: none;
 }
 
+.disabled{
+    display: none;
+    visibility: hidden;
+}
+
 .wrapper {
     display: grid;
     grid-template-columns: 1fr 4fr;

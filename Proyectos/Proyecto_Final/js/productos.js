@@ -49,9 +49,9 @@ let ofertasCreadasLS = JSON.parse(localStorage.getItem("ofertas"))
 let CarritoLS = JSON.parse(localStorage.getItem("productos-en-carrito"))
 
 productosCheck()
-console.log("Ls: ",productosenLS)
-console.log("Array ",productos)
-console.log("ofertasLS ", ofertasCreadasLS)
+// console.log("Ls: ",productosenLS)
+// console.log("Array ",productos)
+// console.log("ofertasLS ", ofertasCreadasLS)
 
 
 //#region FUNCIONES
@@ -64,7 +64,7 @@ function productosCheck(){
     }else{
     productosenLS = []
     }
-    console.log(productos)
+    //console.log(productos)
 }
 
 function carritoCheck(){
@@ -97,7 +97,7 @@ function arrayVacio(){
     let aux = productos.length; //Cantidad de elementos
 
     if(aux<=0){
-        console.error("La tabla de productos esta vacia.\nIngrese Productos para trabajar sobre ellos")
+        //console.error("La tabla de productos esta vacia.\nIngrese Productos para trabajar sobre ellos")
         return false;
     }else{
         return true;
@@ -125,7 +125,7 @@ function validarProductos(precioLista,descripCorta,descripLarga,nombre,stock){
     // Validación para productShortDescription (descripCorta)
     const valShortDescription = descripCorta =>{
         if (descripCorta.length > 30) {
-            console.error("Error: productShortDescription no debe exceder los 30 caracteres.");
+           // console.error("Error: productShortDescription no debe exceder los 30 caracteres.");
             return false;
         }else{
             return true;
@@ -135,7 +135,7 @@ function validarProductos(precioLista,descripCorta,descripLarga,nombre,stock){
     // Validación para productShortDescription (descripCorta)
     const valLongDescription = descripLarga =>{
         if (descripCorta.length > 70) {
-            console.error("Error: productLongDescription no debe exceder los 70 caracteres.");
+           // console.error("Error: productLongDescription no debe exceder los 70 caracteres.");
             return false;
         }else{
             return true;
@@ -146,7 +146,7 @@ function validarProductos(precioLista,descripCorta,descripLarga,nombre,stock){
     const valPrecio = parsedPrice =>{
 
         if (isNaN(parsedPrice) || parsedPrice < 0) {
-            console.error("Error: productPrice debe ser un valor numérico no negativo.");
+            //console.error("Error: productPrice debe ser un valor numérico no negativo.");
             return false;
         }else{
             return true;
@@ -159,7 +159,7 @@ function validarProductos(precioLista,descripCorta,descripLarga,nombre,stock){
     const valStock = parsedStock =>{
 
         if (parsedStock < 0) {
-            console.error("Error: ID no debe ser un número negativo.");
+            //console.error("Error: ID no debe ser un número negativo.");
             return false;
         }else{
             return true;
@@ -178,9 +178,9 @@ function validarProductos(precioLista,descripCorta,descripLarga,nombre,stock){
     }
 
     //Puesto DE CONTROL
-    console.log("stock: "+valStock(stock)+"\nNombre: "+valNombre(nombre)+"\ncorta: "+
-                valShortDescription(descripCorta)+"\nlarga: "+valLongDescription(descripLarga)+
-                "\n precio: "+valPrecio(parsedPrice));
+    //console.log("stock: "+valStock(stock)+"\nNombre: "+valNombre(nombre)+"\ncorta: "+
+    //            valShortDescription(descripCorta)+"\nlarga: "+valLongDescription(descripLarga)+
+    //            "\n precio: "+valPrecio(parsedPrice));
 
 
     //VALIDACION GENERAL
@@ -197,7 +197,7 @@ function validarProductos(precioLista,descripCorta,descripLarga,nombre,stock){
 //Funcion Global para Agregar Productos
 function agregarProductos(){
     //Puesto de control
-    console.log("inicio agregarProducto()");
+    //console.log("inicio agregarProducto()");
 
     //DECLARACION DE ELEMENTOS SACADOS DEL FORMULARIO
     let imgProd = rutaimg;
@@ -316,7 +316,7 @@ inputImg.onchange =  (event) => {
 //--AGREGAR PRODUCTOS AL ARRAY y LOCALSTORAGE---
 agregarProd.onclick = () =>{
     agregarProductos()
-    console.table(productos);
+    //console.table(productos);
     alamacenArray()
     //TOASTYFY 
     Toastify({
@@ -343,7 +343,7 @@ botonesCategorias.forEach(boton => {
 
         //AL QUE **SI** ESTOY CLICKEANDO LO DEJA ACTIVO
         e.currentTarget.classList.add("active");
-       console.log(e.currentTarget.innerText)
+       //console.log(e.currentTarget.innerText)
     
         //SI EL ID DEL BOTON QUE ESTOY CLICKEANDO ES DISTINTO A TODOS.. 
         if (e.currentTarget.id!= "todos") {
@@ -398,7 +398,7 @@ function agregarAlCarrito(e) {
         
         //BUSCO LA POSICION DEL PRODUCTO 
         const index = productosEnCarrito.findIndex(producto => producto.id === parseID);       
-        console.log(productosEnCarrito)
+        //console.log(productosEnCarrito)
         
         //SUMO CANTIDAD
         productosEnCarrito[index].cantidad++; 
@@ -436,7 +436,7 @@ function agregarAlCarrito(e) {
     }
 
     actualizarNumerito();
-    console.log(productosEnCarrito)
+    //console.log(productosEnCarrito)
     //GUARDO EN LOCALSTORAGE EL CARRITO
     localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito));
 }
@@ -582,7 +582,7 @@ busquedaEliminar.addEventListener("keyup",(e)=>{
     eliminarbotones = document.querySelectorAll(".agregar-oferta")
     
     //puesto de control 
-    console.log(eliminarbotones) 
+    //console.log(eliminarbotones) 
 
     //recorro todos los botones
     eliminarbotones.forEach(boton =>{
@@ -590,10 +590,11 @@ busquedaEliminar.addEventListener("keyup",(e)=>{
         boton.onclick = (e) =>{
             //rescato su ID
             const botonId = e.currentTarget.id
-            console.log(botonId)
+            //console.log(botonId)
+            
             //Rescato el producto dentro del ARRAY GLOBAL CON EL MISMO ID
             const productoSeleccion = productos.find(producto => producto.id == botonId)
-            console.log(productoSeleccion)
+           // console.log(productoSeleccion)
             //Rescato el INDEX del PRODUCTO en array global con el MISMO ID O NOMBRE
             let productIndex = productos.findIndex(producto => producto.nombre == productoSeleccion.nombre)
             let checkCarrito = CarritoLS.some((producto) => producto.id == productoSeleccion.id)
