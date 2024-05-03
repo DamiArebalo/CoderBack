@@ -20,10 +20,10 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     
     <!-- /* LINKEO DE JS  -->
-   
-    <script defer src="./js/backend.js"></script>
+    <script  defer src="./js/admin.js"></script>
     <script  defer src="./js/productos.js"></script>
     <script defer src="./js/ofertas.js"></script>
+
     <!-- SWEET ALERT -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
      <!-- TOASTIFY JS -->
@@ -46,7 +46,7 @@
         
         <!-- /*PARTE DERECHA*/ -->
         <div class="right-header">
-            <div class="opcion" id="btnAdmin"><i class="bi bi-code-square"></i>Modo Admin</div>
+            <a href="./admin.html"  class="opcion" id="btnAdmin"><i class="bi bi-code-square"></i>Modo Admin</a>
             <div class="opcion admin" id="btnUser"><i class="bi bi-person-circle"></i>Modo User</div>
             <a href="./carrito.html" class="opcion" id="btnCarrito"><i class="bi bi-cart-fill"></i> Carrito</a>
         </div>
@@ -85,48 +85,7 @@
             </div>
         </section>
 
-        <!-- /*Seccion de productos*/ -->
-        <section id="products">
-            
-            <div class="product-section">
-                
-                <!-- POP UP FORMULARIO AGREGAR PRODUCTOS-->
-                <div class="background" id="modalBackgroundProducts">
-                    <div class="popup" id="productPopup">
-                        <span class="close-button" id="cerrarProd">×</span><!--cerrarPopupProductos()-->
-                        <div class="product-form">
-                            <div class="left-column">
-                                <div class="contendor-img">
-                                    <input class="dato" type="file" id="productImg" placeholder="Ingresa Imagen" accept="image/*">
-                                    <div id="preview-img" class="preview-img">
-                                        <!--PREVIEW DE IMG POR JS-->
-                                    </div>   
-                                </div>
-                                
-                                <input class="dato" type="text" id="productName" placeholder="Nombre del producto">
-                            </div>
-                            <div class="right-column">
-                                <input class="dato"type="text" id="productShortDescription" placeholder="Descripción breve">
-                                <input class="dato"type="text" id="productLongDescription" placeholder="Descripción extensa">
-                                <input class="dato" type="number" id="productPrice" placeholder="Precio del producto">
-                                <input class="dato"type="number" id="productStock" placeholder="Stock Inicial">
-                                
-                                <label for="categoria">Categoría:</label>
-                                <select class="dato"id="categoria" name="categoria">
-                                    <option value="fisico">Físico</option>
-                                    <option value="frecuente">Frecuente</option>
-                                    <option value="aromaterapia">Aromaterapia</option>
-                                </select>
-
-                                <button class="add-products" type="submit" id="agregarProd">Add Products</button>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>    
-
-        </section>
+        
         <!-- seccion de muestro de productos -->
         <section class="wrapper">
             <!-- menu lateral -->
@@ -157,12 +116,7 @@
                         </li>
                         
                     </ul>
-                    <div class="botonesAdmin">
-                        <button class="botonfuncion admin" id="abrirProductos" >Nuevo Producto</button>
-                        <button class="botonfuncion admin" id="btnEliminar" >Eliminar Producto</button>
-                        <button class="botonfuncion admin" id="btnOferta" >Agregar Oferta</button>
-
-                    </div>
+                    
                     
                 </nav>
                 
@@ -175,68 +129,14 @@
                 </div>
             </section class="muestraProductos">
 
-            <!-- PopUp de ofertas -->
-            <div class="background" id="backOffer">
-                <div class="accionOferta" id="accionOferta" >
-                    <div class="contentoffer">
-                        <span class="close-button" id="cerrarOffer">×</span>
-                        <h4 class="subtitulo">Crear Oferta</h4>
-                        <div class="botonAccion">
-                            <button id="offerAll">TODOS LOS PRODUCTOS</button>
-                            <button id="offerUnico">UN SOLO PRODUCTO</button>
-                        </div>
-                        <div class="offerSeleccion" id="descuentoAllDiv">
-                            <p>PORCENTAJE DE DESCUENTO</p>
-                            <input type="number" id="descuentoALL">
-                            <button class="add-products"  id="btnAll">Agregar Descuento</button>
-                        </div>
-                        <div class="seleccionProd" id="busquedaDiv">
-                            <!-- Barra de búsqueda -->
-                            <div class="search">
-                                <i class="bi bi-search"></i>
-                                <input type="text"  id="busqueda" placeholder="Buscar producto...">
-                            </div>
-                            <div class="muestraProductos" id="productosDiv">
-                                <!-- Aquí se agregarán los productos mediante JavaScript -->
-                            </div>
-                        </div>
-
-                    </div>
-                    
-                </div>
-
-            </div>
-
-            <!-- PopUp de eliminar -->
-            <div class="background" id="backEliminar">
-                <div class="accionOferta" id="accionEliminar" >
-                    <div class="contentoffer">
-                        <span class="close-button" id="cerrarEliminar">×</span>
-                        <h4 class="subtitulo">Eliminar Un Producto</h4>
-                        
-                        <div class="seleccionProd" id="busqueda-Eliminar">
-                            <!-- Barra de búsqueda -->
-                            <div class="search">
-                                <i class="bi bi-search"></i>
-                                <input type="text"  id="busquedaEliminar" placeholder="Buscar producto...">
-                            </div>
-                            <div class="muestraProductos" id="productosEliminar">
-                                <!-- Aquí se agregarán los productos mediante JavaScript -->
-                            </div>
-                        </div>
-
-                    </div>
-                    
-                </div>
-
-            </div>
+            
         </section>
-
-        <!--  /*Seccion de preguntas*/ EN PROCESO -->
+        <!-- 
+         <!-- /*Seccion de preguntas*/ EN PROCESO
         <section id="questions">Questions Content</section>
         
-        <!-- /*Seccion de contacto*/ EN PROCESO-->
-        <section id="contact">Contact Content</section>
+        <!-- /*Seccion de contacto*/ EN PROCESO
+        <section id="contact">Contact Content</section> -->
     </main>
 
     <!-- /* PIE DE PAGINA */ -->

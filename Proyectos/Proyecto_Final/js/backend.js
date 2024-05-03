@@ -2,12 +2,14 @@
 const btnProd = document.getElementById("abrirProductos"); // BOTON PRODUCTOS
 const cerrarProd = document.getElementById("cerrarProd"); // CERRAR PRODUCTOS
 const btnCarrito = document.getElementById("btnCarrito"); // BOTON CARRITO
-const btnLAdmin = document.getElementById("btnAdmin"); // BOTON ADMIN
+const btnAdmin = document.getElementById("btnAdmin"); // BOTON ADMIN
 const btnUser = document.getElementById("btnUser")// BOTON USER
 const btnOferta = document.querySelector("#btnOferta")//BOTON OFERTA
 const cerrarOffer = document.querySelector("#cerrarOffer")//Cerrar Oferta
 let btnEliminar = document.querySelector("#btnEliminar")//boton eliminar
 const cerrarEliminar = document.querySelector("#cerrarEliminar")//Cerrar eliminar
+const cerrarEditar = document.querySelector("#cerrarEditar")
+//console.log(btnEliminar)
 
 
 //ABRIR PRODUCTOS
@@ -73,9 +75,9 @@ function modoUser(){
 
 btnProd.onclick = () => abrirPopupProductos();
 cerrarProd.onclick = () => cerrarPopupProductos();
-btnAdmin.onclick = () => {modoAdmin();btnAdmin.classList.add("admin")};
-btnUser.onclick =()=>{modoUser();btnAdmin.classList.remove("admin")}
-btnCarrito.onclick = () => console.log("click carrito")
+
+
+
 
 cerrarOffer.onclick = () => cerrarPopupOferta()
 
@@ -95,6 +97,11 @@ document.getElementById('offerUnico').addEventListener('click', function() {
     document.getElementById('busquedaDiv').style.display = 'block';
 });
 
+
+cerrarEditar.onclick = () =>{
+    document.getElementById('editarBackground').style.display = 'none';
+    document.getElementById('editarPopUp').style.display = 'none';
+}
 
 
 

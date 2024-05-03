@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/productosycarritos.css">
+    <link rel="stylesheet" href="./css/admin.css">
+    <link rel="stylesheet" href="./css/popUp.css">
+    <!-- TOASTIFY CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+    <script defer src="./js/backend.js"></script>
+    <script defer src="./js/admin.js"></script>
+    <script  defer src="./js/productos.js"></script>
+    <script defer src="./js/ofertas.js"></script>
+
+     <!-- SWEET ALERT -->
+     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+     <!-- TOASTIFY JS -->
+     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+</head>
+<body>
+    <header class="sticky-header">
+        <!-- PARTE IZQUIERDA -->
+        <div class="logo">
+            <img src="./Img/Logos/rityJust.jpg">    
+        </div>  
+        
+        <!-- PARTE CENTRAL -->
+        <h1 class="titulo">Panel de Control</h1>
+        
+        <!-- PARTE DERECHA -->
+        <div class="right-header">
+            <a href="./index.html" class="opcion " id="btnUser"><i class="bi bi-person-circle"></i>Modo User</a>
+            
+        </div>
+    </header>
+
+
+    <div class="main-buttons ">
+        <button class=" " id="abrirProductos" >Nuevo Producto</button>
+        <button class=" " id="btnEliminar" >Eliminar Producto</button>
+        <button class=" " id="btnOferta" >Agregar Oferta</button>
+        
+    </div>
+
+    
+    <section class="listado-editar">
+      <h2 class="subtitulo">LISTADO DE PRODUCTOS</h2>
+      <div id="product-cards">
+
+      </div>
+    </section>
+  
+    <section class="historial-compras">
+       <h2 class="subtitulo">Historial de Compras</h2>
+      <div class="cards-historial"></div>
+    </section>
+
+    <!-- /*Seccion de productos*/ -->
+    <section id="products">
+            
+        <div class="product-section">
+            
+            <!-- POP UP FORMULARIO AGREGAR PRODUCTOS-->
+            <div class="background" id="modalBackgroundProducts">
+                <div class="popup" id="productPopup">
+                    <span class="close-button" id="cerrarProd">×</span><!--cerrarPopupProductos()-->
+                    <div class="product-form">
+                        <div class="left-column">
+                            <div class="contendor-img">
+                                <input class="dato" type="file" id="productImg" placeholder="Ingresa Imagen" accept="image/*">
+                                <div id="preview-img" class="preview-img">
+                                    <!--PREVIEW DE IMG POR JS-->
+                                </div>   
+                            </div>
+                            
+                            <input class="dato" type="text" id="productName" placeholder="Nombre del producto">
+                        </div>
+                        <div class="right-column">
+                            <input class="dato"type="text" id="productShortDescription" placeholder="Descripción breve">
+                            <input class="dato"type="text" id="productLongDescription" placeholder="Descripción extensa">
+                            <input class="dato" type="number" id="productPrice" placeholder="Precio del producto">
+                            <input class="dato"type="number" id="productStock" placeholder="Stock Inicial">
+                            
+                            <label for="categoria">Categoría:</label>
+                            <select class="dato"id="categoria" name="categoria">
+                                <option value="fisico">Físico</option>
+                                <option value="frecuente">Frecuente</option>
+                                <option value="aromaterapia">Aromaterapia</option>
+                            </select>
+
+                            <button class="add-products" type="submit" id="agregarProd">Add Products</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- PopUp de ofertas -->
+    <div class="background" id="backOffer">
+        <div class="accionOferta" id="accionOferta" >
+            <div class="contentoffer">
+                <span class="close-button" id="cerrarOffer">×</span>
+                <h4 class="subtitulo">Crear Oferta</h4>
+                <div class="botonAccion">
+                    <button id="offerAll">TODOS LOS PRODUCTOS</button>
+                    <button id="offerUnico">UN SOLO PRODUCTO</button>
+                </div>
+                <div class="offerSeleccion" id="descuentoAllDiv">
+                    <p>PORCENTAJE DE DESCUENTO</p>
+                    <input type="number" id="descuentoALL">
+                    <button class="add-products"  id="btnAll">Agregar Descuento</button>
+                </div>
+                <div class="seleccionProd" id="busquedaDiv">
+                    <!-- Barra de búsqueda -->
+                    <div class="search">
+                        <i class="bi bi-search"></i>
+                        <input type="text"  id="busqueda" placeholder="Buscar producto...">
+                    </div>
+                    <div class="muestraProductos" id="productosDiv">
+                        <!-- Aquí se agregarán los productos mediante JavaScript -->
+                    </div>
+                </div>
+
+            </div>
+            
+        </div>
+
+    </div>
+
+    <!-- PopUp de eliminar -->
+    <div class="background" id="backEliminar">
+        <div class="accionOferta" id="accionEliminar" >
+            <div class="contentoffer">
+                <span class="close-button" id="cerrarEliminar">×</span>
+                <h4 class="subtitulo">Eliminar Un Producto</h4>
+                
+                <div class="seleccionProd" id="busqueda-Eliminar">
+                    <!-- Barra de búsqueda -->
+                    <div class="search">
+                        <i class="bi bi-search"></i>
+                        <input type="text"  id="busquedaEliminar" placeholder="Buscar producto...">
+                    </div>
+                    <div class="muestraProductos" id="productosEliminar">
+                        <!-- Aquí se agregarán los productos mediante JavaScript -->
+                    </div>
+                </div>
+
+            </div>
+            
+        </div>
+
+    </div>
+
+    <!-- PopUp Editar -->
+    <!-- Pop-up de formulario para editar productos -->
+<div class="background" id="editarBackground" style="display: none;">
+    <div class="popup" id="editarPopUp">
+        <span class="close-button" id="cerrarEditar">×</span>
+        <div class="product-form">
+            <div class="left-column">
+                <div class="contendor-img">
+                    <input class="dato-editar" type="file" id="editarProductoImg" placeholder="Ingresa Imagen" accept="image/*">
+                    <div id="editarPreview-img" class="preview-img"></div>
+                </div>
+                <input class="dato-editar" type="text" id="editarProductoNombre" placeholder="Nombre del producto">
+            </div>
+            <div class="right-column">
+                <input class="dato-editar"type="text" id="editarProductoShortDescription" placeholder="Descripción breve">
+                <input class="dato-editar"type="text" id="editarProductoLongDescription" placeholder="Descripción extensa">
+                <input class="dato-editar" type="number" id="editarProductoPrice" placeholder="Precio del producto">
+                <input class="dato-editar"type="number" id="editarProductoStock" placeholder="Stock Inicial">
+                <label for="editarCategoria">Categoría:</label>
+                <select class="dato-editar"id="editarCategoria" name="categoria">
+                    <option value="fisico">Físico</option>
+                    <option value="frecuente">Frecuente</option>
+                    <option value="aromaterapia">Aromaterapia</option>
+                </select>
+                <button class="add-products" type="submit" id="guardarCambios">Guardar cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+</body>
+</html>

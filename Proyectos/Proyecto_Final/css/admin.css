@@ -1,0 +1,128 @@
+.subtitulo{
+    color: var(--clr-main);
+    margin-bottom: 1rem;
+  }
+
+  .main-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 1rem;
+}
+
+.main-buttons {
+    display: flex;
+    justify-content: space-around;
+    height: 30vh;
+    background-color: var(--clr-green);
+  
+}
+
+.main-buttons button {
+    background-color: var(--clr-main);
+    border: none;
+    border-radius: 5px;
+    color: var(--clr-green);
+    cursor: pointer;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
+    width: 30rem;
+    
+    text-transform: UpperCase;
+}
+
+.main-buttons button:hover {
+    background-color: var(--clr-green-light);
+}
+
+
+.product-card {
+    background-color: var(--clr-soft);
+    border: 1px solid var(--clr-green);
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    width: calc(100vw - 40px);
+}
+
+.product-card img {
+    width: 100px;
+    height: 100px;
+}
+
+.btn-editar {
+    background-color: var(--clr-green-light);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 5px 10px;
+    cursor:pointer;
+}
+
+.btn-editar:hover{
+  background-color: var(--clr-green);
+}
+
+#product-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    margin: 0 2rem;
+  
+  
+}
+
+.product-card {
+    max-height: 20rem;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--clr-green);
+    border-radius: 10px;
+    width: 100%;
+    gap: 2rem;
+    
+  
+}
+
+.product-card img {
+    width: 7rem;
+    height: 5rem;
+    border: 1px solid var(--clr-green);
+}
+
+
+.card-historial {
+    background-color: var(--clr-soft);
+    border: 1px solid var(--clr-green);
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    width: calc(100vw - 40px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-historial img {
+    width: 100px;
+    height: 100px;
+    border: 1px solid var(--clr-green);
+}
+
+.card-historial button {
+    background-color: var(--clr-green-light);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 5px 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.card-historial select {
+    margin-top: 10px;
+}
+

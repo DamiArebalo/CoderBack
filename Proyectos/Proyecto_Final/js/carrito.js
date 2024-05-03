@@ -2,15 +2,9 @@
 
 
 //------RECUPERO CARRITO ------------------
-let carritoProductos = localStorage.getItem("productos-en-carrito");
-carritoProductos = JSON.parse(carritoProductos);
-
+let carritoProductos = JSON.parse(localStorage.getItem("productos-en-carrito"));;
 let productosLS = JSON.parse(localStorage.getItem("array-productos"))
-
 productos = productosLS
-
-
-console.log(productos)
 
 //puesto de control
 //console.log(carritoProductos)
@@ -32,7 +26,34 @@ const $btnDolar = document.querySelector("#carrito-acciones-moneda")
 let dolarActive 
 // Declara una variable global para almacenar los datos
 let valorDolarBlue;
+//FUNCION PARA LLAMAR A UNA CONFIRMACION DE TOASTIFY
+function checkToastify (mensaje){
+    Toastify({
+        text: `✅ ${mensaje}`,
+        className: "info",
+        duration: 3000,
+        close: true,
+        position: "left", 
+        style: {
+          background: "linear-gradient(to left, #34c765, #054d33)",
+        //   
+        }
+      }).showToast();
+}
 
+function errorToastify (mensaje){
+    Toastify({
+        text: `💢 ${mensaje} 💢`,
+        className: "info",
+        duration: 3000,
+        close: true,
+        position: "left", 
+        style: {
+          background: "linear-gradient(to left, #961515e4, #ff233c)", 
+        //   
+        }
+      }).showToast();
+}
 async function obtenerValorDolarBlue() {
     try {
         const response = await fetch('https://dolarapi.com/v1/dolares/blue');
@@ -70,14 +91,14 @@ async function calcularPrecioEnDolar() {
 }
 
 $btnDolar.onclick = () =>{
-    console.log(dolarActive)
+    //console.log(dolarActive)
     if(dolarActive){
         dolarActive = false
     }else{
         dolarActive = true
     }
     // puesto de control
-    console.log("Precio en dolar: ", dolarActive)
+   // console.log("Precio en dolar: ", dolarActive)
 
     cargarProductosCarrito()
 
@@ -181,7 +202,7 @@ async function cargarProductosCarrito() {
         contenedorCarritoProductos.innerHTML = "";
         
         // Crear un array de promesas
-        const promises = carritoProductos.map(producto => {
+        let promises = carritoProductos.map(producto => {
             if(dolarActive){
             return tarjetaCarritoDolar(producto, calcularPrecioEnDolar());
             } else {
@@ -215,22 +236,31 @@ async function cargarProductosCarrito() {
                 //console.log(carritoProductos[indexSuma])
 
                 cargarProductosCarrito();
-                //check0(productoSeleccionado, botonRestar,indexResta)
+                
                 localStorage.setItem("productos-en-carrito", JSON.stringify(carritoProductos))
             }
         })
 
-        botonSumar.forEach(boton =>{
+        botonSumar.forEach((boton,index) =>{
            // console.log(boton)
+           if(carritoProductos[index].cantidad == carritoProductos[index].stock){
+            botonSumar[index].disabled = true;
+           }
             boton.onclick = (e) =>{
                 //console.log(e.currentTarget.id)
                 idSuma = parseInt(e.currentTarget.id)
                 indexSuma = carritoProductos.findIndex(producto => producto.id === idSuma);
                 
                 let productoSeleccionado = carritoProductos[indexSuma] ;
-                productoSeleccionado.cantidad += 1;
+                if(productoSeleccionado.cantidad >= productoSeleccionado.stock){
+                    botonSumar[index].disabled = true;
+
+                }else{
+                    productoSeleccionado.cantidad += 1;
+                }
+                
                 cargarProductosCarrito();
-                //check0(productoSeleccionado, botonSumar, indexSuma)
+               
     
                 localStorage.setItem("productos-en-carrito", JSON.stringify(carritoProductos))
             }
@@ -297,7 +327,7 @@ function vaciarCarrito() {
     //actualizo el LS
     localStorage.setItem("productos-en-carrito", JSON.stringify(carritoProductos));
     //Actualizo al DOM
-    cargarProductosCarrito()
+    
     //console.log("vaciaste carrito")
    
 }
@@ -323,6 +353,7 @@ async function actualizarTotal() {
     
 }
 
+//#region COMPRA
 //FUNCION DE COMPRA
 botonComprar.addEventListener("click", comprarCarrito);
 
@@ -353,7 +384,9 @@ async function alertaDeCompra(){
         })
         
         if (result.isConfirmed) {
-            // Guardar los datos en el objeto contacto
+           
+            checkToastify("Compra realizada con exito")
+             // Guardar los datos en el objeto contacto
             return(result.value);
 
                 
@@ -371,6 +404,12 @@ async function alertaDeCompra(){
   
     }
 }
+let comprasHistory = [];
+let historyLs = JSON.parse(localStorage.getItem("compras-history"))
+
+if(historyLs){
+    comprasHistory = historyLs
+}
 
 //SIMULACION DE COMPRA
 async function comprarCarrito() {
@@ -386,7 +425,7 @@ async function comprarCarrito() {
     let cotizacion = await calcularPrecioEnDolar()
     let fecha = luxon.DateTime.now();
     let momento = fecha.toLocaleString(luxon.DateTime.DATETIME_SHORT);
-    
+    let carritoComprado = carritoProductos.map(({ img, ...resto }) => resto)
     carritoProductos.forEach(producto=>{
         //console.log(producto)
         productoElejido = productos.find(item => item.id === producto.id)
@@ -394,33 +433,46 @@ async function comprarCarrito() {
         //console.log(productoElejido)   
     })
 
+    
+
     localStorage.setItem("array-productos", JSON.stringify(productos))
 
-    //VACIO CARRITO
-   // vaciarCarrito()
+    let compra = new CompraHistory(carritoComprado,momento,total,cotizacion,contacto)
+
+    comprasHistory.push(compra);
+
+    //console.log(comprasHistory)
     
     //MUESTRO MENSAJE DE COMPRA
-    // contenedorCarritoVacio.classList.add("disabled");
-    // contenedorCarritoProductos.classList.add("disabled");
-    // contenedorCarritoAcciones.classList.add("disabled");
-    // contenedorCarritoComprado.classList.remove("disabled");
+    contenedorCarritoVacio.classList.add("disabled");
+    contenedorCarritoProductos.classList.add("disabled");
+    contenedorCarritoAcciones.classList.add("disabled");
+    contenedorCarritoComprado.classList.remove("disabled");
 
+    //console.log(comprasHistory)
+
+    localStorage.setItem("compras-history", JSON.stringify(comprasHistory))
     
-
-
+    //VACIO CARRITO
+    vaciarCarrito()
 
 }
 
-let comprasHistory=[];
+
 
 class CompraHistory{
-    constructor(carrito,fecha,total,cotizacion){
-        this.id = comprasHistory.length +1
-        this.carrito = carrito
-        this.fecha = fecha
-        this.total = total
-        this.total = dolarActive
-        this.cotizacion = cotizacion
+    constructor(carrito,fecha,total,cotizacion,contacto){
+        this.id = comprasHistory.length +1;
+        this.carrito = carrito;
+        this.fecha = fecha;
+        this.total = total;
+        this.dolar = dolarActive;
+        if(this.dolar){
+            this.cotizacion = cotizacion;
+        }else{
+            this.cotizacion = 0;
+        }
+        this.contacto= contacto;
         this.estado = "pendiente"
     }
 }
